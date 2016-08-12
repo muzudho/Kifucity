@@ -1,9 +1,10 @@
-﻿using System.Drawing;
-using System.Windows.Forms;
-using System;
-using System.Collections.Generic;
-using Grayscale.A500_Kifucity.B500_Kifucity.C___500_MapProp_;
+﻿using Grayscale.A500_Kifucity.B500_Kifucity.C___500_MapProp_;
 using Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Text;
+using System.IO;
 
 namespace Grayscale.A500_Kifucity
 {
@@ -13,6 +14,9 @@ namespace Grayscale.A500_Kifucity
         public const int TABLE_COLS = 120;
         public const int TABLE_ROWS = 100;
         public const int TABLE_LAYERS = 2;
+        // マスの大きさ
+        public const int cellW = 16;
+        public const int cellH = 16;
 
         /// <summary>
         /// テーブルの左辺座標。
@@ -51,10 +55,6 @@ namespace Grayscale.A500_Kifucity
 
         private void UcMain_Paint(object sender, PaintEventArgs e)
         {
-            // マスの大きさ
-            int cellW = 16;
-            int cellH = 16;
-
             // 外枠を描こうぜ☆
             Graphics g = e.Graphics;
 
@@ -206,37 +206,169 @@ namespace Grayscale.A500_Kifucity
         private void UcMain_MouseDown(object sender, MouseEventArgs e)
         {
             this.MouseDownLocation = e.Location;
+
+            if (MouseButtons.Left == e.Button)
+            {
+                // 左ボタンなら
+                // 砂地を置く☆
+                {
+                    int col = (e.Location.X - this.TableLeft) / cellW;
+                    int row = (e.Location.Y - this.TableTop) / cellH;
+                    if (col < TABLE_COLS && row < TABLE_ROWS)
+                    {
+                        this.MapImg[1, row, col] = MapchipType.su砂_田5;
+                        this.Refresh();
+                    }
+                }
+            }
         }
 
         private void UcMain_MouseUp(object sender, MouseEventArgs e)
         {
-            int deltaX = e.Location.X - this.MouseDownLocation.X;
-            int deltaY = e.Location.Y - this.MouseDownLocation.Y;
-
-            this.TableLeft += deltaX;
-            this.TableTop += deltaY;
-            this.Refresh();
-
-            // マウスでマップを引きずるのは終わった☆
-            this.MouseDownLocation = Point.Empty;
-        }
-
-        private void UcMain_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (this.MouseDownLocation != Point.Empty)
+            if (MouseButtons.Right == e.Button)
             {
-                // マウスでマップを引きずっているようなら
-
+                // マウスの右ボタンで、マップ引きずる
                 int deltaX = e.Location.X - this.MouseDownLocation.X;
                 int deltaY = e.Location.Y - this.MouseDownLocation.Y;
 
                 this.TableLeft += deltaX;
                 this.TableTop += deltaY;
-
-                // すぐ更新☆
-                this.MouseDownLocation = e.Location;
-
                 this.Refresh();
+            }
+            else if (MouseButtons.Left == e.Button)
+            {
+                // 左ボタンなら
+                // 砂地を置く☆
+                {
+                    int col = (e.Location.X - this.TableLeft) / cellW;
+                    int row = (e.Location.Y - this.TableTop) / cellH;
+                    if (col < TABLE_COLS && row < TABLE_ROWS)
+                    {
+                        this.MapImg[1, row, col] = MapchipType.su砂_田5;
+                        this.Refresh();
+                    }
+                }
+            }
+
+            // マウスのドラッグは終わった☆
+            this.MouseDownLocation = Point.Empty;
+        }
+
+        private void UcMain_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (MouseButtons.Right == e.Button)
+            {
+                // マウスの右ボタンで、マップ引きずる
+                if (this.MouseDownLocation != Point.Empty)
+                {
+                    // マウスでマップを引きずっているようなら
+
+                    int deltaX = e.Location.X - this.MouseDownLocation.X;
+                    int deltaY = e.Location.Y - this.MouseDownLocation.Y;
+
+                    this.TableLeft += deltaX;
+                    this.TableTop += deltaY;
+
+                    // すぐ更新☆
+                    this.MouseDownLocation = e.Location;
+
+                    this.Refresh();
+                }
+            }
+            else if (MouseButtons.Left == e.Button)
+            {
+                // 左ボタンなら
+                // 砂地を置く☆
+                if (this.MouseDownLocation != Point.Empty)
+                {
+                    int col = (e.Location.X - this.TableLeft) / cellW;
+                    int row = (e.Location.Y - this.TableTop) / cellH;
+                    if (col < TABLE_COLS && row < TABLE_ROWS)
+                    {
+                        this.MapImg[1, row, col] = MapchipType.su砂_田5;
+                        this.Refresh();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 一時保存
+        /// </summary>
+        private void SaveGame()
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int layer = 0; layer < TABLE_LAYERS; layer++)
+            {
+                for (int row = 0; row < TABLE_ROWS; row++)
+                {
+                    for (int col = 0; col < TABLE_COLS; col++)
+                    {
+                        sb.Append((int)this.MapImg[layer, row, col]);
+                        sb.Append(",");
+                    }
+                    sb.AppendLine();
+                }
+                sb.AppendLine();
+                sb.AppendLine();
+            }
+
+            File.WriteAllText("./save.txt", sb.ToString());
+        }
+
+        /// <summary>
+        /// 再開
+        /// </summary>
+        private void LoadGame()
+        {
+            string[] lines = File.ReadAllLines("./save.txt");
+
+            int line = 0;
+            for (int layer = 0; layer < TABLE_LAYERS; layer++)
+            {
+                for (int row = 0; row < TABLE_ROWS; row++, line++)
+                {
+                    if (""==lines[line].Trim())
+                    {
+                        // 空行は無視☆
+                        continue;
+                    }
+
+                    string[] tokens = lines[line].Split(',');
+
+                    for (int col = 0; col < TABLE_COLS; col++)
+                    {
+                        int number;
+                        if (int.TryParse(tokens[col],out number))
+                        {
+                            this.MapImg[layer, row, col] = (MapchipType)number;
+                        }
+                    }
+                }
+            }
+
+            this.Refresh();
+        }
+
+        private void UcMain_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.Control)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.L:
+                        {
+                            // ロード
+                            this.LoadGame();
+                        }
+                        break;
+                    case Keys.S:
+                        {
+                            // セーブ
+                            this.SaveGame();
+                        }
+                        break;
+                }
             }
         }
     }
