@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Grayscale.Kifucity.Properties {
+namespace Grayscale.A500_Kifucity.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

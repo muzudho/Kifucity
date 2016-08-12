@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kifucity", "Kifucity\Kifucity.csproj", "{235AFB7D-B781-4EDC-A702-A3663B3A8568}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A500_Kifucity", "A500_Kifucity\A500_Kifucity.csproj", "{235AFB7D-B781-4EDC-A702-A3663B3A8568}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

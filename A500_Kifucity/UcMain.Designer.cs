@@ -1,4 +1,4 @@
-﻿namespace Kifucity
+﻿namespace Grayscale.A500_Kifucity
 {
     partial class UcMain
     {

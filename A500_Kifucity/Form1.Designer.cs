@@ -1,4 +1,4 @@
-﻿namespace Kifucity
+﻿namespace Grayscale.A500_Kifucity
 {
     partial class Form1
     {
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucMain1 = new Kifucity.UcMain();
+            this.ucMain1 = new A500_Kifucity.UcMain();
             this.SuspendLayout();
             // 
             // ucMain1
