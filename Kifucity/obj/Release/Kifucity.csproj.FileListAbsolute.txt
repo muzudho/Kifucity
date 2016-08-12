@@ -1,0 +1,11 @@
+E:\Muzudho\CSharp\Kifucity\C#ソースコード\Kifucity\bin\Release\Kifucity.exe.config
+E:\Muzudho\CSharp\Kifucity\C#ソースコード\Kifucity\obj\Release\Kifucity.csprojResolveAssemblyReference.cache
+E:\Muzudho\CSharp\Kifucity\C#ソースコード\Kifucity\obj\Release\Kifucity.Form1.resources
+E:\Muzudho\CSharp\Kifucity\C#ソースコード\Kifucity\obj\Release\Kifucity.UcMain.resources
+E:\Muzudho\CSharp\Kifucity\C#ソースコード\Kifucity\obj\Release\Kifucity.csproj.GenerateResource.Cache
+E:\Muzudho\CSharp\Kifucity\C#ソースコード\bin\Grayscale.Kifucity.exe.config
+E:\Muzudho\CSharp\Kifucity\C#ソースコード\bin\Grayscale.Kifucity.exe
+E:\Muzudho\CSharp\Kifucity\C#ソースコード\bin\Grayscale.Kifucity.pdb
+E:\Muzudho\CSharp\Kifucity\C#ソースコード\Kifucity\obj\Release\Grayscale.Kifucity.Properties.Resources.resources
+E:\Muzudho\CSharp\Kifucity\C#ソースコード\Kifucity\obj\Release\Grayscale.Kifucity.exe
+E:\Muzudho\CSharp\Kifucity\C#ソースコード\Kifucity\obj\Release\Grayscale.Kifucity.pdb
