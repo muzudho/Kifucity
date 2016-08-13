@@ -301,8 +301,10 @@ namespace Grayscale.A500_Kifucity
                             //
                             // 東の方に向かう直線。図でいうと「＜」扇状の範囲。
                             //
+                            //*
                             int pCol;
-                            int pRow;
+                            int pRow = beginRow;
+                            int pRowPrev;
                             for (int iCol = 0; iCol < distanceCol + 1; iCol++)
                             {
                                 int iRow;
@@ -317,20 +319,30 @@ namespace Grayscale.A500_Kifucity
                                 }
 
                                 pCol = beginCol + iCol;
+                                pRowPrev = pRow;
                                 pRow = beginRow + iRow;
                                 if (pCol < TABLE_COLS && pRow < TABLE_ROWS)
                                 {
                                     this.MapImg[1, pRow, pCol] = MapchipType.su砂_田5;
+
+                                    if (pRowPrev != pRow && pRowPrev < TABLE_ROWS)
+                                    {
+                                        // シムシティの線路みたいな直線のつなげ方をするぜ☆（＾～＾）
+                                        this.MapImg[1, pRowPrev, pCol] = MapchipType.su砂_田5;
+                                    }
                                 }
                             }
+                            //*/
                         }
                         else
                         {
                             //
                             // 西の方に向かう直線。図でいうと「＞」扇状の範囲。
                             //
+                            //*
                             int pCol;
-                            int pRow;
+                            int pRow = beginRow;
+                            int pRowPrev;
                             for (int iCol = 0; distanceCol - 1 < iCol; iCol--)
                             {
                                 int iRow;
@@ -345,12 +357,20 @@ namespace Grayscale.A500_Kifucity
                                 }
 
                                 pCol = beginCol + iCol;
+                                pRowPrev = pRow;
                                 pRow = beginRow + iRow;
                                 if (pCol < TABLE_COLS && pRow < TABLE_ROWS)
                                 {
                                     this.MapImg[1, pRow, pCol] = MapchipType.su砂_田5;
+
+                                    if (pRowPrev != pRow && pRowPrev < TABLE_ROWS)
+                                    {
+                                        // シムシティの線路みたいな直線のつなげ方をするぜ☆（＾～＾）
+                                        this.MapImg[1, pRowPrev, pCol] = MapchipType.su砂_田5;
+                                    }
                                 }
                             }
+                            //*/
                         }
 
                         // すぐ更新☆ すぐ描画☆
@@ -365,7 +385,9 @@ namespace Grayscale.A500_Kifucity
                             //
                             // 南の方に向かう直線。図でいうと「∧」扇状の範囲。
                             //
-                            int pCol;
+                            //*
+                            int pCol = beginCol;
+                            int pColPrev;
                             int pRow;
                             for (int iRow = 0; iRow < distanceRow + 1; iRow++)
                             {
@@ -380,20 +402,30 @@ namespace Grayscale.A500_Kifucity
                                     iCol = (int)((float)distanceCol * ((float)iRow / (float)distanceRow));
                                 }
 
+                                pColPrev = pCol;
                                 pCol = beginCol + iCol;
                                 pRow = beginRow + iRow;
                                 if (pCol < TABLE_COLS && pRow < TABLE_ROWS)
                                 {
                                     this.MapImg[1, pRow, pCol] = MapchipType.su砂_田5;
+
+                                    if (pColPrev != pCol && pColPrev < TABLE_COLS)
+                                    {
+                                        // シムシティの線路みたいな直線のつなげ方をするぜ☆（＾～＾）
+                                        this.MapImg[1, pRow, pColPrev] = MapchipType.su砂_田5;
+                                    }
                                 }
                             }
+                            //*/
                         }
                         else
                         {
                             //
                             // 北の方に向かう直線。図でいうと「∨」扇状の範囲。
                             //
-                            int pCol;
+                            //*
+                            int pCol = beginCol;
+                            int pColPrev;
                             int pRow;
                             for (int iRow = 0; distanceRow - 1 < iRow; iRow--)
                             {
@@ -408,13 +440,21 @@ namespace Grayscale.A500_Kifucity
                                     iCol = (int)((float)distanceCol * ((float)iRow / (float)distanceRow));
                                 }
 
+                                pColPrev = pCol;
                                 pCol = beginCol + iCol;
                                 pRow = beginRow + iRow;
                                 if (pCol < TABLE_COLS && pRow < TABLE_ROWS)
                                 {
                                     this.MapImg[1, pRow, pCol] = MapchipType.su砂_田5;
+
+                                    if (pColPrev != pCol && pColPrev < TABLE_COLS)
+                                    {
+                                        // シムシティの線路みたいな直線のつなげ方をするぜ☆（＾～＾）
+                                        this.MapImg[1, pRow, pColPrev] = MapchipType.su砂_田5;
+                                    }
                                 }
                             }
+                            //*/
                         }
 
                         // すぐ更新☆ すぐ描画☆
