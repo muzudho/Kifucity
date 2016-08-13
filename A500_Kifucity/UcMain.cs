@@ -269,9 +269,8 @@ namespace Grayscale.A500_Kifucity
                     this.TableLeft += deltaX;
                     this.TableTop += deltaY;
 
-                    // すぐ更新☆
+                    // すぐ更新☆ すぐ描画☆
                     this.MouseDownLocation = e.Location;
-
                     this.Refresh();
                 }
             }
@@ -281,13 +280,148 @@ namespace Grayscale.A500_Kifucity
                 // 砂地を置く☆
                 if (this.MouseDownLocation != Point.Empty)
                 {
-                    int col = (e.Location.X - this.TableLeft) / cellW;
-                    int row = (e.Location.Y - this.TableTop) / cellH;
-                    if (col < TABLE_COLS && row < TABLE_ROWS)
+                    // ２点間を補完して埋めたい。
+                    // http://kifucity.warabenture.com/archives/47
+
+                    // 始点
+                    int beginCol = (this.MouseDownLocation.X - this.TableLeft) / cellW;
+                    int beginRow = (this.MouseDownLocation.Y - this.TableTop) / cellH;
+                    // 終点
+                    int endCol = (e.Location.X - this.TableLeft) / cellW;
+                    int endRow = (e.Location.Y - this.TableTop) / cellH;
+                    // 距離
+                    int distanceCol = endCol - beginCol;
+                    int distanceRow = endRow - beginRow;
+
+                    if (Math.Abs(distanceRow) <= Math.Abs(distanceCol))
                     {
-                        this.MapImg[1, row, col] = MapchipType.su砂_田5;
+                        // ２点間が、ヨコ、タテが同じか、ヨコの方が長い場合☆
+                        if (0 <= distanceCol)
+                        {
+                            //
+                            // 東の方に向かう直線。図でいうと「＜」扇状の範囲。
+                            //
+                            int pCol;
+                            int pRow;
+                            for (int iCol = 0; iCol < distanceCol + 1; iCol++)
+                            {
+                                int iRow;
+                                if (0== distanceCol)
+                                {
+                                    iRow = 0;
+                                }
+                                else
+                                {
+                                    // 計算途中は実数にしないと、隙間ができてしまうぜ☆（＾～＾）
+                                    iRow = (int)((float)distanceRow * ((float)iCol / (float)distanceCol));
+                                }
+
+                                pCol = beginCol + iCol;
+                                pRow = beginRow + iRow;
+                                if (pCol < TABLE_COLS && pRow < TABLE_ROWS)
+                                {
+                                    this.MapImg[1, pRow, pCol] = MapchipType.su砂_田5;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            //
+                            // 西の方に向かう直線。図でいうと「＞」扇状の範囲。
+                            //
+                            int pCol;
+                            int pRow;
+                            for (int iCol = 0; distanceCol - 1 < iCol; iCol--)
+                            {
+                                int iRow;
+                                if (0 == distanceCol)
+                                {
+                                    iRow = 0;
+                                }
+                                else
+                                {
+                                    // 計算途中は実数にしないと、隙間ができてしまうぜ☆（＾～＾）
+                                    iRow = (int)((float)distanceRow * ((float)iCol / (float)distanceCol));
+                                }
+
+                                pCol = beginCol + iCol;
+                                pRow = beginRow + iRow;
+                                if (pCol < TABLE_COLS && pRow < TABLE_ROWS)
+                                {
+                                    this.MapImg[1, pRow, pCol] = MapchipType.su砂_田5;
+                                }
+                            }
+                        }
+
+                        // すぐ更新☆ すぐ描画☆
+                        this.MouseDownLocation = e.Location;
                         this.Refresh();
                     }
+                    else
+                    {
+                        // ２点間が、タテの方が長い場合☆
+                        if (0 <= distanceRow)
+                        {
+                            //
+                            // 南の方に向かう直線。図でいうと「∧」扇状の範囲。
+                            //
+                            int pCol;
+                            int pRow;
+                            for (int iRow = 0; iRow < distanceRow + 1; iRow++)
+                            {
+                                int iCol;
+                                if (0 == distanceRow)
+                                {
+                                    iCol = 0;
+                                }
+                                else
+                                {
+                                    // 計算途中は実数にしないと、隙間ができてしまうぜ☆（＾～＾）
+                                    iCol = (int)((float)distanceCol * ((float)iRow / (float)distanceRow));
+                                }
+
+                                pCol = beginCol + iCol;
+                                pRow = beginRow + iRow;
+                                if (pCol < TABLE_COLS && pRow < TABLE_ROWS)
+                                {
+                                    this.MapImg[1, pRow, pCol] = MapchipType.su砂_田5;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            //
+                            // 北の方に向かう直線。図でいうと「∨」扇状の範囲。
+                            //
+                            int pCol;
+                            int pRow;
+                            for (int iRow = 0; distanceRow - 1 < iRow; iRow--)
+                            {
+                                int iCol;
+                                if (0 == distanceRow)
+                                {
+                                    iCol = 0;
+                                }
+                                else
+                                {
+                                    // 計算途中は実数にしないと、隙間ができてしまうぜ☆（＾～＾）
+                                    iCol = (int)((float)distanceCol * ((float)iRow / (float)distanceRow));
+                                }
+
+                                pCol = beginCol + iCol;
+                                pRow = beginRow + iRow;
+                                if (pCol < TABLE_COLS && pRow < TABLE_ROWS)
+                                {
+                                    this.MapImg[1, pRow, pCol] = MapchipType.su砂_田5;
+                                }
+                            }
+                        }
+
+                        // すぐ更新☆ すぐ描画☆
+                        this.MouseDownLocation = e.Location;
+                        this.Refresh();
+                    }
+
                 }
             }
         }

@@ -38,7 +38,7 @@
             this.ucMain1.Location = new System.Drawing.Point(0, 0);
             this.ucMain1.MouseDownLocation = new System.Drawing.Point(0, 0);
             this.ucMain1.Name = "ucMain1";
-            this.ucMain1.Size = new System.Drawing.Size(284, 261);
+            this.ucMain1.Size = new System.Drawing.Size(600, 400);
             this.ucMain1.TabIndex = 0;
             this.ucMain1.TableLeft = 16;
             this.ucMain1.TableTop = 16;
@@ -47,7 +47,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(600, 400);
             this.Controls.Add(this.ucMain1);
             this.Name = "Form1";
             this.Text = "きふシティ";
