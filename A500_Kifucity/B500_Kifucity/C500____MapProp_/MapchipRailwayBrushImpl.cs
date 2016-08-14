@@ -1,4 +1,6 @@
 ﻿using Grayscale.A500_Kifucity.B500_Kifucity.C___500_MapProp_;
+using System.Drawing;
+using System;
 
 namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
 {
@@ -69,9 +71,9 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
 
 
         /// <summary>
-        /// 5近傍のマップチップの置き換え
+        /// 近傍を巻き込んだマップチップの置き換え
         /// </summary>
-        public void Update5Neighborhood(UcMain ucMain //MapchipCrop[,,] map
+        public void UpdateNeighborhood(UcMain ucMain //MapchipCrop[,,] map
             , int centerRow, int centerCol)
         {
             if (-1 < centerCol && centerCol < UcMain.TABLE_COLS &&
@@ -87,18 +89,18 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 if (col < UcMain.TABLE_COLS && -1 < row)
                 {
                     if (
-                        ucMain.MapImg[1, row, col] == this.Patches[1] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[2] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[3] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[4] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[5] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[6] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[7] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[8] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[9] ||
-                        ucMain.MapImg[1, row, col] == this.Point ||
-                        ucMain.MapImg[1, row, col] == this.Vertical ||
-                        ucMain.MapImg[1, row, col] == this.Horizontal
+                        ucMain.MapData1[1, row, col] == this.Patches[1] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[2] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[3] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[4] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[5] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[6] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[7] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[8] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[9] ||
+                        ucMain.MapData1[1, row, col] == this.Point ||
+                        ucMain.MapData1[1, row, col] == this.Vertical ||
+                        ucMain.MapData1[1, row, col] == this.Horizontal
                         )
                     {
                         isNorthEast = true;
@@ -112,18 +114,18 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 if (col < UcMain.TABLE_COLS && row < UcMain.TABLE_ROWS)
                 {
                     if (
-                        ucMain.MapImg[1, row, col] == this.Patches[1] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[2] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[3] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[4] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[5] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[6] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[7] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[8] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[9] ||
-                        ucMain.MapImg[1, row, col] == this.Point ||
-                        ucMain.MapImg[1, row, col] == this.Vertical ||
-                        ucMain.MapImg[1, row, col] == this.Horizontal
+                        ucMain.MapData1[1, row, col] == this.Patches[1] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[2] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[3] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[4] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[5] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[6] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[7] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[8] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[9] ||
+                        ucMain.MapData1[1, row, col] == this.Point ||
+                        ucMain.MapData1[1, row, col] == this.Vertical ||
+                        ucMain.MapData1[1, row, col] == this.Horizontal
                         )
                     {
                         isSouthEast = true;
@@ -137,18 +139,18 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 if (-1 < col && row < UcMain.TABLE_ROWS)
                 {
                     if (
-                        ucMain.MapImg[1, row, col] == this.Patches[1] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[2] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[3] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[4] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[5] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[6] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[7] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[8] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[9] ||
-                        ucMain.MapImg[1, row, col] == this.Point ||
-                        ucMain.MapImg[1, row, col] == this.Vertical ||
-                        ucMain.MapImg[1, row, col] == this.Horizontal
+                        ucMain.MapData1[1, row, col] == this.Patches[1] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[2] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[3] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[4] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[5] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[6] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[7] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[8] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[9] ||
+                        ucMain.MapData1[1, row, col] == this.Point ||
+                        ucMain.MapData1[1, row, col] == this.Vertical ||
+                        ucMain.MapData1[1, row, col] == this.Horizontal
                         )
                     {
                         isSouthWest = true;
@@ -162,18 +164,18 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 if (-1 < col && -1 < row)
                 {
                     if (
-                        ucMain.MapImg[1, row, col] == this.Patches[1] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[2] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[3] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[4] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[5] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[6] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[7] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[8] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[9] ||
-                        ucMain.MapImg[1, row, col] == this.Point ||
-                        ucMain.MapImg[1, row, col] == this.Vertical ||
-                        ucMain.MapImg[1, row, col] == this.Horizontal
+                        ucMain.MapData1[1, row, col] == this.Patches[1] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[2] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[3] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[4] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[5] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[6] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[7] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[8] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[9] ||
+                        ucMain.MapData1[1, row, col] == this.Point ||
+                        ucMain.MapData1[1, row, col] == this.Vertical ||
+                        ucMain.MapData1[1, row, col] == this.Horizontal
                         )
                     {
                         isNorthWest = true;
@@ -186,58 +188,65 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 row = centerRow - 1;
                 if (-1 < row)
                 {
-                    if (ucMain.MapImg[1, row, col] == this.Point)
+                    if (ucMain.MapData1[1, row, col] == this.Point)
                     {
                         // ・ → │
-                        ucMain.MapImg[1, row, col] = this.Vertical;
+                        ucMain.MapData1[1, row, col] = this.Vertical;
+                        ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         isNorth = true;
                     }
-                    else if (ucMain.MapImg[1, row, col] == this.Horizontal)
+                    else if (ucMain.MapData1[1, row, col] == this.Horizontal)
                     {
                         // ─ → 
                         if (!isNorthEast)
                         {
                             // → ┐
-                            ucMain.MapImg[1, row, col] = this.Patches[3];
+                            ucMain.MapData1[1, row, col] = this.Patches[3];
+                            ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         }
                         else if (!isNorthWest)
                         {
                             // → ┌
-                            ucMain.MapImg[1, row, col] = this.Patches[1];
+                            ucMain.MapData1[1, row, col] = this.Patches[1];
+                            ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         }
                         else
                         {
                             // → ┬
-                            ucMain.MapImg[1, row, col] = this.Patches[2];
+                            ucMain.MapData1[1, row, col] = this.Patches[2];
+                            ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         }
                         isNorth = true;
                     }
-                    else if (ucMain.MapImg[1, row, col] == this.Patches[7])
+                    else if (ucMain.MapData1[1, row, col] == this.Patches[7])
                     {
                         // └ → ├
-                        ucMain.MapImg[1, row, col] = this.Patches[4];
+                        ucMain.MapData1[1, row, col] = this.Patches[4];
+                        ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         isNorth = true;
                     }
-                    else if (ucMain.MapImg[1, row, col] == this.Patches[8])
+                    else if (ucMain.MapData1[1, row, col] == this.Patches[8])
                     {
                         // ┴ → ┼
-                        ucMain.MapImg[1, row, col] = this.Patches[5];
+                        ucMain.MapData1[1, row, col] = this.Patches[5];
+                        ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         isNorth = true;
                     }
-                    else if (ucMain.MapImg[1, row, col] == this.Patches[9])
+                    else if (ucMain.MapData1[1, row, col] == this.Patches[9])
                     {
                         // ┘ → ┤
-                        ucMain.MapImg[1, row, col] = this.Patches[6];
+                        ucMain.MapData1[1, row, col] = this.Patches[6];
+                        ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         isNorth = true;
                     }
                     else if (
-                        ucMain.MapImg[1, row, col] == this.Patches[1] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[2] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[3] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[4] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[5] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[6] ||
-                        ucMain.MapImg[1, row, col] == this.Vertical
+                        ucMain.MapData1[1, row, col] == this.Patches[1] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[2] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[3] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[4] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[5] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[6] ||
+                        ucMain.MapData1[1, row, col] == this.Vertical
                         )
                     {
                         isNorth = true;
@@ -250,58 +259,65 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 row = centerRow;
                 if (col < UcMain.TABLE_COLS)
                 {
-                    if (ucMain.MapImg[1, row, col] == this.Point)
+                    if (ucMain.MapData1[1, row, col] == this.Point)
                     {
                         // ・ → ─
-                        ucMain.MapImg[1, row, col] = this.Horizontal;
+                        ucMain.MapData1[1, row, col] = this.Horizontal;
+                        ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         isEast = true;
                     }
-                    else if (ucMain.MapImg[1, row, col] == this.Vertical)
+                    else if (ucMain.MapData1[1, row, col] == this.Vertical)
                     {
                         // │ → 
                         if (!isNorthEast)
                         {
                             // → ┐
-                            ucMain.MapImg[1, row, col] = this.Patches[3];
+                            ucMain.MapData1[1, row, col] = this.Patches[3];
+                            ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         }
                         else if (!isSouthEast)
                         {
                             // → ┘
-                            ucMain.MapImg[1, row, col] = this.Patches[9];
+                            ucMain.MapData1[1, row, col] = this.Patches[9];
+                            ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         }
                         else
                         {
                             // → ┤
-                            ucMain.MapImg[1, row, col] = this.Patches[6];
+                            ucMain.MapData1[1, row, col] = this.Patches[6];
+                            ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         }
                         isEast = true;
                     }
-                    else if (ucMain.MapImg[1, row, col] == this.Patches[1])
+                    else if (ucMain.MapData1[1, row, col] == this.Patches[1])
                     {
                         // ┌ → ┬
-                        ucMain.MapImg[1, row, col] = this.Patches[2];
+                        ucMain.MapData1[1, row, col] = this.Patches[2];
+                        ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         isEast = true;
                     }
-                    else if (ucMain.MapImg[1, row, col] == this.Patches[4])
+                    else if (ucMain.MapData1[1, row, col] == this.Patches[4])
                     {
                         // ├ → ┼
-                        ucMain.MapImg[1, row, col] = this.Patches[5];
+                        ucMain.MapData1[1, row, col] = this.Patches[5];
+                        ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         isEast = true;
                     }
-                    else if (ucMain.MapImg[1, row, col] == this.Patches[7])
+                    else if (ucMain.MapData1[1, row, col] == this.Patches[7])
                     {
                         // └ → ┴
-                        ucMain.MapImg[1, row, col] = this.Patches[8];
+                        ucMain.MapData1[1, row, col] = this.Patches[8];
+                        ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         isEast = true;
                     }
                     else if (
-                        ucMain.MapImg[1, row, col] == this.Patches[2] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[3] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[5] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[6] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[8] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[9] ||
-                        ucMain.MapImg[1, row, col] == this.Horizontal
+                        ucMain.MapData1[1, row, col] == this.Patches[2] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[3] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[5] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[6] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[8] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[9] ||
+                        ucMain.MapData1[1, row, col] == this.Horizontal
                         )
                     {
                         isEast = true;
@@ -314,58 +330,65 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 row = centerRow + 1;
                 if (row < UcMain.TABLE_ROWS)
                 {
-                    if (ucMain.MapImg[1, row, col] == this.Point)
+                    if (ucMain.MapData1[1, row, col] == this.Point)
                     {
                         // ・ → │
-                        ucMain.MapImg[1, row, col] = this.Vertical;
+                        ucMain.MapData1[1, row, col] = this.Vertical;
+                        ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         isSouth = true;
                     }
-                    else if (ucMain.MapImg[1, row, col] == this.Horizontal)
+                    else if (ucMain.MapData1[1, row, col] == this.Horizontal)
                     {
                         // ─ → 
                         if (!isSouthEast)
                         {
                             // → ┘
-                            ucMain.MapImg[1, row, col] = this.Patches[9];
+                            ucMain.MapData1[1, row, col] = this.Patches[9];
+                            ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         }
                         else if (!isSouthWest)
                         {
                             // → └
-                            ucMain.MapImg[1, row, col] = this.Patches[7];
+                            ucMain.MapData1[1, row, col] = this.Patches[7];
+                            ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         }
                         else
                         {
                             // → ┴
-                            ucMain.MapImg[1, row, col] = this.Patches[8];
+                            ucMain.MapData1[1, row, col] = this.Patches[8];
+                            ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         }
                         isSouth = true;
                     }
-                    else if (ucMain.MapImg[1, row, col] == this.Patches[1])
+                    else if (ucMain.MapData1[1, row, col] == this.Patches[1])
                     {
                         // ┌ → ├
-                        ucMain.MapImg[1, row, col] = this.Patches[4];
+                        ucMain.MapData1[1, row, col] = this.Patches[4];
+                        ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         isSouth = true;
                     }
-                    else if (ucMain.MapImg[1, row, col] == this.Patches[2])
+                    else if (ucMain.MapData1[1, row, col] == this.Patches[2])
                     {
                         // ┬ → ┼
-                        ucMain.MapImg[1, row, col] = this.Patches[5];
+                        ucMain.MapData1[1, row, col] = this.Patches[5];
+                        ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         isSouth = true;
                     }
-                    else if (ucMain.MapImg[1, row, col] == this.Patches[3])
+                    else if (ucMain.MapData1[1, row, col] == this.Patches[3])
                     {
                         // ┐ → ┤
-                        ucMain.MapImg[1, row, col] = this.Patches[6];
+                        ucMain.MapData1[1, row, col] = this.Patches[6];
+                        ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         isSouth = true;
                     }
                     else if (
-                        ucMain.MapImg[1, row, col] == this.Patches[4] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[5] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[6] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[7] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[8] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[9] ||
-                        ucMain.MapImg[1, row, col] == this.Vertical
+                        ucMain.MapData1[1, row, col] == this.Patches[4] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[5] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[6] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[7] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[8] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[9] ||
+                        ucMain.MapData1[1, row, col] == this.Vertical
                         )
                     {
                         isSouth = true;
@@ -378,58 +401,65 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 row = centerRow;
                 if (-1 < col)
                 {
-                    if (ucMain.MapImg[1, row, col] == this.Point)
+                    if (ucMain.MapData1[1, row, col] == this.Point)
                     {
                         // ・ → ─
-                        ucMain.MapImg[1, row, col] = this.Horizontal;
+                        ucMain.MapData1[1, row, col] = this.Horizontal;
+                        ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         isWest = true;
                     }
-                    else if (ucMain.MapImg[1, row, col] == this.Vertical)
+                    else if (ucMain.MapData1[1, row, col] == this.Vertical)
                     {
                         // │→
                         if (!isNorthWest)
                         {
                             // → ┌
-                            ucMain.MapImg[1, row, col] = this.Patches[1];
+                            ucMain.MapData1[1, row, col] = this.Patches[1];
+                            ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         }
                         else if (!isSouthWest)
                         {
                             // → └
-                            ucMain.MapImg[1, row, col] = this.Patches[7];
+                            ucMain.MapData1[1, row, col] = this.Patches[7];
+                            ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         }
                         else
                         {
                             // → ├
-                            ucMain.MapImg[1, row, col] = this.Patches[4];
+                            ucMain.MapData1[1, row, col] = this.Patches[4];
+                            ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         }
                         isWest = true;
                     }
-                    else if (ucMain.MapImg[1, row, col] == this.Patches[3])
+                    else if (ucMain.MapData1[1, row, col] == this.Patches[3])
                     {
                         // ┐ → ┬
-                        ucMain.MapImg[1, row, col] = this.Patches[2];
+                        ucMain.MapData1[1, row, col] = this.Patches[2];
+                        ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         isWest = true;
                     }
-                    else if (ucMain.MapImg[1, row, col] == this.Patches[6])
+                    else if (ucMain.MapData1[1, row, col] == this.Patches[6])
                     {
                         // ┤ → ┼
-                        ucMain.MapImg[1, row, col] = this.Patches[5];
+                        ucMain.MapData1[1, row, col] = this.Patches[5];
+                        ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         isWest = true;
                     }
-                    else if (ucMain.MapImg[1, row, col] == this.Patches[9])
+                    else if (ucMain.MapData1[1, row, col] == this.Patches[9])
                     {
                         // ┘ → ┴
-                        ucMain.MapImg[1, row, col] = this.Patches[8];
+                        ucMain.MapData1[1, row, col] = this.Patches[8];
+                        ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                         isWest = true;
                     }
                     else if (
-                        ucMain.MapImg[1, row, col] == this.Patches[1] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[2] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[4] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[5] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[7] ||
-                        ucMain.MapImg[1, row, col] == this.Patches[8] ||
-                        ucMain.MapImg[1, row, col] == this.Horizontal
+                        ucMain.MapData1[1, row, col] == this.Patches[1] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[2] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[4] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[5] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[7] ||
+                        ucMain.MapData1[1, row, col] == this.Patches[8] ||
+                        ucMain.MapData1[1, row, col] == this.Horizontal
                         )
                     {
                         isWest = true;
@@ -440,63 +470,281 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 if (isNorth && isEast && isSouth && isWest)
                 {
                     // ┼
-                    ucMain.MapImg[1, centerRow, centerCol] = this.Patches[5];
+                    ucMain.MapData1[1, centerRow, centerCol] = this.Patches[5];
+                    ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                 }
                 else if (isWest && isNorth && isEast)
                 {
                     // ┴
-                    ucMain.MapImg[1, centerRow, centerCol] = this.Patches[8];
+                    ucMain.MapData1[1, centerRow, centerCol] = this.Patches[8];
+                    ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                 }
                 else if (isNorth && isEast && isSouth)
                 {
                     // ├
-                    ucMain.MapImg[1, centerRow, centerCol] = this.Patches[4];
+                    ucMain.MapData1[1, centerRow, centerCol] = this.Patches[4];
+                    ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                 }
                 else if ( isEast && isSouth && isWest)
                 {
                     // ┬
-                    ucMain.MapImg[1, centerRow, centerCol] = this.Patches[2];
+                    ucMain.MapData1[1, centerRow, centerCol] = this.Patches[2];
+                    ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                 }
                 else if ( isSouth && isWest && isNorth)
                 {
                     // ┤
-                    ucMain.MapImg[1, centerRow, centerCol] = this.Patches[6];
+                    ucMain.MapData1[1, centerRow, centerCol] = this.Patches[6];
+                    ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                 }
                 else if (isNorth && isEast)
                 {
                     // └
-                    ucMain.MapImg[1, centerRow, centerCol] = this.Patches[7];
+                    ucMain.MapData1[1, centerRow, centerCol] = this.Patches[7];
+                    ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                 }
                 else if (isEast && isSouth)
                 {
                     // ┌
-                    ucMain.MapImg[1, centerRow, centerCol] = this.Patches[1];
+                    ucMain.MapData1[1, centerRow, centerCol] = this.Patches[1];
+                    ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                 }
                 else if (isSouth && isWest)
                 {
                     // ┐
-                    ucMain.MapImg[1, centerRow, centerCol] = this.Patches[3];
+                    ucMain.MapData1[1, centerRow, centerCol] = this.Patches[3];
+                    ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                 }
                 else if (isWest && isNorth)
                 {
                     // ┘
-                    ucMain.MapImg[1, centerRow, centerCol] = this.Patches[9];
+                    ucMain.MapData1[1, centerRow, centerCol] = this.Patches[9];
+                    ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                 }
                 else if (isNorth || isSouth)
                 {
                     // │
-                    ucMain.MapImg[1, centerRow, centerCol] = this.Vertical;
+                    ucMain.MapData1[1, centerRow, centerCol] = this.Vertical;
+                    ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                 }
                 else if (isEast || isWest)
                 {
                     // ─
-                    ucMain.MapImg[1, centerRow, centerCol] = this.Horizontal;
+                    ucMain.MapData1[1, centerRow, centerCol] = this.Horizontal;
+                    ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                 }
                 else
                 {
                     // ・
-                    ucMain.MapImg[1, centerRow, centerCol] = this.Point;
+                    ucMain.MapData1[1, centerRow, centerCol] = this.Point;
+                    ucMain.MapData2[1, row, col] = MapchipImageType.Mapchip;
                 }
+            }
+        }
+
+        /// <summary>
+        /// 直線状にマップチップを連続配置するぜ☆（＾▽＾）
+        /// </summary>
+        public void PutMapchipAsLine(
+            out bool out_isUpdate, Point mouseLocation, UcMain ucMain
+            )
+        {
+            // ２点間を補完して埋めたい。
+            // http://kifucity.warabenture.com/archives/47
+
+            out_isUpdate = false;
+
+            // 始点
+            int beginCol = (ucMain.MouseDownLocation.X - ucMain.TableLeft) / UcMain.CELL_W;
+            int beginRow = (ucMain.MouseDownLocation.Y - ucMain.TableTop) / UcMain.CELL_H;
+            // 終点
+            int endCol = (mouseLocation.X - ucMain.TableLeft) / UcMain.CELL_W;
+            int endRow = (mouseLocation.Y - ucMain.TableTop) / UcMain.CELL_H;
+            // 距離
+            int distanceCol = endCol - beginCol;
+            int distanceRow = endRow - beginRow;
+
+            if (Math.Abs(distanceRow) <= Math.Abs(distanceCol))
+            {
+                // ２点間が、ヨコ、タテが同じか、ヨコの方が長い場合☆
+                if (0 <= distanceCol)
+                {
+                    //
+                    // 東の方に向かう直線。図でいうと「＜」扇状の範囲。
+                    //
+                    //*
+                    int pCol;
+                    int pRow = beginRow;
+                    int pRowPrev;
+                    for (int iCol = 0; iCol < distanceCol + 1; iCol++)
+                    {
+                        int iRow;
+                        if (0 == distanceCol)
+                        {
+                            iRow = 0;
+                        }
+                        else
+                        {
+                            // 計算途中は実数にしないと、隙間ができてしまうぜ☆（＾～＾）
+                            iRow = (int)((float)distanceRow * ((float)iCol / (float)distanceCol));
+                        }
+
+                        pCol = beginCol + iCol;
+                        pRowPrev = pRow;
+                        pRow = beginRow + iRow;
+                        if (pCol < UcMain.TABLE_COLS && pRow < UcMain.TABLE_ROWS)
+                        {
+                            this.UpdateNeighborhood(ucMain //this.MapImg
+                                , pRow, pCol);
+                            //this.MapImg[1, pRow, pCol] = brushRailway.Patches[5];// MapchipCrop.su砂_田5;
+
+                            if (pRowPrev != pRow && pRowPrev < UcMain.TABLE_ROWS)
+                            {
+                                // シムシティの線路みたいな直線のつなげ方をするぜ☆（＾～＾）
+                                this.UpdateNeighborhood(ucMain //this.MapImg
+                                    , pRowPrev, pCol);
+                                //this.MapImg[1, pRowPrev, pCol] = brushRailway.Patches[5];// MapchipCrop.su砂_田5;
+                            }
+                        }
+                    }
+                    //*/
+                }
+                else
+                {
+                    //
+                    // 西の方に向かう直線。図でいうと「＞」扇状の範囲。
+                    //
+                    //*
+                    int pCol;
+                    int pRow = beginRow;
+                    int pRowPrev;
+                    for (int iCol = 0; distanceCol - 1 < iCol; iCol--)
+                    {
+                        int iRow;
+                        if (0 == distanceCol)
+                        {
+                            iRow = 0;
+                        }
+                        else
+                        {
+                            // 計算途中は実数にしないと、隙間ができてしまうぜ☆（＾～＾）
+                            iRow = (int)((float)distanceRow * ((float)iCol / (float)distanceCol));
+                        }
+
+                        pCol = beginCol + iCol;
+                        pRowPrev = pRow;
+                        pRow = beginRow + iRow;
+                        if (pCol < UcMain.TABLE_COLS && pRow < UcMain.TABLE_ROWS)
+                        {
+                            this.UpdateNeighborhood(ucMain //this.MapImg
+                                , pRow, pCol);
+                            //this.MapImg[1, pRow, pCol] = brushRailway.Patches[5]; //MapchipCrop.su砂_田5;
+
+                            if (pRowPrev != pRow && pRowPrev < UcMain.TABLE_ROWS)
+                            {
+                                // シムシティの線路みたいな直線のつなげ方をするぜ☆（＾～＾）
+                                this.UpdateNeighborhood(ucMain //this.MapImg
+                                    , pRowPrev, pCol);
+                                //this.MapImg[1, pRowPrev, pCol] = brushRailway.Patches[5]; //MapchipCrop.su砂_田5;
+                            }
+                        }
+                    }
+                    //*/
+                }
+
+                // すぐ更新☆ すぐ描画☆
+                out_isUpdate = true;
+            }
+            else
+            {
+                // ２点間が、タテの方が長い場合☆
+                if (0 <= distanceRow)
+                {
+                    //
+                    // 南の方に向かう直線。図でいうと「∧」扇状の範囲。
+                    //
+                    //*
+                    int pCol = beginCol;
+                    int pColPrev;
+                    int pRow;
+                    for (int iRow = 0; iRow < distanceRow + 1; iRow++)
+                    {
+                        int iCol;
+                        if (0 == distanceRow)
+                        {
+                            iCol = 0;
+                        }
+                        else
+                        {
+                            // 計算途中は実数にしないと、隙間ができてしまうぜ☆（＾～＾）
+                            iCol = (int)((float)distanceCol * ((float)iRow / (float)distanceRow));
+                        }
+
+                        pColPrev = pCol;
+                        pCol = beginCol + iCol;
+                        pRow = beginRow + iRow;
+                        if (pCol < UcMain.TABLE_COLS && pRow < UcMain.TABLE_ROWS)
+                        {
+                            this.UpdateNeighborhood(ucMain //this.MapImg
+                                , pRow, pCol);
+                            //this.MapImg[1, pRow, pCol] = brushRailway.Patches[5]; //MapchipCrop.su砂_田5;
+
+                            if (pColPrev != pCol && pColPrev < UcMain.TABLE_COLS)
+                            {
+                                // シムシティの線路みたいな直線のつなげ方をするぜ☆（＾～＾）
+                                this.UpdateNeighborhood(ucMain //this.MapImg
+                                    , pRow, pColPrev);
+                                //this.MapImg[1, pRow, pColPrev] = brushRailway.Patches[5]; //MapchipCrop.su砂_田5;
+                            }
+                        }
+                    }
+                    //*/
+                }
+                else
+                {
+                    //
+                    // 北の方に向かう直線。図でいうと「∨」扇状の範囲。
+                    //
+                    //*
+                    int pCol = beginCol;
+                    int pColPrev;
+                    int pRow;
+                    for (int iRow = 0; distanceRow - 1 < iRow; iRow--)
+                    {
+                        int iCol;
+                        if (0 == distanceRow)
+                        {
+                            iCol = 0;
+                        }
+                        else
+                        {
+                            // 計算途中は実数にしないと、隙間ができてしまうぜ☆（＾～＾）
+                            iCol = (int)((float)distanceCol * ((float)iRow / (float)distanceRow));
+                        }
+
+                        pColPrev = pCol;
+                        pCol = beginCol + iCol;
+                        pRow = beginRow + iRow;
+                        if (pCol < UcMain.TABLE_COLS && pRow < UcMain.TABLE_ROWS)
+                        {
+                            this.UpdateNeighborhood(ucMain //this.MapImg
+                                , pRow, pCol);
+                            //this.MapImg[1, pRow, pCol] = brushRailway.Patches[5]; //MapchipCrop.su砂_田5;
+
+                            if (pColPrev != pCol && pColPrev < UcMain.TABLE_COLS)
+                            {
+                                // シムシティの線路みたいな直線のつなげ方をするぜ☆（＾～＾）
+                                this.UpdateNeighborhood(ucMain //this.MapImg
+                                    , pRow, pColPrev);
+                                //this.MapImg[1, pRow, pColPrev] = brushRailway.Patches[5]; //MapchipCrop.su砂_田5;
+                            }
+                        }
+                    }
+                    //*/
+                }
+
+                // すぐ更新☆ すぐ描画☆
+                out_isUpdate = true;
             }
         }
     }

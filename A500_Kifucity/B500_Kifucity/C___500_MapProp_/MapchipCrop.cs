@@ -20,111 +20,6 @@
         /// 工業地
         /// </summary>
         I,
-        /// <summary>
-        /// ┌
-        /// </summary>
-        su砂_田1,
-        /// <summary>
-        /// ┬
-        /// </summary>
-        su砂_田2,
-        /// <summary>
-        /// ┐
-        /// </summary>
-        su砂_田3,
-        /// <summary>
-        /// ├
-        /// </summary>
-        su砂_田4,
-        /// <summary>
-        /// ┼
-        /// </summary>
-        su砂_田5,
-        /// <summary>
-        /// ┤
-        /// </summary>
-        su砂_田6,
-        /// <summary>
-        /// └
-        /// </summary>
-        su砂_田7,
-        /// <summary>
-        /// ┴
-        /// </summary>
-        su砂_田8,
-        /// <summary>
-        /// ┘
-        /// </summary>
-        su砂_田9,
-        /// <summary>
-        /// 逆┌
-        /// </summary>
-        su砂_逆田1,
-        /// <summary>
-        /// 逆┐
-        /// </summary>
-        su砂_逆田3,
-        /// <summary>
-        /// 逆└
-        /// </summary>
-        su砂_逆田7,
-        /// <summary>
-        /// 逆┘
-        /// </summary>
-        su砂_逆田9,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        si芝_田1,
-        /// <summary>
-        /// 
-        /// </summary>
-        si芝_田2,
-        /// <summary>
-        /// 
-        /// </summary>
-        si芝_田3,
-        /// <summary>
-        /// 
-        /// </summary>
-        si芝_田4,
-        /// <summary>
-        /// 
-        /// </summary>
-        si芝_田5,
-        /// <summary>
-        /// 
-        /// </summary>
-        si芝_田6,
-        /// <summary>
-        /// 
-        /// </summary>
-        si芝_田7,
-        /// <summary>
-        /// 
-        /// </summary>
-        si芝_田8,
-        /// <summary>
-        /// 
-        /// </summary>
-        si芝_田9,
-        /// <summary>
-        /// 
-        /// </summary>
-        si芝_逆田1,
-        /// <summary>
-        /// 
-        /// </summary>
-        si芝_逆田3,
-        /// <summary>
-        /// 
-        /// </summary>
-        si芝_逆田7,
-        /// <summary>
-        /// 
-        /// </summary>
-        si芝_逆田9,
 
         /// <summary>
         /// ・ point
@@ -245,6 +140,155 @@
         dobt道路2,
         dobt道路3,
         dobt道路4,
+
+        /// <summary>
+        /// 境界線チップ
+        /// </summary>
+        kyo境界線_A1,
+        /// <summary>
+        /// ┬
+        /// </summary>
+        kyo境界線_A2,
+        /// <summary>
+        /// ┐
+        /// </summary>
+        kyo境界線_A3,
+        /// <summary>
+        /// ├
+        /// </summary>
+        kyo境界線_A4,
+        /// <summary>
+        /// ┼
+        /// </summary>
+        kyo境界線_A5,
+        /// <summary>
+        /// ┤
+        /// </summary>
+        kyo境界線_A6,
+        /// <summary>
+        /// └
+        /// </summary>
+        kyo境界線_A7,
+        /// <summary>
+        /// ┴
+        /// </summary>
+        kyo境界線_A8,
+        /// <summary>
+        /// ┘
+        /// </summary>
+        kyo境界線_A9,
+        /// <summary>
+        /// 逆┌
+        /// </summary>
+        kyo境界線_B1,
+        /// <summary>
+        /// 逆┐
+        /// </summary>
+        kyo境界線_B2,
+        /// <summary>
+        /// 逆└
+        /// </summary>
+        kyo境界線_B3,
+        /// <summary>
+        /// 逆┘
+        /// </summary>
+        kyo境界線_B4,
+        /// <summary>
+        /// 逆┌
+        /// </summary>
+        kyo境界線_C1,
+        /// <summary>
+        /// 逆┐
+        /// </summary>
+        kyo境界線_C2,
+        /// <summary>
+        /// 逆└
+        /// </summary>
+        kyo境界線_C3,
+        /// <summary>
+        /// 逆┘
+        /// </summary>
+        kyo境界線_C4,
+        /// <summary>
+        /// 
+        /// </summary>
+        kyo境界線_D,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_E3,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_E5,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_E6,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_E7,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_E9,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_E10,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_E11,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_E13,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_E14,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_E15,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_E17,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_F1,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_F2,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_F3,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_F4,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_F5,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_F6,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_F7,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_F8,
 
         /// <summary>
         /// 列挙型サイズ

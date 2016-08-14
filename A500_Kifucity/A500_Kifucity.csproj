@@ -47,11 +47,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="B500_Kifucity\C500____MapProp_\MapchipButtonBrushImpl.cs" />
+    <Compile Include="B500_Kifucity\C500____MapProp_\MapchipBulldozerBrushImpl.cs" />
     <Compile Include="B500_Kifucity\C500____MapProp_\MapchipRailwayBrushImpl.cs" />
     <Compile Include="B500_Kifucity\C500____MapProp_\MapchipPropertyImpl.cs" />
     <Compile Include="B500_Kifucity\C___500_MapProp_\ButtonState2.cs" />
     <Compile Include="B500_Kifucity\C___500_MapProp_\ButtonType.cs" />
+    <Compile Include="B500_Kifucity\C___500_MapProp_\MapchipBrush.cs" />
     <Compile Include="B500_Kifucity\C___500_MapProp_\MapchipButtonBrush.cs" />
+    <Compile Include="B500_Kifucity\C___500_MapProp_\MapchipBulldozerBrush.cs" />
+    <Compile Include="B500_Kifucity\C___500_MapProp_\MapchipImageType.cs" />
     <Compile Include="B500_Kifucity\C___500_MapProp_\MapchipRailwayBrush.cs" />
     <Compile Include="B500_Kifucity\C___500_MapProp_\MapchipProperty.cs" />
     <Compile Include="B500_Kifucity\C___500_MapProp_\MapchipCrop.cs" />

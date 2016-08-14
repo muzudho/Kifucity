@@ -1,9 +1,11 @@
-﻿namespace Grayscale.A500_Kifucity.B500_Kifucity.C___500_MapProp_
+﻿using System.Drawing;
+
+namespace Grayscale.A500_Kifucity.B500_Kifucity.C___500_MapProp_
 {
     /// <summary>
     /// 線路状のマップチップを置くブラシ☆
     /// </summary>
-    public interface MapchipRailwayBrush
+    public interface MapchipRailwayBrush : MapchipBrush
     {
         /// <summary>
         /// ・
@@ -33,10 +35,10 @@
         MapchipCrop[] Patches { get; set; }
 
         /// <summary>
-        /// 5近傍のマップチップの置き換え
+        /// 線路状にマップチップを連続配置するぜ☆（＾▽＾）
         /// </summary>
-        void Update5Neighborhood(UcMain ucMain //MapchipCrop[,,] map
-            , int row, int col);
-
+        void PutMapchipAsLine(
+            out bool out_isUpdate, Point mouseLocation, UcMain ucMain
+            );
     }
 }

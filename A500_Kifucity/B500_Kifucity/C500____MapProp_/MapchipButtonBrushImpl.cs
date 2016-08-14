@@ -54,16 +54,5 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             g.DrawImage(ucMain.ImgMap, this.DestinationBounds, ucMain.MapchipProperties[(int)this.Patches[(int)this.ButtonState]].SourceBounds, GraphicsUnit.Pixel);
         }
 
-        /*
-        /// <summary>
-        /// マウスカーソルが重なったかを確認するぜ☆（＾▽＾）
-        /// </summary>
-        /// <param name="mouseLocation"></param>
-        /// <returns></returns>
-        public bool Contains(Point mouseLocation)
-        {
-            return this.DestinationBounds.Contains(mouseLocation);
-        }
-        */
     }
 }
