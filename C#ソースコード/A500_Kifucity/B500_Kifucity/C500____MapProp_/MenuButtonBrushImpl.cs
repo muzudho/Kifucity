@@ -3,9 +3,10 @@ using System.Drawing;
 
 namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
 {
-    public class MenuButtonBrushImpl : ButtonBrush
+    public class MenuButtonBrushImpl : MenuButtonBrush
     {
         public MenuButtonBrushImpl(
+            ImageType imageType,
             int x,
             int y,
             int width,
@@ -16,10 +17,10 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             MapchipCrop patch4
             )
         {
+            this.ImageType = imageType;
             this.DestinationBounds = new Rectangle(x,y,width,height);
 
             this.ButtonState = ButtonState2.Pushable;
-            //this.ButtonState = ButtonState2.Pushed;
 
             this.Patches = new MapchipCrop[]
             {
@@ -33,6 +34,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
 
         public ButtonState2 ButtonState { get; set; }
 
+        public ImageType ImageType { get; set; }
         /// <summary>
         /// [0]なし
         /// [1]押す前
@@ -51,7 +53,10 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
         /// </summary>
         public void Paint(Graphics g, UcMain ucMain)
         {
-            g.DrawImage(ucMain.ImgMap, this.DestinationBounds, ucMain.MapchipProperties[(int)this.Patches[(int)this.ButtonState]].SourceBounds, GraphicsUnit.Pixel);
+            if (null != ucMain.Images)//ビジュアル・エディター対策
+            {
+                g.DrawImage(ucMain.Images[(int)this.ImageType], this.DestinationBounds, ucMain.MapchipProperties[(int)this.Patches[(int)this.ButtonState]].SourceBounds, GraphicsUnit.Pixel);
+            }
         }
 
     }

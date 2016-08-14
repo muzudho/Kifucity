@@ -11,6 +11,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
     {
         public MapchipRailwayBrushImpl(
             int layer,
+            ImageType imageType,
             MapchipCrop point,
             MapchipCrop vertical,
             MapchipCrop horizontal,
@@ -26,6 +27,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             )
         {
             this.Layer = layer;
+            this.ImageType = imageType;
             this.Point = point;
             this.Vertical = vertical;
             this.Horizontal = horizontal;
@@ -48,6 +50,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
         /// レイヤー番号☆
         /// </summary>
         public int Layer { get; set; }
+        public ImageType ImageType { get; set; }
 
         /// <summary>
         /// ・
@@ -199,7 +202,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                     {
                         // ・ → │
                         ucMain.MapData1[this.Layer, row, col] = this.Vertical;
-                        ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         isNorth = true;
                     }
                     else if (ucMain.MapData1[this.Layer, row, col] == this.Horizontal)
@@ -209,19 +212,19 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                         {
                             // → ┐
                             ucMain.MapData1[this.Layer, row, col] = this.Patches[3];
-                            ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                            ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         }
                         else if (!isNorthWest)
                         {
                             // → ┌
                             ucMain.MapData1[this.Layer, row, col] = this.Patches[1];
-                            ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                            ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         }
                         else
                         {
                             // → ┬
                             ucMain.MapData1[this.Layer, row, col] = this.Patches[2];
-                            ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                            ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         }
                         isNorth = true;
                     }
@@ -229,21 +232,21 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                     {
                         // └ → ├
                         ucMain.MapData1[this.Layer, row, col] = this.Patches[4];
-                        ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         isNorth = true;
                     }
                     else if (ucMain.MapData1[this.Layer, row, col] == this.Patches[8])
                     {
                         // ┴ → ┼
                         ucMain.MapData1[this.Layer, row, col] = this.Patches[5];
-                        ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         isNorth = true;
                     }
                     else if (ucMain.MapData1[this.Layer, row, col] == this.Patches[9])
                     {
                         // ┘ → ┤
                         ucMain.MapData1[this.Layer, row, col] = this.Patches[6];
-                        ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         isNorth = true;
                     }
                     else if (
@@ -270,7 +273,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                     {
                         // ・ → ─
                         ucMain.MapData1[this.Layer, row, col] = this.Horizontal;
-                        ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         isEast = true;
                     }
                     else if (ucMain.MapData1[this.Layer, row, col] == this.Vertical)
@@ -280,19 +283,19 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                         {
                             // → ┐
                             ucMain.MapData1[this.Layer, row, col] = this.Patches[3];
-                            ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                            ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         }
                         else if (!isSouthEast)
                         {
                             // → ┘
                             ucMain.MapData1[this.Layer, row, col] = this.Patches[9];
-                            ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                            ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         }
                         else
                         {
                             // → ┤
                             ucMain.MapData1[this.Layer, row, col] = this.Patches[6];
-                            ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                            ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         }
                         isEast = true;
                     }
@@ -300,21 +303,21 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                     {
                         // ┌ → ┬
                         ucMain.MapData1[this.Layer, row, col] = this.Patches[2];
-                        ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         isEast = true;
                     }
                     else if (ucMain.MapData1[this.Layer, row, col] == this.Patches[4])
                     {
                         // ├ → ┼
                         ucMain.MapData1[this.Layer, row, col] = this.Patches[5];
-                        ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         isEast = true;
                     }
                     else if (ucMain.MapData1[this.Layer, row, col] == this.Patches[7])
                     {
                         // └ → ┴
                         ucMain.MapData1[this.Layer, row, col] = this.Patches[8];
-                        ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         isEast = true;
                     }
                     else if (
@@ -341,7 +344,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                     {
                         // ・ → │
                         ucMain.MapData1[this.Layer, row, col] = this.Vertical;
-                        ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         isSouth = true;
                     }
                     else if (ucMain.MapData1[this.Layer, row, col] == this.Horizontal)
@@ -351,19 +354,19 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                         {
                             // → ┘
                             ucMain.MapData1[this.Layer, row, col] = this.Patches[9];
-                            ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                            ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         }
                         else if (!isSouthWest)
                         {
                             // → └
                             ucMain.MapData1[this.Layer, row, col] = this.Patches[7];
-                            ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                            ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         }
                         else
                         {
                             // → ┴
                             ucMain.MapData1[this.Layer, row, col] = this.Patches[8];
-                            ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                            ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         }
                         isSouth = true;
                     }
@@ -371,21 +374,21 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                     {
                         // ┌ → ├
                         ucMain.MapData1[this.Layer, row, col] = this.Patches[4];
-                        ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         isSouth = true;
                     }
                     else if (ucMain.MapData1[this.Layer, row, col] == this.Patches[2])
                     {
                         // ┬ → ┼
                         ucMain.MapData1[this.Layer, row, col] = this.Patches[5];
-                        ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         isSouth = true;
                     }
                     else if (ucMain.MapData1[this.Layer, row, col] == this.Patches[3])
                     {
                         // ┐ → ┤
                         ucMain.MapData1[this.Layer, row, col] = this.Patches[6];
-                        ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         isSouth = true;
                     }
                     else if (
@@ -412,7 +415,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                     {
                         // ・ → ─
                         ucMain.MapData1[this.Layer, row, col] = this.Horizontal;
-                        ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         isWest = true;
                     }
                     else if (ucMain.MapData1[this.Layer, row, col] == this.Vertical)
@@ -422,19 +425,19 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                         {
                             // → ┌
                             ucMain.MapData1[this.Layer, row, col] = this.Patches[1];
-                            ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                            ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         }
                         else if (!isSouthWest)
                         {
                             // → └
                             ucMain.MapData1[this.Layer, row, col] = this.Patches[7];
-                            ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                            ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         }
                         else
                         {
                             // → ├
                             ucMain.MapData1[this.Layer, row, col] = this.Patches[4];
-                            ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                            ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         }
                         isWest = true;
                     }
@@ -442,21 +445,21 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                     {
                         // ┐ → ┬
                         ucMain.MapData1[this.Layer, row, col] = this.Patches[2];
-                        ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         isWest = true;
                     }
                     else if (ucMain.MapData1[this.Layer, row, col] == this.Patches[6])
                     {
                         // ┤ → ┼
                         ucMain.MapData1[this.Layer, row, col] = this.Patches[5];
-                        ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         isWest = true;
                     }
                     else if (ucMain.MapData1[this.Layer, row, col] == this.Patches[9])
                     {
                         // ┘ → ┴
                         ucMain.MapData1[this.Layer, row, col] = this.Patches[8];
-                        ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
                         isWest = true;
                     }
                     else if (
@@ -478,73 +481,73 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 {
                     // ┼
                     ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Patches[5];
-                    ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                    ucMain.MapData2[this.Layer, centerRow, centerCol] = this.ImageType;
                 }
                 else if (isWest && isNorth && isEast)
                 {
                     // ┴
                     ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Patches[8];
-                    ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                    ucMain.MapData2[this.Layer, centerRow, centerCol] = this.ImageType;
                 }
                 else if (isNorth && isEast && isSouth)
                 {
                     // ├
                     ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Patches[4];
-                    ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                    ucMain.MapData2[this.Layer, centerRow, centerCol] = this.ImageType;
                 }
                 else if ( isEast && isSouth && isWest)
                 {
                     // ┬
                     ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Patches[2];
-                    ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                    ucMain.MapData2[this.Layer, centerRow, centerCol] = this.ImageType;
                 }
                 else if ( isSouth && isWest && isNorth)
                 {
                     // ┤
                     ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Patches[6];
-                    ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                    ucMain.MapData2[this.Layer, centerRow, centerCol] = this.ImageType;
                 }
                 else if (isNorth && isEast)
                 {
                     // └
                     ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Patches[7];
-                    ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                    ucMain.MapData2[this.Layer, centerRow, centerCol] = this.ImageType;
                 }
                 else if (isEast && isSouth)
                 {
                     // ┌
                     ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Patches[1];
-                    ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                    ucMain.MapData2[this.Layer, centerRow, centerCol] = this.ImageType;
                 }
                 else if (isSouth && isWest)
                 {
                     // ┐
                     ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Patches[3];
-                    ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                    ucMain.MapData2[this.Layer, centerRow, centerCol] = this.ImageType;
                 }
                 else if (isWest && isNorth)
                 {
                     // ┘
                     ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Patches[9];
-                    ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                    ucMain.MapData2[this.Layer, centerRow, centerCol] = this.ImageType;
                 }
                 else if (isNorth || isSouth)
                 {
                     // │
                     ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Vertical;
-                    ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                    ucMain.MapData2[this.Layer, centerRow, centerCol] = this.ImageType;
                 }
                 else if (isEast || isWest)
                 {
                     // ─
                     ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Horizontal;
-                    ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                    ucMain.MapData2[this.Layer, centerRow, centerCol] = this.ImageType;
                 }
                 else
                 {
                     // ・
                     ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Point;
-                    ucMain.MapData2[this.Layer, row, col] = MapchipImageType.Mapchip;
+                    ucMain.MapData2[this.Layer, centerRow, centerCol] = this.ImageType;
                 }
             }
         }

@@ -28,16 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucMain1 = new A500_Kifucity.UcMain();
+            this.ucMain1 = new Grayscale.A500_Kifucity.UcMain();
             this.SuspendLayout();
             // 
             // ucMain1
             // 
             this.ucMain1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucMain1.ImgMap = null;
+            this.ucMain1.Images = null;
+            this.ucMain1.IsButtonEffected = false;
             this.ucMain1.Location = new System.Drawing.Point(0, 0);
+            this.ucMain1.MapchipProperties = null;
             this.ucMain1.MouseDownLocation = new System.Drawing.Point(0, 0);
             this.ucMain1.Name = "ucMain1";
+            this.ucMain1.SaveFileVersion = 2;
             this.ucMain1.Size = new System.Drawing.Size(600, 400);
             this.ucMain1.TabIndex = 0;
             this.ucMain1.TableLeft = 16;
@@ -50,7 +53,7 @@
             this.ClientSize = new System.Drawing.Size(600, 400);
             this.Controls.Add(this.ucMain1);
             this.Name = "Form1";
-            this.Text = "きふシティ";
+            this.Text = "ここは使わない";
             this.ResumeLayout(false);
 
         }

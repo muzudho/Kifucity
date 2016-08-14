@@ -140,6 +140,22 @@
         dobt道路2,
         dobt道路3,
         dobt道路4,
+        /// <summary>
+        /// 
+        /// </summary>
+        bobt太ペン1,
+        bobt太ペン2,
+        bobt太ペン3,
+        bobt太ペン4,
+        /*
+        /// <summary>
+        /// 砂地で囲まれた空間を、砂地で埋めるバケツ。
+        /// </summary>
+        babtバケツ1,
+        babtバケツ2,
+        babtバケツ3,
+        babtバケツ4,
+        */
 
         /// <summary>
         /// 境界線チップ

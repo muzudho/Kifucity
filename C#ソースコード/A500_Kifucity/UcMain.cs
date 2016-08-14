@@ -24,6 +24,8 @@ namespace Grayscale.A500_Kifucity
         // マスの大きさ
         public const int CELL_W = 16;
         public const int CELL_H = 16;
+        public const int BUTTON_W = 32;
+        public const int BUTTON_H = 32;
 
         /// <summary>
         /// テーブルの左辺座標。
@@ -41,13 +43,10 @@ namespace Grayscale.A500_Kifucity
         public Point MouseDownLocation { get; set; }
 
         /// <summary>
-        /// マップ画像☆
+        /// [MapchipImageType]
+        /// [0]なし [1]マップ画像☆ [2]砂地画像☆ [3]ボタン画像☆
         /// </summary>
-        public Image ImgMap { get; set; }
-        /// <summary>
-        /// 砂地画像☆
-        /// </summary>
-        public Image ImgSunachi { get; set; }
+        public Image[] Images { get; set; }
 
         /// <summary>
         /// マップチップ画像に関するデータ。
@@ -58,10 +57,10 @@ namespace Grayscale.A500_Kifucity
         /// マップ・データ。[layer,row,col]
         /// </summary>
         public MapchipCrop[,,] MapData1 { get; set; }
-        public MapchipImageType[,,] MapData2 { get; set; }
+        public ImageType[,,] MapData2 { get; set; }
 
         /// <summary>
-        /// 施設を置くブラシ。[0]なし [1]線路 [2]砂地 [3]道路
+        /// 施設を置くブラシ。[0]なし [1]線路 [2]砂地 [3]道路 [4]太ペン
         /// </summary>
         public MapchipBrush[] BrushesFacility { get; set; }
 
@@ -69,7 +68,7 @@ namespace Grayscale.A500_Kifucity
         /// ボタンを描くブラシ。
         /// [0]なし [1]線路 [2]整地 [3]道路 ...
         /// </summary>
-        public ButtonBrush[] BrushesButton { get; set; }
+        public MenuButtonBrush[] BrushesButton { get; set; }
 
         /// <summary>
         /// マウスボタン押下、開放に反応するオブジェクトが重なっている場合、一番上のオブジェクトをマウス押下し終わったらチェックを立てて、下のボタンを押さないようにするんだぜ☆（＾～＾）
@@ -95,7 +94,7 @@ namespace Grayscale.A500_Kifucity
             g.DrawRectangle(Pens.Black, this.TableLeft, this.TableTop,
                 TABLE_COLS*CELL_W, TABLE_ROWS*CELL_H);
 
-            if (null != this.ImgMap)
+            if (null != this.Images)//ビジュアル・エディターでは画像を読込んでない☆（＾～＾）
             {
                 // 画像の一部を切り抜いて貼り付け☆（＾▽＾）
                 for (int layer = 0; layer < TABLE_LAYERS; layer++)
@@ -106,24 +105,17 @@ namespace Grayscale.A500_Kifucity
                         {
                             if(MapchipCrop.None != this.MapData1[layer, row, col])
                             {
-                                Image img;
-                                switch (this.MapData2[layer, row, col])
-                                {
-                                    case MapchipImageType.Border_Sunachi:
-                                        // 境界線チップ_砂地 にあるもの。
-                                        img = this.ImgSunachi;
-                                        break;
-                                    default:// 旧仕様に対応
-                                    case MapchipImageType.Mapchip:
-                                        // マップチップにあるもの。
-                                        img = this.ImgMap;
-                                        break;
-                                }
+                                // セルには MapchipImageType が入っているので、どの画像ファイルから
+                                // 画像を切り抜くのかが分かるぜ☆（＾▽＾）
+                                Image img = this.Images[(int)this.MapData2[layer, row, col]];
 
-                                g.DrawImage(img,
-                                    new Rectangle(col * CELL_W + this.TableLeft, row * CELL_H + this.TableTop, CELL_W, CELL_H),//ディスプレイ
-                                    this.MapchipProperties[(int)this.MapData1[layer, row, col]].SourceBounds,// 元画像
-                                    GraphicsUnit.Pixel);
+                                if (null!=img)
+                                {
+                                    g.DrawImage(img,
+                                        new Rectangle(col * CELL_W + this.TableLeft, row * CELL_H + this.TableTop, CELL_W, CELL_H),//ディスプレイ
+                                        this.MapchipProperties[(int)this.MapData1[layer, row, col]].SourceBounds,// 元画像
+                                        GraphicsUnit.Pixel);
+                                }
                             }
                         }
                     }
@@ -156,12 +148,10 @@ namespace Grayscale.A500_Kifucity
             //────────────────────────────────────────
             // ボタンを置こうぜ☆（＾▽＾）
             //────────────────────────────────────────
-            // 整地
             this.BrushesButton[(int)ButtonType.se整地].Paint(g, this);
-            // 道路
             this.BrushesButton[(int)ButtonType.do道路].Paint(g, this);
-            // 線路
             this.BrushesButton[(int)ButtonType.se線路].Paint(g, this);
+            this.BrushesButton[(int)ButtonType.bo太ペン].Paint(g, this);
 
             /*
 #if DEBUG
@@ -176,13 +166,13 @@ namespace Grayscale.A500_Kifucity
 
         private void RefreshTitlebar()
         {
-            this.ParentForm.Text = this.ParentForm.Text + " (savefile ver." + this.SaveFileVersion + ")";
+            this.ParentForm.Text = "きふシティ  (savefile ver." + this.SaveFileVersion + ")";
         }
 
         private void UcMain_Load(object sender, System.EventArgs e)
         {
             // セーブファイルのバージョン番号。
-            this.SaveFileVersion = 1;
+            this.SaveFileVersion = 2;
             this.RefreshTitlebar();
 
             // アプリケーション起動時の最初の位置。
@@ -194,107 +184,117 @@ namespace Grayscale.A500_Kifucity
             try
             {
                 // マップチップ画像読み込み
-                this.ImgMap = Image.FromFile("./img/map.png");
-                this.ImgSunachi = Image.FromFile("./img/border_sunachi.png");
+                this.Images = new Image[]{
+                    null,
+                    Image.FromFile("./img/map.png"),
+                    Image.FromFile("./img/border_sunachi.png"),
+                    Image.FromFile("./img/buttons.png")
+                };
                 // 透明色を指定。
                 Color transparentColor = Color.FromArgb(0, 128, 128);
-                ((Bitmap)this.ImgMap).MakeTransparent(transparentColor);
-                ((Bitmap)this.ImgSunachi).MakeTransparent(transparentColor);
+                ((Bitmap)this.Images[(int)ImageType.Mapchip]).MakeTransparent(transparentColor);
+                ((Bitmap)this.Images[(int)ImageType.Border_Sunachi]).MakeTransparent(transparentColor);
+                ((Bitmap)this.Images[(int)ImageType.Buttons]).MakeTransparent(transparentColor);
 
 
                 // マップチップ画像に関するデータ。
                 this.MapchipProperties = new MapchipProperty[(int)MapchipCrop.Num];
-                this.MapchipProperties[(int)MapchipCrop.None] = new MapchipPropertyImpl(0, 0, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.u海] = new MapchipPropertyImpl(16, 0, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.R] = new MapchipPropertyImpl(48, 0, 48, 48);//住宅地
-                this.MapchipProperties[(int)MapchipCrop.C] = new MapchipPropertyImpl(96, 0, 48, 48);//商業地
-                this.MapchipProperties[(int)MapchipCrop.I] = new MapchipPropertyImpl(144, 0, 48, 48);//工業地
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_A1] = new MapchipPropertyImpl(1 * CELL_W, 0 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_A2] = new MapchipPropertyImpl(2 * CELL_W, 0 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_A3] = new MapchipPropertyImpl(3 * CELL_W, 0 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_A4] = new MapchipPropertyImpl(1 * CELL_W, 1 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_A5] = new MapchipPropertyImpl(2 * CELL_W, 1 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_A6] = new MapchipPropertyImpl(3 * CELL_W, 1 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_A7] = new MapchipPropertyImpl(1 * CELL_W, 2 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_A8] = new MapchipPropertyImpl(2 * CELL_W, 2 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_A9] = new MapchipPropertyImpl(3 * CELL_W, 2 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_B1] = new MapchipPropertyImpl(0 * CELL_W, 3 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_B2] = new MapchipPropertyImpl(1 * CELL_W, 3 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_B3] = new MapchipPropertyImpl(0 * CELL_W, 4 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_B4] = new MapchipPropertyImpl(1 * CELL_W, 4 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_C1] = new MapchipPropertyImpl(2 * CELL_W, 3 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_C2] = new MapchipPropertyImpl(3 * CELL_W, 3 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_C3] = new MapchipPropertyImpl(2 * CELL_W, 4 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_C4] = new MapchipPropertyImpl(3 * CELL_W, 4 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_D] = new MapchipPropertyImpl(0 * CELL_W, 5 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_E6] = new MapchipPropertyImpl(1 * CELL_W, 5 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_E13] = new MapchipPropertyImpl(2 * CELL_W, 5 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_E10] = new MapchipPropertyImpl(3 * CELL_W, 5 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_E12] = new MapchipPropertyImpl(0 * CELL_W, 6 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_E14] = new MapchipPropertyImpl(1 * CELL_W, 6 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_E15] = new MapchipPropertyImpl(2 * CELL_W, 6 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_E9] = new MapchipPropertyImpl(3 * CELL_W, 6 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_E3] = new MapchipPropertyImpl(0 * CELL_W, 7 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_E7] = new MapchipPropertyImpl(1 * CELL_W, 7 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_E11] = new MapchipPropertyImpl(2 * CELL_W, 7 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_E5] = new MapchipPropertyImpl(3 * CELL_W, 7 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_F1] = new MapchipPropertyImpl(4 * CELL_W, 1 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_F2] = new MapchipPropertyImpl(5 * CELL_W, 1 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_F3] = new MapchipPropertyImpl(6 * CELL_W, 1 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_F4] = new MapchipPropertyImpl(4 * CELL_W, 2 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_F5] = new MapchipPropertyImpl(5 * CELL_W, 2 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_F6] = new MapchipPropertyImpl(6 * CELL_W, 2 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_F7] = new MapchipPropertyImpl(4 * CELL_W, 3 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_F8] = new MapchipPropertyImpl(4 * CELL_W, 4 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_F9] = new MapchipPropertyImpl(4 * CELL_W, 5 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_F10] = new MapchipPropertyImpl(5 * CELL_W, 3 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_F11] = new MapchipPropertyImpl(5 * CELL_W, 4 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_F12] = new MapchipPropertyImpl(5 * CELL_W, 5 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_G1] = new MapchipPropertyImpl(4 * CELL_W, 0 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_G2] = new MapchipPropertyImpl(5 * CELL_W, 0 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_G3] = new MapchipPropertyImpl(6 * CELL_W, 0 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_G4] = new MapchipPropertyImpl(7 * CELL_W, 0 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_G5] = new MapchipPropertyImpl(7 * CELL_W, 1 * CELL_H, CELL_W, CELL_H);
-                this.MapchipProperties[(int)MapchipCrop.kyo境界線_G6] = new MapchipPropertyImpl(7 * CELL_W, 2 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.None] = new MapchipPropertyImpl(ImageType.Mapchip, 0, 0, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.u海] = new MapchipPropertyImpl(ImageType.Mapchip, 16, 0, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.R] = new MapchipPropertyImpl(ImageType.Mapchip, 48, 0, 48, 48);//住宅地
+                this.MapchipProperties[(int)MapchipCrop.C] = new MapchipPropertyImpl(ImageType.Mapchip, 96, 0, 48, 48);//商業地
+                this.MapchipProperties[(int)MapchipCrop.I] = new MapchipPropertyImpl(ImageType.Mapchip, 144, 0, 48, 48);//工業地
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_A1] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 1 * CELL_W, 0 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_A2] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 2 * CELL_W, 0 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_A3] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 3 * CELL_W, 0 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_A4] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 1 * CELL_W, 1 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_A5] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 2 * CELL_W, 1 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_A6] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 3 * CELL_W, 1 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_A7] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 1 * CELL_W, 2 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_A8] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 2 * CELL_W, 2 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_A9] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 3 * CELL_W, 2 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_B1] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 0 * CELL_W, 3 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_B2] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 1 * CELL_W, 3 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_B3] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 0 * CELL_W, 4 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_B4] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 1 * CELL_W, 4 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_C1] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 2 * CELL_W, 3 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_C2] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 3 * CELL_W, 3 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_C3] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 2 * CELL_W, 4 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_C4] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 3 * CELL_W, 4 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_D] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 0 * CELL_W, 5 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_E6] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 1 * CELL_W, 5 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_E13] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 2 * CELL_W, 5 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_E10] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 3 * CELL_W, 5 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_E12] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 0 * CELL_W, 6 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_E14] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 1 * CELL_W, 6 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_E15] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 2 * CELL_W, 6 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_E9] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 3 * CELL_W, 6 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_E3] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 0 * CELL_W, 7 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_E7] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 1 * CELL_W, 7 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_E11] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 2 * CELL_W, 7 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_E5] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 3 * CELL_W, 7 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_F1] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 4 * CELL_W, 1 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_F2] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 5 * CELL_W, 1 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_F3] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 6 * CELL_W, 1 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_F4] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 4 * CELL_W, 2 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_F5] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 5 * CELL_W, 2 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_F6] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 6 * CELL_W, 2 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_F7] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 4 * CELL_W, 3 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_F8] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 4 * CELL_W, 4 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_F9] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 4 * CELL_W, 5 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_F10] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 5 * CELL_W, 3 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_F11] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 5 * CELL_W, 4 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_F12] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 5 * CELL_W, 5 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_G1] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 4 * CELL_W, 0 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_G2] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 5 * CELL_W, 0 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_G3] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 6 * CELL_W, 0 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_G4] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 7 * CELL_W, 0 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_G5] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 7 * CELL_W, 1 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.kyo境界線_G6] = new MapchipPropertyImpl(ImageType.Border_Sunachi, 7 * CELL_W, 2 * CELL_H, CELL_W, CELL_H);
 
-                this.MapchipProperties[(int)MapchipCrop.do道路P] = new MapchipPropertyImpl(48, 48, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.do道路V] = new MapchipPropertyImpl(64, 48, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.do道路H] = new MapchipPropertyImpl(80, 48, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.do道路_田1] = new MapchipPropertyImpl(48, 64, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.do道路_田2] = new MapchipPropertyImpl(64, 64, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.do道路_田3] = new MapchipPropertyImpl(80, 64, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.do道路_田4] = new MapchipPropertyImpl(48, 80, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.do道路_田5] = new MapchipPropertyImpl(64, 80, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.do道路_田6] = new MapchipPropertyImpl(80, 80, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.do道路_田7] = new MapchipPropertyImpl(48, 96, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.do道路_田8] = new MapchipPropertyImpl(64, 96, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.do道路_田9] = new MapchipPropertyImpl(80, 96, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.do道路P] = new MapchipPropertyImpl(ImageType.Mapchip, 48, 48, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.do道路V] = new MapchipPropertyImpl(ImageType.Mapchip, 64, 48, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.do道路H] = new MapchipPropertyImpl(ImageType.Mapchip, 80, 48, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.do道路_田1] = new MapchipPropertyImpl(ImageType.Mapchip, 48, 64, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.do道路_田2] = new MapchipPropertyImpl(ImageType.Mapchip, 64, 64, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.do道路_田3] = new MapchipPropertyImpl(ImageType.Mapchip, 80, 64, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.do道路_田4] = new MapchipPropertyImpl(ImageType.Mapchip, 48, 80, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.do道路_田5] = new MapchipPropertyImpl(ImageType.Mapchip, 64, 80, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.do道路_田6] = new MapchipPropertyImpl(ImageType.Mapchip, 80, 80, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.do道路_田7] = new MapchipPropertyImpl(ImageType.Mapchip, 48, 96, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.do道路_田8] = new MapchipPropertyImpl(ImageType.Mapchip, 64, 96, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.do道路_田9] = new MapchipPropertyImpl(ImageType.Mapchip, 80, 96, 16, 16);
 
-                this.MapchipProperties[(int)MapchipCrop.se線路P] = new MapchipPropertyImpl(48, 112, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.se線路V] = new MapchipPropertyImpl(64, 112, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.se線路H] = new MapchipPropertyImpl(80, 112, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.se線路_田1] = new MapchipPropertyImpl(48, 128, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.se線路_田2] = new MapchipPropertyImpl(64, 128, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.se線路_田3] = new MapchipPropertyImpl(80, 128, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.se線路_田4] = new MapchipPropertyImpl(48, 144, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.se線路_田5] = new MapchipPropertyImpl(64, 144, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.se線路_田6] = new MapchipPropertyImpl(80, 144, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.se線路_田7] = new MapchipPropertyImpl(48, 160, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.se線路_田8] = new MapchipPropertyImpl(64, 160, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.se線路_田9] = new MapchipPropertyImpl(80, 160, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.se線路P] = new MapchipPropertyImpl(ImageType.Mapchip, 48, 112, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.se線路V] = new MapchipPropertyImpl(ImageType.Mapchip, 64, 112, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.se線路H] = new MapchipPropertyImpl(ImageType.Mapchip, 80, 112, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.se線路_田1] = new MapchipPropertyImpl(ImageType.Mapchip, 48, 128, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.se線路_田2] = new MapchipPropertyImpl(ImageType.Mapchip, 64, 128, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.se線路_田3] = new MapchipPropertyImpl(ImageType.Mapchip, 80, 128, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.se線路_田4] = new MapchipPropertyImpl(ImageType.Mapchip, 48, 144, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.se線路_田5] = new MapchipPropertyImpl(ImageType.Mapchip, 64, 144, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.se線路_田6] = new MapchipPropertyImpl(ImageType.Mapchip, 80, 144, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.se線路_田7] = new MapchipPropertyImpl(ImageType.Mapchip, 48, 160, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.se線路_田8] = new MapchipPropertyImpl(ImageType.Mapchip, 64, 160, 16, 16);
+                this.MapchipProperties[(int)MapchipCrop.se線路_田9] = new MapchipPropertyImpl(ImageType.Mapchip, 80, 160, 16, 16);
 
-                this.MapchipProperties[(int)MapchipCrop.sebt線路1] = new MapchipPropertyImpl(192, 0, 32, 32);
-                this.MapchipProperties[(int)MapchipCrop.sebt線路2] = new MapchipPropertyImpl(192, 32, 32, 32);
-                this.MapchipProperties[(int)MapchipCrop.sebt線路3] = new MapchipPropertyImpl(192, 64, 32, 32);
-                this.MapchipProperties[(int)MapchipCrop.sebt線路4] = new MapchipPropertyImpl(192, 96, 32, 32);
-                this.MapchipProperties[(int)MapchipCrop.sebt整地1] = new MapchipPropertyImpl(224, 0, 32, 32);
-                this.MapchipProperties[(int)MapchipCrop.sebt整地2] = new MapchipPropertyImpl(224, 32, 32, 32);
-                this.MapchipProperties[(int)MapchipCrop.sebt整地3] = new MapchipPropertyImpl(224, 64, 32, 32);
-                this.MapchipProperties[(int)MapchipCrop.sebt整地4] = new MapchipPropertyImpl(224, 96, 32, 32);
-                this.MapchipProperties[(int)MapchipCrop.dobt道路1] = new MapchipPropertyImpl(256, 0, 32, 32);
-                this.MapchipProperties[(int)MapchipCrop.dobt道路2] = new MapchipPropertyImpl(256, 32, 32, 32);
-                this.MapchipProperties[(int)MapchipCrop.dobt道路3] = new MapchipPropertyImpl(256, 64, 32, 32);
-                this.MapchipProperties[(int)MapchipCrop.dobt道路4] = new MapchipPropertyImpl(256, 96, 32, 32);
+                // ボタン
+                this.MapchipProperties[(int)MapchipCrop.sebt線路1] = new MapchipPropertyImpl(ImageType.Buttons, 0 * BUTTON_W, 0 * BUTTON_H, BUTTON_W, BUTTON_H);
+                this.MapchipProperties[(int)MapchipCrop.sebt線路2] = new MapchipPropertyImpl(ImageType.Buttons, 0 * BUTTON_W, 1 * BUTTON_H, BUTTON_W, BUTTON_H);
+                this.MapchipProperties[(int)MapchipCrop.sebt線路3] = new MapchipPropertyImpl(ImageType.Buttons, 0 * BUTTON_W, 2 * BUTTON_H, BUTTON_W, BUTTON_H);
+                this.MapchipProperties[(int)MapchipCrop.sebt線路4] = new MapchipPropertyImpl(ImageType.Buttons, 0 * BUTTON_W, 3 * BUTTON_H, BUTTON_W, BUTTON_H);
+                this.MapchipProperties[(int)MapchipCrop.sebt整地1] = new MapchipPropertyImpl(ImageType.Buttons, 1 * BUTTON_W, 0 * BUTTON_H, BUTTON_W, BUTTON_H);
+                this.MapchipProperties[(int)MapchipCrop.sebt整地2] = new MapchipPropertyImpl(ImageType.Buttons, 1 * BUTTON_W, 1 * BUTTON_H, BUTTON_W, BUTTON_H);
+                this.MapchipProperties[(int)MapchipCrop.sebt整地3] = new MapchipPropertyImpl(ImageType.Buttons, 1 * BUTTON_W, 2 * BUTTON_H, BUTTON_W, BUTTON_H);
+                this.MapchipProperties[(int)MapchipCrop.sebt整地4] = new MapchipPropertyImpl(ImageType.Buttons, 1 * BUTTON_W, 3 * BUTTON_H, BUTTON_W, BUTTON_H);
+                this.MapchipProperties[(int)MapchipCrop.dobt道路1] = new MapchipPropertyImpl(ImageType.Buttons, 2 * BUTTON_W, 0 * BUTTON_H, BUTTON_W, BUTTON_H);
+                this.MapchipProperties[(int)MapchipCrop.dobt道路2] = new MapchipPropertyImpl(ImageType.Buttons, 2 * BUTTON_W, 1 * BUTTON_H, BUTTON_W, BUTTON_H);
+                this.MapchipProperties[(int)MapchipCrop.dobt道路3] = new MapchipPropertyImpl(ImageType.Buttons, 2 * BUTTON_W, 2 * BUTTON_H, BUTTON_W, BUTTON_H);
+                this.MapchipProperties[(int)MapchipCrop.dobt道路4] = new MapchipPropertyImpl(ImageType.Buttons, 2 * BUTTON_W, 3 * BUTTON_H, BUTTON_W, BUTTON_H);
+                this.MapchipProperties[(int)MapchipCrop.bobt太ペン1] = new MapchipPropertyImpl(ImageType.Buttons, 3 * BUTTON_W, 0 * BUTTON_H, BUTTON_W, BUTTON_H);
+                this.MapchipProperties[(int)MapchipCrop.bobt太ペン2] = new MapchipPropertyImpl(ImageType.Buttons, 3 * BUTTON_W, 1 * BUTTON_H, BUTTON_W, BUTTON_H);
+                this.MapchipProperties[(int)MapchipCrop.bobt太ペン3] = new MapchipPropertyImpl(ImageType.Buttons, 3 * BUTTON_W, 2 * BUTTON_H, BUTTON_W, BUTTON_H);
+                this.MapchipProperties[(int)MapchipCrop.bobt太ペン4] = new MapchipPropertyImpl(ImageType.Buttons, 3 * BUTTON_W, 3 * BUTTON_H, BUTTON_W, BUTTON_H);
             }
             catch (Exception)
             {
@@ -304,12 +304,13 @@ namespace Grayscale.A500_Kifucity
             //────────────────────────────────────────
             // ブラシ
             //────────────────────────────────────────
-            this.BrushesButton = new ButtonBrush[]
+            this.BrushesButton = new MenuButtonBrush[]
             {
                 null,
-                new MenuButtonBrushImpl(32,32,32,32,MapchipCrop.sebt線路1,MapchipCrop.sebt線路2,MapchipCrop.sebt線路3,MapchipCrop.sebt線路4),
-                new MenuButtonBrushImpl(64,32,32,32,MapchipCrop.sebt整地1,MapchipCrop.sebt整地2,MapchipCrop.sebt整地3,MapchipCrop.sebt整地4),
-                new MenuButtonBrushImpl(32,64,32,32,MapchipCrop.dobt道路1,MapchipCrop.dobt道路2,MapchipCrop.dobt道路3,MapchipCrop.dobt道路4),
+                new MenuButtonBrushImpl(ImageType.Buttons, 0*BUTTON_W+32,0*BUTTON_H+32,BUTTON_W,BUTTON_H,MapchipCrop.sebt線路1,MapchipCrop.sebt線路2,MapchipCrop.sebt線路3,MapchipCrop.sebt線路4),
+                new MenuButtonBrushImpl(ImageType.Buttons, 1*BUTTON_W+32,0*BUTTON_H+32,BUTTON_W,BUTTON_H,MapchipCrop.sebt整地1,MapchipCrop.sebt整地2,MapchipCrop.sebt整地3,MapchipCrop.sebt整地4),
+                new MenuButtonBrushImpl(ImageType.Buttons, 0*BUTTON_W+32,1*BUTTON_H+32,BUTTON_W,BUTTON_H,MapchipCrop.dobt道路1,MapchipCrop.dobt道路2,MapchipCrop.dobt道路3,MapchipCrop.dobt道路4),
+                new MenuButtonBrushImpl(ImageType.Buttons, 1*BUTTON_W+32,1*BUTTON_H+32,BUTTON_W,BUTTON_H,MapchipCrop.bobt太ペン1,MapchipCrop.bobt太ペン2,MapchipCrop.bobt太ペン3,MapchipCrop.bobt太ペン4),
             };
             this.BrushesFacility = new MapchipBrush[]
             {
@@ -317,6 +318,7 @@ namespace Grayscale.A500_Kifucity
                 // 線路
                 new MapchipRailwayBrushImpl(
                     LAYER_RAILWAY,
+                    ImageType.Mapchip,
                     MapchipCrop.se線路P,
                     MapchipCrop.se線路V,
                     MapchipCrop.se線路H,
@@ -333,6 +335,7 @@ namespace Grayscale.A500_Kifucity
                 // 砂地
                 new MapchipBulldozerBrushImpl(
                     LAYER_LAND,
+                    ImageType.Border_Sunachi,
                     MapchipCrop.kyo境界線_A1,
                     MapchipCrop.kyo境界線_A2,
                     MapchipCrop.kyo境界線_A3,
@@ -384,6 +387,7 @@ namespace Grayscale.A500_Kifucity
                 // 道路
                 new MapchipRailwayBrushImpl(
                     LAYER_ROAD,
+                    ImageType.Mapchip,
                     MapchipCrop.do道路P,
                     MapchipCrop.do道路V,
                     MapchipCrop.do道路H,
@@ -396,11 +400,17 @@ namespace Grayscale.A500_Kifucity
                     MapchipCrop.do道路_田7,
                     MapchipCrop.do道路_田8,
                     MapchipCrop.do道路_田9
+                ),
+                //太ペン
+                new MapchipBoldBrushImpl(
+                    LAYER_LAND,
+                    ImageType.Border_Sunachi,
+                    MapchipCrop.kyo境界線_A5
                 )
             };
 
             this.MapData1 = new MapchipCrop[TABLE_LAYERS, UcMain.TABLE_ROWS, UcMain.TABLE_COLS];
-            this.MapData2 = new MapchipImageType[TABLE_LAYERS, UcMain.TABLE_ROWS, UcMain.TABLE_COLS];
+            this.MapData2 = new ImageType[TABLE_LAYERS, UcMain.TABLE_ROWS, UcMain.TABLE_COLS];
             for (int layer=0;layer<TABLE_LAYERS;layer++)
             {
                 for (int row = 0; row < TABLE_ROWS; row++)
@@ -411,12 +421,12 @@ namespace Grayscale.A500_Kifucity
                         {
                             // レイヤー[0] を海で埋め尽くすぜ☆（＾▽＾）
                             this.MapData1[layer, row, col] = MapchipCrop.u海;
-                            this.MapData2[layer, row, col] = MapchipImageType.Mapchip;
+                            this.MapData2[layer, row, col] = ImageType.Mapchip;
                         }
                         else
                         {
                             this.MapData1[layer, row, col] = MapchipCrop.None;
-                            this.MapData2[layer, row, col] = MapchipImageType.None;
+                            this.MapData2[layer, row, col] = ImageType.None;
                         }
                     }
                 }
@@ -652,7 +662,7 @@ namespace Grayscale.A500_Kifucity
             // [0]行目は「Version,セーブファイルのバージョン番号,」で固定☆
             sb.Append("Version,");
             sb.Append(this.SaveFileVersion);
-            sb.Append(",");
+            sb.AppendLine(",");//ここで改行☆（＾～＾）
 
             for (int layer = 0; layer < TABLE_LAYERS; layer++)
             {
@@ -682,11 +692,12 @@ namespace Grayscale.A500_Kifucity
         {
             string[] lines = File.ReadAllLines("./save.txt");
 
+            int headerRow = 0;
             int line = 0;
 
             for (int layer = 0; layer < TABLE_LAYERS; layer++)
             {
-                for (int row = 0; row < TABLE_ROWS; row++, line++)
+                for (int row = 0; row < TABLE_ROWS && line< lines.Length; line++)
                 {
                     if (""==lines[line].Trim())
                     {
@@ -696,7 +707,7 @@ namespace Grayscale.A500_Kifucity
 
                     string[] tokens = lines[line].Split(',');
 
-                    if (0==line && 1<tokens.Length && "Version"==tokens[0])
+                    if (0== headerRow && 1<tokens.Length && "Version"==tokens[0])
                     {
                         // [0]行目の[0]列目が「Version」なら、[1]列目はセーブファイル仕様のバージョン番号。
                         int version;
@@ -704,6 +715,8 @@ namespace Grayscale.A500_Kifucity
                         {
                             this.SaveFileVersion = version;
                         }
+
+                        headerRow++;
                         continue;
                     }
 
@@ -713,9 +726,10 @@ namespace Grayscale.A500_Kifucity
                         if (int.TryParse(tokens[col],out number))
                         {
                             this.MapData1[layer, row, col] = (MapchipCrop)(number % MapchipImageSaveNumber);
-                            this.MapData2[layer, row, col] = (MapchipImageType)(number / MapchipImageSaveNumber);
+                            this.MapData2[layer, row, col] = (ImageType)(number / MapchipImageSaveNumber);
                         }
                     }
+                    row++;
                 }
             }
 

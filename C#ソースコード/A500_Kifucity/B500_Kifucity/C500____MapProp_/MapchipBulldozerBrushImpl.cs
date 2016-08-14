@@ -11,6 +11,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
     {
         public MapchipBulldozerBrushImpl(
             int layer,
+            ImageType imageType,
             MapchipCrop a1,
             MapchipCrop a2,
             MapchipCrop a3,
@@ -61,6 +62,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             )
         {
             this.Layer = layer;
+            this.ImageType = imageType;
             this.PatchesA = new MapchipCrop[] { MapchipCrop.None, a1, a2, a3, a4, a5, a6, a7, a8, a9 };
             this.PatchesB = new MapchipCrop[] { MapchipCrop.None, b1, b2, b3, b4 };
             this.PatchesC = new MapchipCrop[] { MapchipCrop.None, c1, c2, c3, c4 };
@@ -74,6 +76,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
         /// レイヤー番号☆
         /// </summary>
         public int Layer { get; set; }
+        public ImageType ImageType { get; set; }
 
         /// <summary>
         /// [0]なし
@@ -137,7 +140,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             row = pRow - 1;
             if (-1 < row)
             {
-                if (ucMain.MapData1[1, row, col] == this.PatchesA[5])
+                if (ucMain.MapData1[this.Layer, row, col] == this.PatchesA[5])
                 {
                     exists2 = true;
                 }
@@ -149,7 +152,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             row = pRow - 1;
             if (col < UcMain.TABLE_COLS && -1 < row)
             {
-                if (ucMain.MapData1[1, row, col] == this.PatchesA[5])
+                if (ucMain.MapData1[this.Layer, row, col] == this.PatchesA[5])
                 {
                     exists3 = true;
                 }
@@ -161,7 +164,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             row = pRow;
             if (col < UcMain.TABLE_COLS)
             {
-                if (ucMain.MapData1[1, row, col] == this.PatchesA[5])
+                if (ucMain.MapData1[this.Layer, row, col] == this.PatchesA[5])
                 {
                     exists6 = true;
                 }
@@ -173,7 +176,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             row = pRow + 1;
             if (col < UcMain.TABLE_COLS && row < UcMain.TABLE_ROWS)
             {
-                if (ucMain.MapData1[1, row, col] == this.PatchesA[5])
+                if (ucMain.MapData1[this.Layer, row, col] == this.PatchesA[5])
                 {
                     exists9 = true;
                 }
@@ -185,7 +188,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             row = pRow + 1;
             if (row < UcMain.TABLE_ROWS)
             {
-                if (ucMain.MapData1[1, row, col] == this.PatchesA[5])
+                if (ucMain.MapData1[this.Layer, row, col] == this.PatchesA[5])
                 {
                     exists8 = true;
                 }
@@ -197,7 +200,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             row = pRow + 1;
             if (-1 < col && row < UcMain.TABLE_ROWS)
             {
-                if (ucMain.MapData1[1, row, col] == this.PatchesA[5])
+                if (ucMain.MapData1[this.Layer, row, col] == this.PatchesA[5])
                 {
                     exists7 = true;
                 }
@@ -209,7 +212,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             row = pRow;
             if (-1 < col)
             {
-                if (ucMain.MapData1[1, row, col] == this.PatchesA[5])
+                if (ucMain.MapData1[this.Layer, row, col] == this.PatchesA[5])
                 {
                     exists4 = true;
                 }
@@ -221,7 +224,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             row = pRow - 1;
             if (-1 < col && -1 < row)
             {
-                if (ucMain.MapData1[1, row, col] == this.PatchesA[5])
+                if (ucMain.MapData1[this.Layer, row, col] == this.PatchesA[5])
                 {
                     exists1 = true;
                 }
@@ -229,22 +232,16 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
 
 
             MapchipCrop crop = MapchipCrop.None;
-            MapchipImageType image = MapchipImageType.None;
             //
             // 変形する条件
             //
-            if (false)
-            {
-
-            }
-            else if (!exists8 && !exists7 && !exists4 && !exists1 && !exists2 && !exists3 && !exists6 &&
+            if (!exists8 && !exists7 && !exists4 && !exists1 && !exists2 && !exists3 && !exists6 &&
                   exists9)
             {
                 // xxx
                 // xxx A1
                 // xxo
                 crop = this.PatchesA[1];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (
                 !exists4 && !exists1 && !exists2 && !exists3 && !exists6 &&
@@ -254,7 +251,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxx A2
                 // -o-
                 crop = this.PatchesA[2];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists4 && !exists1 && !exists2 && !exists3 && !exists6 && !exists9 && !exists8 &&
                 exists7)
@@ -263,7 +259,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxx A3
                 // oxx
                 crop = this.PatchesA[3];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (
                 !exists8 && !exists7 && !exists4 && !exists1 && !exists2 &&
@@ -273,7 +268,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxo A4
                 // xx-
                 crop = this.PatchesA[4];
-                image = MapchipImageType.Border_Sunachi;
             }
             // A5 は境界線ではないので、無視するぜ☆（＾▽＾）
             else if (
@@ -284,7 +278,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // oxx A6
                 // -xx
                 crop = this.PatchesA[6];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists6 && !exists9 && !exists8 && !exists7 && !exists4 && !exists1 && !exists2 &&
                 exists3)
@@ -293,7 +286,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxx A7
                 // xxx
                 crop = this.PatchesA[7];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (
                 !exists6 && !exists9 && !exists8 && !exists7 && !exists4 &&
@@ -303,7 +295,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxx A8
                 // xxx
                 crop = this.PatchesA[8];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists3 && !exists6 && !exists9 && !exists8 && !exists7 && !exists4 &&
                 exists1)
@@ -312,7 +303,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxx A9
                 // xxx
                 crop = this.PatchesA[9];
-                image = MapchipImageType.Border_Sunachi;
             }
 
             else if (!exists6 && !exists9 && !exists8 &&
@@ -322,7 +312,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // oxx B1
                 // -xx
                 crop = this.PatchesB[1];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists8 && !exists7 && !exists4 &&
                 exists2 && exists6)
@@ -331,7 +320,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxo B2
                 // xx-
                 crop = this.PatchesB[2];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists3 && !exists6 &&
                 exists8 && exists4)
@@ -340,7 +328,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // oxx B3
                 // -o-
                 crop = this.PatchesB[3];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists4 && !exists1 &&
                 exists6 && exists8)
@@ -349,7 +336,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxo B4
                 // -o-
                 crop = this.PatchesB[4];
-                image = MapchipImageType.Border_Sunachi;
             }
 
             else if (!exists6 && !exists8 &&
@@ -359,7 +345,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // oxx C1
                 // -xo
                 crop = this.PatchesC[1];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists8 && !exists4 &&
                 exists2 && exists6 && exists7)
@@ -368,7 +353,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxo C2
                 // ox-
                 crop = this.PatchesC[2];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists6 &&
                 exists3 && exists8 && exists4)
@@ -377,7 +361,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // oxx C3
                 // -o-
                 crop = this.PatchesC[3];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists4 &&
                 exists6 && exists8 && exists1)
@@ -386,7 +369,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxo C4
                 // -o-
                 crop = this.PatchesC[4];
-                image = MapchipImageType.Border_Sunachi;
             }
 
             else if (exists2 && exists6 && exists8 && exists4)
@@ -395,7 +377,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // oxo D
                 // -o-
                 crop = this.PatchesD;
-                image = MapchipImageType.Border_Sunachi;
             }
 
             else if (!exists2 && !exists6 && !exists8 && !exists7 && !exists4 && !exists1 &&
@@ -405,7 +386,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxx E6
                 // xxo
                 crop = this.PatchesE[6];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists3 && !exists6 && !exists8 && !exists4 &&
                 exists9 && exists7 && exists1)
@@ -414,7 +394,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxx E13
                 // oxo
                 crop = this.PatchesE[13];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists6 && !exists9 && !exists8 && !exists4 && !exists1 &&
                 exists3 && exists7)
@@ -423,7 +402,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxx E10
                 // oxx
                 crop = this.PatchesE[10];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists3 && !exists6 && !exists8 && !exists4 && !exists1 &&
                 exists9 && exists7)
@@ -432,7 +410,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxx E12
                 // oxo
                 crop = this.PatchesE[12];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists6 && !exists8 && !exists4 && !exists1 &&
                 exists3 && exists9 && exists7)
@@ -441,7 +418,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxx E14
                 // oxo
                 crop = this.PatchesE[14];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists6 && !exists8 && !exists4 &&
                 exists3 && exists9 && exists7 && exists1)
@@ -450,7 +426,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxx E15
                 // oxo
                 crop = this.PatchesE[15];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists3 && !exists6 && !exists9 && !exists8 && !exists4 &&
                 exists1 && exists7)
@@ -459,7 +434,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxx E9
                 // oxx
                 crop = this.PatchesE[9];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists6 && !exists9 && !exists8 && !exists7 && !exists4 &&
                 exists1 && exists3)
@@ -468,7 +442,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxx E3
                 // xxx
                 crop = this.PatchesE[3];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists6 && !exists8 && !exists7 && !exists4 &&
                 exists3 && exists9 && exists1)
@@ -477,7 +450,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxx E7
                 // xxo
                 crop = this.PatchesE[7];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists6 && !exists9 && !exists8 && !exists4 &&
                 exists3 && exists7 && exists1)
@@ -486,7 +458,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxx E11
                 // oxx
                 crop = this.PatchesE[11];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists3 && !exists6 && !exists8 && !exists7 && !exists4 &&
                 exists1 && exists9)
@@ -495,7 +466,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxx E5
                 // xxo
                 crop = this.PatchesE[5];
-                image = MapchipImageType.Border_Sunachi;
             }
 
             else if (!exists6 && !exists8 && !exists7 && !exists4 &&
@@ -505,7 +475,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxx F1
                 // xxo
                 crop = this.PatchesFx[1];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists6 && !exists8 && !exists4 &&
                 exists2 && exists9 && exists7)
@@ -514,7 +483,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxx F2
                 // oxo
                 crop = this.PatchesFx[2];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists6 && !exists9 && !exists8 && !exists4 &&
                 exists2 && exists7)
@@ -523,7 +491,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxx F3
                 // oxx
                 crop = this.PatchesFx[3];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists6 && !exists4 && !exists1 &&
                 exists3 && exists8)
@@ -532,7 +499,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxx F4
                 // -o-
                 crop = this.PatchesFx[4];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists6 && !exists4 &&
                 exists1 && exists3 && exists8)
@@ -541,7 +507,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxx F5
                 // -o-
                 crop = this.PatchesFx[5];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists3 && !exists6 && !exists4 &&
                 exists1 && exists8)
@@ -550,7 +515,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxx F6
                 // -o-
                 crop = this.PatchesFx[6];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists3 && !exists6 && !exists8 &&
                 exists4 && exists9)
@@ -559,7 +523,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // oxx F7
                 // -xo
                 crop = this.PatchesFx[7];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists6 && !exists8 &&
                 exists3 && exists4 && exists9)
@@ -568,7 +531,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // oxx F8
                 // -xo
                 crop = this.PatchesFx[8];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists6 && !exists9 && !exists8 &&
                 exists3 && exists4)
@@ -577,7 +539,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // oxx F9
                 // -xx
                 crop = this.PatchesFx[9];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists8 && !exists4 && !exists1 &&
                 exists6 && exists7)
@@ -586,7 +547,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxo F10
                 // ox-
                 crop = this.PatchesFx[10];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists8 && !exists4 &&
                 exists1 && exists6 && exists7)
@@ -595,7 +555,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxo F11
                 // ox-
                 crop = this.PatchesFx[11];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists8 && !exists7 && !exists4 &&
                 exists1 && exists6)
@@ -604,7 +563,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxo F12
                 // xx-
                 crop = this.PatchesFx[12];
-                image = MapchipImageType.Border_Sunachi;
             }
 
             else if (!exists6 &&
@@ -614,7 +572,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // oxx G1
                 // -o-
                 crop = this.PatchesGx[1];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists6 && !exists4 &&
                 exists2 && exists8)
@@ -623,7 +580,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxx G2
                 // -o-
                 crop = this.PatchesGx[2];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists4 &&
                 exists2 && exists6 && exists8)
@@ -632,7 +588,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // xxo G3
                 // -o-
                 crop = this.PatchesGx[3];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if ( !exists8 &&
                 exists4 && exists2 && exists6)
@@ -641,7 +596,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // oxo G4
                 // -x-
                 crop = this.PatchesGx[4];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if ( !exists2 && !exists8 &&
                 exists4 && exists6)
@@ -650,7 +604,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // oxo G5
                 // -x-
                 crop = this.PatchesGx[5];
-                image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 &&
                 exists8 && exists6 && exists4)
@@ -659,14 +612,13 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // oxo G6
                 // -o-
                 crop = this.PatchesGx[6];
-                image = MapchipImageType.Border_Sunachi;
             }
 
             // 更新☆
-            if (crop!=MapchipCrop.None && image != MapchipImageType.None)
+            if (crop!=MapchipCrop.None)
             {
                 ucMain.MapData1[this.Layer, pRow, pCol] = crop;
-                ucMain.MapData2[this.Layer, pRow, pCol] = image;
+                ucMain.MapData2[this.Layer, pRow, pCol] = this.ImageType;
             }
         }
 
@@ -695,7 +647,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
 
                 // （更新）中央
                 ucMain.MapData1[this.Layer, centerRow, centerCol] = this.PatchesA[5];
-                ucMain.MapData2[this.Layer, centerRow, centerCol] = MapchipImageType.Border_Sunachi;
+                ucMain.MapData2[this.Layer, centerRow, centerCol] = ImageType.Border_Sunachi;
 
                 //────────────────────────────────────────
                 // 8近傍は、更新の候補だぜ☆（＾▽＾）

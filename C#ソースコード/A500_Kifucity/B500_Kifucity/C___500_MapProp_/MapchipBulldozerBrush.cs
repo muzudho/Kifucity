@@ -43,5 +43,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C___500_MapProp_
         /// レイヤー番号☆
         /// </summary>
         int Layer { get; set; }
+        ImageType ImageType { get; set; }
     }
 }
