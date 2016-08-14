@@ -47,6 +47,10 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             MapchipCrop f6,
             MapchipCrop f7,
             MapchipCrop f8,
+            MapchipCrop f9,
+            MapchipCrop f10,
+            MapchipCrop f11,
+            MapchipCrop f12,
             MapchipCrop g1,
             MapchipCrop g2,
             MapchipCrop g3,
@@ -60,8 +64,8 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             this.PatchesC = new MapchipCrop[] { MapchipCrop.None, c1, c2, c3, c4 };
             this.PatchesD = d;
             this.PatchesE = new MapchipCrop[] { MapchipCrop.None, MapchipCrop.None, MapchipCrop.None, e3, MapchipCrop.None, e5, e6, e7, MapchipCrop.None, e9, e10, e11, e12, e13, e14, e15 };
-            this.PatchesF = new MapchipCrop[] { MapchipCrop.None, f1, f2, f3, f4, f5, f6, f7, f8 };
-            this.PatchesG = new MapchipCrop[] { MapchipCrop.None, g1, g2, g3, g4, g5, g6 };
+            this.PatchesFx = new MapchipCrop[] { MapchipCrop.None, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12 };
+            this.PatchesGx = new MapchipCrop[] { MapchipCrop.None, g1, g2, g3, g4, g5, g6 };
         }
 
         /// <summary>
@@ -87,14 +91,14 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
         public MapchipCrop[] PatchesE { get; set; }
         /// <summary>
         /// [0]なし
-        /// [1]～[8]
+        /// [1]～[12]
         /// </summary>
-        public MapchipCrop[] PatchesF { get; set; }
+        public MapchipCrop[] PatchesFx { get; set; }
         /// <summary>
         /// [0]なし
         /// [1]～[6]
         /// </summary>
-        public MapchipCrop[] PatchesG { get; set; }
+        public MapchipCrop[] PatchesGx { get; set; }
 
         /// <summary>
         /// 周囲８方向に何があるかで、チップの形が決まるぜ☆（＾▽＾）
@@ -117,19 +121,8 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             // 東西南北を、数字で表すぜ☆（＾▽＾）
             //
             // 123
-            // 456
+            // 456 ※5は空きだぜ☆（＾▽＾）
             // 789
-
-            // 中央
-            bool exists5 = false;
-            col = pCol;
-            row = pRow;
-            {
-                if (ucMain.MapData1[1, row, col] == this.PatchesA[5])
-                {
-                    exists5 = true;
-                }
-            }
 
             // 北
             bool exists2 = false;
@@ -238,8 +231,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
 
             }
             else if (!exists8 && !exists7 && !exists4 && !exists1 && !exists2 && !exists3 && !exists6 &&
-                  exists9 &&
-                  !exists5)
+                  exists9)
             {
                 // xxx
                 // xxx A1
@@ -249,8 +241,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             }
             else if (
                 !exists4 && !exists1 && !exists2 && !exists3 && !exists6 &&
-                exists8 &&
-                !exists5)
+                exists8)
             {
                 // xxx
                 // xxx A2
@@ -259,8 +250,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists4 && !exists1 && !exists2 && !exists3 && !exists6 && !exists9 && !exists8 &&
-                exists7 &&
-                  !exists5)
+                exists7)
             {
                 // xxx
                 // xxx A3
@@ -270,8 +260,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             }
             else if (
                 !exists8 && !exists7 && !exists4 && !exists1 && !exists2 &&
-                exists6 &&
-                  !exists5)
+                exists6)
             {
                 // xx-
                 // xxo A4
@@ -282,8 +271,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             // A5 は境界線ではないので、無視するぜ☆（＾▽＾）
             else if (
                 !exists2 && !exists3 && !exists6 && !exists9 && !exists8 &&
-                exists4 &&
-                  !exists5)
+                exists4)
             {
                 // -xx
                 // oxx A6
@@ -292,8 +280,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists6 && !exists9 && !exists8 && !exists7 && !exists4 && !exists1 && !exists2 &&
-                exists3 &&
-                  !exists5)
+                exists3)
             {
                 // xxo
                 // xxx A7
@@ -303,8 +290,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             }
             else if (
                 !exists6 && !exists9 && !exists8 && !exists7 && !exists4 &&
-                exists2 &&
-                  !exists5)
+                exists2)
             {
                 // -o-
                 // xxx A8
@@ -313,8 +299,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists3 && !exists6 && !exists9 && !exists8 && !exists7 && !exists4 &&
-                exists1 &&
-                  !exists5)
+                exists1)
             {
                 // oxx
                 // xxx A9
@@ -324,8 +309,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             }
 
             else if (!exists6 && !exists9 && !exists8 &&
-                exists2 && exists4 &&
-                  !exists5)
+                exists2 && exists4)
             {
                 // -o-
                 // oxx B1
@@ -334,8 +318,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists8 && !exists7 && !exists4 &&
-                exists2 && exists6 &&
-                  !exists5)
+                exists2 && exists6)
             {
                 // -o-
                 // xxo B2
@@ -344,8 +327,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists3 && !exists6 &&
-                exists8 && exists4 &&
-                  !exists5)
+                exists8 && exists4)
             {
                 // -xx
                 // oxx B3
@@ -354,8 +336,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists4 && !exists1 &&
-                exists6 && exists8 &&
-                  !exists5)
+                exists6 && exists8)
             {
                 // xx-
                 // xxo B4
@@ -365,8 +346,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             }
 
             else if (!exists6 && !exists8 &&
-                exists2 && exists9 && exists4 &&
-                  !exists5)
+                exists2 && exists9 && exists4)
             {
                 // -o-
                 // oxx C1
@@ -375,8 +355,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists8 && !exists4 &&
-                exists2 && exists6 && exists7 &&
-                  !exists5)
+                exists2 && exists6 && exists7)
             {
                 // -o-
                 // xxo C2
@@ -385,8 +364,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists6 &&
-                exists3 && exists8 && exists4 &&
-                  !exists5)
+                exists3 && exists8 && exists4)
             {
                 // -xo
                 // oxx C3
@@ -395,8 +373,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists4 &&
-                exists6 && exists8 && exists1 &&
-                  !exists5)
+                exists6 && exists8 && exists1)
             {
                 // ox-
                 // xxo C4
@@ -405,8 +382,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 image = MapchipImageType.Border_Sunachi;
             }
 
-            else if (exists2 && exists6 && exists8 && exists4 &&
-                !exists5)
+            else if (exists2 && exists6 && exists8 && exists4)
             {
                 // -o-
                 // oxo D
@@ -416,8 +392,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             }
 
             else if (!exists2 && !exists6 && !exists8 && !exists7 && !exists4 && !exists1 &&
-                exists3 && exists9 &&
-                !exists5)
+                exists3 && exists9)
             {
                 // xxo
                 // xxx E6
@@ -426,8 +401,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists3 && !exists6 && !exists8 && !exists4 &&
-                exists9 && exists7 && exists1 &&
-                !exists5)
+                exists9 && exists7 && exists1)
             {
                 // oxx
                 // xxx E13
@@ -436,8 +410,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists6 && !exists9 && !exists8 && !exists4 && !exists1 &&
-                exists3 && exists7 &&
-                !exists5)
+                exists3 && exists7)
             {
                 // xxo
                 // xxx E10
@@ -446,8 +419,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists3 && !exists6 && !exists8 && !exists4 && !exists1 &&
-                exists9 && exists7 &&
-                !exists5)
+                exists9 && exists7)
             {
                 // xxx
                 // xxx E12
@@ -456,8 +428,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists6 && !exists8 && !exists4 && !exists1 &&
-                exists3 && exists9 && exists7 &&
-                !exists5)
+                exists3 && exists9 && exists7)
             {
                 // xxo
                 // xxx E14
@@ -466,8 +437,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists6 && !exists8 && !exists4 &&
-                exists3 && exists9 && exists7 && exists1 &&
-                !exists5)
+                exists3 && exists9 && exists7 && exists1)
             {
                 // oxo
                 // xxx E15
@@ -476,8 +446,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists3 && !exists6 && !exists9 && !exists8 && !exists4 &&
-                exists1 && exists7 &&
-                !exists5)
+                exists1 && exists7)
             {
                 // oxx
                 // xxx E9
@@ -486,8 +455,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists6 && !exists9 && !exists8 && !exists7 && !exists4 &&
-                exists1 && exists3 &&
-                !exists5)
+                exists1 && exists3)
             {
                 // oxo
                 // xxx E3
@@ -496,8 +464,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists6 && !exists8 && !exists7 && !exists4 &&
-                exists3 && exists9 && exists1 &&
-                !exists5)
+                exists3 && exists9 && exists1)
             {
                 // oxo
                 // xxx E7
@@ -506,8 +473,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists6 && !exists9 && !exists8 && !exists4 &&
-                exists3 && exists7 && exists1 &&
-                !exists5)
+                exists3 && exists7 && exists1)
             {
                 // oxo
                 // xxx E11
@@ -516,8 +482,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists3 && !exists6 && !exists8 && !exists7 && !exists4 &&
-                exists1 && exists9 &&
-                !exists5)
+                exists1 && exists9)
             {
                 // oxx
                 // xxx E5
@@ -527,144 +492,166 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             }
 
             else if (!exists6 && !exists8 && !exists7 && !exists4 &&
-                exists2 && exists9 &&
-                !exists5)
+                exists2 && exists9)
             {
                 // -o-
-                // xxx F1
+                // xxx Fx1
                 // xxo
-                crop = this.PatchesF[1];
+                crop = this.PatchesFx[1];
+                image = MapchipImageType.Border_Sunachi;
+            }
+            else if (!exists6 && !exists8 && !exists4 &&
+                exists2 && exists9 && exists7)
+            {
+                // -o-
+                // xxx Fx2
+                // oxo
+                crop = this.PatchesFx[2];
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists6 && !exists9 && !exists8 && !exists4 &&
-                exists2 && exists7 &&
-                !exists5)
+                exists2 && exists7)
             {
                 // -o-
-                // xxx F2
+                // xxx Fx3
                 // oxx
-                crop = this.PatchesF[2];
+                crop = this.PatchesFx[3];
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists6 && !exists4 && !exists1 &&
-                exists3 && exists8 &&
-                !exists5)
+                exists3 && exists8)
             {
                 // xxo
-                // xxx F3
+                // xxx Fx4
                 // -o-
-                crop = this.PatchesF[3];
+                crop = this.PatchesFx[4];
+                image = MapchipImageType.Border_Sunachi;
+            }
+            else if (!exists2 && !exists6 && !exists4 &&
+                exists1 && exists3 && exists8)
+            {
+                // oxo
+                // xxx Fx5
+                // -o-
+                crop = this.PatchesFx[5];
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists3 && !exists6 && !exists4 &&
-                exists1 && exists8 &&
-                !exists5)
+                exists1 && exists8)
             {
                 // oxx
-                // xxx F4
+                // xxx Fx6
                 // -o-
-                crop = this.PatchesF[4];
+                crop = this.PatchesFx[6];
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists3 && !exists6 && !exists8 &&
-                exists4 && exists9 &&
-                !exists5)
+                exists4 && exists9)
             {
                 // -xx
-                // oxx F5
+                // oxx Fx7
                 // -xo
-                crop = this.PatchesF[5];
+                crop = this.PatchesFx[7];
                 image = MapchipImageType.Border_Sunachi;
             }
-            else if (!exists2 && !exists8 && !exists4 && !exists1 &&
-                exists6 && exists7 &&
-                !exists5)
+            else if (!exists2 && !exists6 && !exists8 &&
+                exists3 && exists4 && exists9)
             {
-                // xx-
-                // xxo F6
-                // ox-
-                crop = this.PatchesF[6];
+                // -xo
+                // oxx Fx8
+                // -xo
+                crop = this.PatchesFx[8];
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists6 && !exists9 && !exists8 &&
-                exists3 && exists4 &&
-                !exists5)
+                exists3 && exists4)
             {
                 // -xo
-                // oxx F7
+                // oxx Fx9
                 // -xx
-                crop = this.PatchesF[7];
+                crop = this.PatchesFx[9];
+                image = MapchipImageType.Border_Sunachi;
+            }
+            else if (!exists2 && !exists8 && !exists4 && !exists1 &&
+                exists6 && exists7)
+            {
+                // xx-
+                // xxo Fx10
+                // ox-
+                crop = this.PatchesFx[10];
+                image = MapchipImageType.Border_Sunachi;
+            }
+            else if (!exists2 && !exists8 && !exists4 &&
+                exists1 && exists6 && exists7)
+            {
+                // ox-
+                // xxo Fx11
+                // ox-
+                crop = this.PatchesFx[11];
                 image = MapchipImageType.Border_Sunachi;
             }
             else if (!exists2 && !exists8 && !exists7 && !exists4 &&
-                exists1 && exists6 &&
-                !exists5)
+                exists1 && exists6)
             {
                 // ox-
-                // xxo F8
+                // xxo Fx12
                 // xx-
-                crop = this.PatchesF[8];
+                crop = this.PatchesFx[12];
                 image = MapchipImageType.Border_Sunachi;
             }
 
-            else if ( !exists2 &&
-                exists8 && exists6 && exists4 &&
-                !exists5)
+            else if (!exists6 &&
+                exists8 && exists4 && exists2)
             {
-                // -x-
-                // oxo G1
                 // -o-
-                crop = this.PatchesG[1];
+                // oxx Gx1
+                // -o-
+                crop = this.PatchesGx[1];
                 image = MapchipImageType.Border_Sunachi;
             }
-            else if ( !exists6 &&
-                exists8 && exists4 && exists2 &&
-                !exists5)
+            else if (!exists6 && !exists4 &&
+                exists2 && exists8)
             {
                 // -o-
-                // oxx G2
+                // xxx Gx2
                 // -o-
-                crop = this.PatchesG[2];
+                crop = this.PatchesGx[2];
+                image = MapchipImageType.Border_Sunachi;
+            }
+            else if (!exists4 &&
+                exists2 && exists6 && exists8)
+            {
+                // -o-
+                // xxo Gx3
+                // -o-
+                crop = this.PatchesGx[3];
                 image = MapchipImageType.Border_Sunachi;
             }
             else if ( !exists8 &&
-                exists4 && exists2 && exists6 &&
-                !exists5)
+                exists4 && exists2 && exists6)
             {
                 // -o-
-                // oxo G3
+                // oxo Gx4
                 // -x-
-                crop = this.PatchesG[3];
-                image = MapchipImageType.Border_Sunachi;
-            }
-            else if ( !exists4 &&
-                exists2 && exists6 && exists8 &&
-                !exists5)
-            {
-                // -o-
-                // xxo G4
-                // -o-
-                crop = this.PatchesG[4];
+                crop = this.PatchesGx[4];
                 image = MapchipImageType.Border_Sunachi;
             }
             else if ( !exists2 && !exists8 &&
-                exists4 && exists6 &&
-                !exists5)
+                exists4 && exists6)
             {
                 // -x-
-                // oxo G5
+                // oxo Gx5
                 // -x-
-                crop = this.PatchesG[5];
+                crop = this.PatchesGx[5];
                 image = MapchipImageType.Border_Sunachi;
             }
-            else if ( !exists6 && !exists4 &&
-                exists2 && exists8 &&
-                !exists5)
+            else if (!exists2 &&
+                exists8 && exists6 && exists4)
             {
+                // -x-
+                // oxo Gx6
                 // -o-
-                // xxx G6
-                // -o-
-                crop = this.PatchesG[6];
+                crop = this.PatchesGx[6];
                 image = MapchipImageType.Border_Sunachi;
             }
 

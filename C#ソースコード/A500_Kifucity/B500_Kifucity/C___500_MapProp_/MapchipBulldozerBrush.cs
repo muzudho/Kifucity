@@ -30,13 +30,13 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C___500_MapProp_
         MapchipCrop[] PatchesE { get; set; }
         /// <summary>
         /// [0]なし
-        /// [1]～[8]
+        /// [1]～[12]
         /// </summary>
-        MapchipCrop[] PatchesF { get; set; }
+        MapchipCrop[] PatchesFx { get; set; }
         /// <summary>
         /// [0]なし
         /// [1]～[6]
         /// </summary>
-        MapchipCrop[] PatchesG { get; set; }
+        MapchipCrop[] PatchesGx { get; set; }
     }
 }

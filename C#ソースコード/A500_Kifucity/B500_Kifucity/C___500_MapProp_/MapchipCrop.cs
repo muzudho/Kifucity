@@ -262,59 +262,75 @@
         /// <summary>
         ///
         /// </summary>
-        kyo境界線_F1,
+        kyo境界線_F1x,
         /// <summary>
         ///
         /// </summary>
-        kyo境界線_F2,
+        kyo境界線_F2x,
         /// <summary>
         ///
         /// </summary>
-        kyo境界線_F3,
+        kyo境界線_F3x,
         /// <summary>
         ///
         /// </summary>
-        kyo境界線_F4,
+        kyo境界線_F4x,
         /// <summary>
         ///
         /// </summary>
-        kyo境界線_F5,
+        kyo境界線_F5x,
         /// <summary>
         ///
         /// </summary>
-        kyo境界線_F6,
+        kyo境界線_F6x,
         /// <summary>
         ///
         /// </summary>
-        kyo境界線_F7,
+        kyo境界線_F7x,
         /// <summary>
         ///
         /// </summary>
-        kyo境界線_F8,
+        kyo境界線_F8x,
         /// <summary>
         ///
         /// </summary>
-        kyo境界線_G1,
+        kyo境界線_F9x,
         /// <summary>
         ///
         /// </summary>
-        kyo境界線_G2,
+        kyo境界線_F10x,
         /// <summary>
         ///
         /// </summary>
-        kyo境界線_G3,
+        kyo境界線_F11x,
         /// <summary>
         ///
         /// </summary>
-        kyo境界線_G4,
+        kyo境界線_F12x,
         /// <summary>
         ///
         /// </summary>
-        kyo境界線_G5,
+        kyo境界線_G1x,
         /// <summary>
         ///
         /// </summary>
-        kyo境界線_G6,
+        kyo境界線_G2x,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_G3x,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_G4x,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_G5x,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_G6x,
 
         /// <summary>
         /// 列挙型サイズ
