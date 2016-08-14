@@ -5,7 +5,7 @@
     /// </summary>
     public enum MapchipType
     {
-        None = 0,
+        None,
 
         u海,
         /// <summary>

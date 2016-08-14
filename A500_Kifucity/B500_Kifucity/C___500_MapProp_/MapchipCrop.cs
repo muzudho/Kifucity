@@ -225,6 +225,28 @@
         se線路_田9,
 
         /// <summary>
+        /// 線路ボタン senro button [1]押す前 [2]マウスカーソルを重ねたとき [3]押した後
+        /// </summary>
+        sebt線路1,
+        sebt線路2,
+        sebt線路3,
+        sebt線路4,
+        /// <summary>
+        /// ブルドーザー seichi button
+        /// </summary>
+        sebt整地1,
+        sebt整地2,
+        sebt整地3,
+        sebt整地4,
+        /// <summary>
+        /// 
+        /// </summary>
+        dobt道路1,
+        dobt道路2,
+        dobt道路3,
+        dobt道路4,
+
+        /// <summary>
         /// 列挙型サイズ
         /// </summary>
         Num

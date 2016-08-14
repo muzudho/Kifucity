@@ -52,6 +52,16 @@ namespace Grayscale.A500_Kifucity
         /// 線路を置くブラシ。
         /// </summary>
         public MapchipRailwayBrush BrushRailway { get; set; }
+        /// <summary>
+        /// 道路を置くブラシ。
+        /// </summary>
+        public MapchipRailwayBrush BrushRoadway { get; set; }
+
+        /// <summary>
+        /// ボタンを描くブラシ。
+        /// [0]なし [1]線路 [2]整地 [3]道路 ...
+        /// </summary>
+        public MapchipButtonBrush[] BrushesButton { get; set; }
 
         public UcMain()
         {
@@ -111,6 +121,20 @@ namespace Grayscale.A500_Kifucity
                     );
             }
 
+            //────────────────────────────────────────
+            // ボタンを置こうぜ☆（＾▽＾）
+            //────────────────────────────────────────
+            // 整地
+            this.BrushesButton[(int)ButtonType.se整地].Paint(g, this);
+            //g.DrawImage(this.ImgMap, new Rectangle(32, 32, 32, 32), this.MapchipProperties[(int)MapchipCrop.sebt整地1].SourceBounds, GraphicsUnit.Pixel);
+            // 道路
+            this.BrushesButton[(int)ButtonType.do道路].Paint(g, this);
+            //g.DrawImage(this.ImgMap, new Rectangle(64, 32, 32, 32), this.MapchipProperties[(int)MapchipCrop.dobt道路1].SourceBounds, GraphicsUnit.Pixel);
+            // 線路
+            this.BrushesButton[(int)ButtonType.se線路].Paint(g, this);
+            //g.DrawImage(this.ImgMap, new Rectangle(32, 64, 32, 32), this.MapchipProperties[(int)MapchipCrop.sebt線路1].SourceBounds, GraphicsUnit.Pixel);
+
+            /*
 #if DEBUG
             if(null!= this.ImgMap)
             {
@@ -118,6 +142,7 @@ namespace Grayscale.A500_Kifucity
                 g.DrawImage(this.ImgMap, new Rectangle(0, 0, 600, 400), new Rectangle(0, 0, 600, 400), GraphicsUnit.Pixel);
             }
 #endif
+            //*/
         }
 
         private void UcMain_Load(object sender, System.EventArgs e)
@@ -192,6 +217,19 @@ namespace Grayscale.A500_Kifucity
                 this.MapchipProperties[(int)MapchipCrop.se線路_田7] = new MapchipPropertyImpl(48, 160, 16, 16);
                 this.MapchipProperties[(int)MapchipCrop.se線路_田8] = new MapchipPropertyImpl(64, 160, 16, 16);
                 this.MapchipProperties[(int)MapchipCrop.se線路_田9] = new MapchipPropertyImpl(80, 160, 16, 16);
+
+                this.MapchipProperties[(int)MapchipCrop.sebt線路1] = new MapchipPropertyImpl(192, 0, 32, 32);
+                this.MapchipProperties[(int)MapchipCrop.sebt線路2] = new MapchipPropertyImpl(192, 32, 32, 32);
+                this.MapchipProperties[(int)MapchipCrop.sebt線路3] = new MapchipPropertyImpl(192, 64, 32, 32);
+                this.MapchipProperties[(int)MapchipCrop.sebt線路4] = new MapchipPropertyImpl(192, 96, 32, 32);
+                this.MapchipProperties[(int)MapchipCrop.sebt整地1] = new MapchipPropertyImpl(224, 0, 32, 32);
+                this.MapchipProperties[(int)MapchipCrop.sebt整地2] = new MapchipPropertyImpl(224, 32, 32, 32);
+                this.MapchipProperties[(int)MapchipCrop.sebt整地3] = new MapchipPropertyImpl(224, 64, 32, 32);
+                this.MapchipProperties[(int)MapchipCrop.sebt整地4] = new MapchipPropertyImpl(224, 96, 32, 32);
+                this.MapchipProperties[(int)MapchipCrop.dobt道路1] = new MapchipPropertyImpl(256, 0, 32, 32);
+                this.MapchipProperties[(int)MapchipCrop.dobt道路2] = new MapchipPropertyImpl(256, 32, 32, 32);
+                this.MapchipProperties[(int)MapchipCrop.dobt道路3] = new MapchipPropertyImpl(256, 64, 32, 32);
+                this.MapchipProperties[(int)MapchipCrop.dobt道路4] = new MapchipPropertyImpl(256, 96, 32, 32);
             }
             catch (Exception)
             {
@@ -201,6 +239,13 @@ namespace Grayscale.A500_Kifucity
             //────────────────────────────────────────
             // ブラシ
             //────────────────────────────────────────
+            this.BrushesButton = new MapchipButtonBrush[]
+            {
+                null,
+                new MapchipButtonBrushImpl(32,32,32,32,MapchipCrop.sebt線路1,MapchipCrop.sebt線路2,MapchipCrop.sebt線路3,MapchipCrop.sebt線路4),
+                new MapchipButtonBrushImpl(64,32,32,32,MapchipCrop.sebt整地1,MapchipCrop.sebt整地2,MapchipCrop.sebt整地3,MapchipCrop.sebt整地4),
+                new MapchipButtonBrushImpl(32,64,32,32,MapchipCrop.dobt道路1,MapchipCrop.dobt道路2,MapchipCrop.dobt道路3,MapchipCrop.dobt道路4),
+            };
             this.BrushRailway = new MapchipRailwayBrushImpl(
                 MapchipCrop.se線路P,
                 MapchipCrop.se線路V,
@@ -214,6 +259,20 @@ namespace Grayscale.A500_Kifucity
                 MapchipCrop.se線路_田7,
                 MapchipCrop.se線路_田8,
                 MapchipCrop.se線路_田9
+                );
+            this.BrushRoadway = new MapchipRailwayBrushImpl(
+                MapchipCrop.do道路P,
+                MapchipCrop.do道路V,
+                MapchipCrop.do道路H,
+                MapchipCrop.do道路_田1,
+                MapchipCrop.do道路_田2,
+                MapchipCrop.do道路_田3,
+                MapchipCrop.do道路_田4,
+                MapchipCrop.do道路_田5,
+                MapchipCrop.do道路_田6,
+                MapchipCrop.do道路_田7,
+                MapchipCrop.do道路_田8,
+                MapchipCrop.do道路_田9
                 );
 
             this.MapImg = new MapchipCrop[2, UcMain.TABLE_ROWS, UcMain.TABLE_COLS];
@@ -230,11 +289,48 @@ namespace Grayscale.A500_Kifucity
 
         private void UcMain_MouseDown(object sender, MouseEventArgs e)
         {
+            bool isRefresh = false;
             this.MouseDownLocation = e.Location;
 
             if (MouseButtons.Left == e.Button)
             {
                 // 左ボタンなら
+
+                //────────────────────────────────────────
+                // ボタン押下
+                //────────────────────────────────────────
+                ButtonType pushedButton = ButtonType.None;
+                for (int iBtn = 1; iBtn < (int)ButtonType.Num; iBtn++)
+                {
+                    if (this.BrushesButton[iBtn].DestinationBounds.Contains(e.Location))
+                    {
+                        pushedButton = (ButtonType)iBtn;
+
+                        switch (this.BrushesButton[iBtn].ButtonState)
+                        {
+                            case ButtonState2.Pushable_MouseOver:
+                                this.BrushesButton[iBtn].ButtonState = ButtonState2.Pushed_MouseOver;
+                                isRefresh = true;
+                                break;
+                            case ButtonState2.Pushed_MouseOver:
+                                this.BrushesButton[iBtn].ButtonState = ButtonState2.Pushable_MouseOver;
+                                isRefresh = true;
+                                break;
+                        }
+                    }
+                }
+                // ボタン押下の解除
+                if (ButtonType.None!=pushedButton)
+                {
+                    for (int iBtn = 1; iBtn < (int)ButtonType.Num; iBtn++)
+                    {
+                        if (pushedButton != (ButtonType)iBtn)
+                        {
+                            this.BrushesButton[iBtn].ButtonState = ButtonState2.Pushable;
+                        }
+                    }
+                }
+
                 // 砂地を置く☆
                 {
                     int col = (e.Location.X - this.TableLeft) / cellW;
@@ -245,9 +341,14 @@ namespace Grayscale.A500_Kifucity
                             , row, col);
                         //this.MapImg[1, row, col] = MapchipCrop.su砂_田5;
 
-                        this.Refresh();
+                        isRefresh = true;
                     }
                 }
+            }
+
+            if (isRefresh)
+            {
+                this.Refresh();
             }
         }
 
@@ -493,6 +594,43 @@ namespace Grayscale.A500_Kifucity
 
         private void UcMain_MouseMove(object sender, MouseEventArgs e)
         {
+            bool isRefresh = false;
+
+            //────────────────────────────────────────
+            // ボタン
+            //────────────────────────────────────────
+            for (int iBtn = 1; iBtn < (int)ButtonType.Num; iBtn++)
+            {
+                if (this.BrushesButton[iBtn].DestinationBounds.Contains(e.Location))
+                {
+                    switch (this.BrushesButton[iBtn].ButtonState)
+                    {
+                        case ButtonState2.Pushable:
+                            this.BrushesButton[iBtn].ButtonState = ButtonState2.Pushable_MouseOver;
+                            isRefresh = true;
+                            break;
+                        case ButtonState2.Pushed:
+                            this.BrushesButton[iBtn].ButtonState = ButtonState2.Pushed_MouseOver;
+                            isRefresh = true;
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (this.BrushesButton[iBtn].ButtonState)
+                    {
+                        case ButtonState2.Pushable_MouseOver:
+                            this.BrushesButton[iBtn].ButtonState = ButtonState2.Pushable;
+                            isRefresh = true;
+                            break;
+                        case ButtonState2.Pushed_MouseOver:
+                            this.BrushesButton[iBtn].ButtonState = ButtonState2.Pushed;
+                            isRefresh = true;
+                            break;
+                    }
+                }
+            }
+
             if (MouseButtons.Right == e.Button)
             {
                 // マウスの右ボタンで、マップ引きずる
@@ -508,23 +646,46 @@ namespace Grayscale.A500_Kifucity
 
                     // すぐ更新☆ すぐ描画☆
                     this.MouseDownLocation = e.Location;
-                    this.Refresh();
+                    isRefresh = true;
                 }
             }
             else if (MouseButtons.Left == e.Button)
             {
                 // 左ボタンなら
-                // 砂地を置く☆
+
                 if (this.MouseDownLocation != Point.Empty)
                 {
-                    bool isUpdate;
-                    this.PutMapchipAsLine(out isUpdate, e.Location, this.BrushRailway);
-                    if (isUpdate)
+                    // 施設を置く☆
+                    if (
+                        this.BrushesButton[(int)ButtonType.se線路].ButtonState == ButtonState2.Pushed ||
+                        this.BrushesButton[(int)ButtonType.se線路].ButtonState == ButtonState2.Pushed_MouseOver)
                     {
-                        this.MouseDownLocation = e.Location;
-                        this.Refresh();
+                        bool isUpdate;
+                        this.PutMapchipAsLine(out isUpdate, e.Location, this.BrushRailway);
+                        if (isUpdate)
+                        {
+                            this.MouseDownLocation = e.Location;
+                            isRefresh = true;
+                        }
+                    }
+                    else if (
+                        this.BrushesButton[(int)ButtonType.do道路].ButtonState == ButtonState2.Pushed ||
+                        this.BrushesButton[(int)ButtonType.do道路].ButtonState == ButtonState2.Pushed_MouseOver)
+                    {
+                        bool isUpdate;
+                        this.PutMapchipAsLine(out isUpdate, e.Location, this.BrushRoadway);
+                        if (isUpdate)
+                        {
+                            this.MouseDownLocation = e.Location;
+                            isRefresh = true;
+                        }
                     }
                 }
+            }
+
+            if (isRefresh)
+            {
+                this.Refresh();
             }
         }
 
