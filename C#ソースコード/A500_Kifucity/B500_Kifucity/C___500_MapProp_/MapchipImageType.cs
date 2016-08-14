@@ -2,7 +2,7 @@
 {
     public enum MapchipImageType
     {
-        Null,
+        None,
 
         /// <summary>
         /// マップチップ

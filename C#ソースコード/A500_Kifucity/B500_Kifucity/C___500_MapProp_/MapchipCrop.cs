@@ -213,14 +213,7 @@
         /// 
         /// </summary>
         kyo境界線_D,
-        /// <summary>
-        ///
-        /// </summary>
-        kyo境界線_E3,
-        /// <summary>
-        ///
-        /// </summary>
-        kyo境界線_E5,
+
         /// <summary>
         ///
         /// </summary>
@@ -228,11 +221,7 @@
         /// <summary>
         ///
         /// </summary>
-        kyo境界線_E7,
-        /// <summary>
-        ///
-        /// </summary>
-        kyo境界線_E9,
+        kyo境界線_E13,
         /// <summary>
         ///
         /// </summary>
@@ -240,11 +229,7 @@
         /// <summary>
         ///
         /// </summary>
-        kyo境界線_E11,
-        /// <summary>
-        ///
-        /// </summary>
-        kyo境界線_E13,
+        kyo境界線_E12,
         /// <summary>
         ///
         /// </summary>
@@ -256,7 +241,24 @@
         /// <summary>
         ///
         /// </summary>
-        kyo境界線_E17,
+        kyo境界線_E9,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_E3,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_E7,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_E11,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_E5,
+
         /// <summary>
         ///
         /// </summary>
@@ -289,6 +291,30 @@
         ///
         /// </summary>
         kyo境界線_F8,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_G1,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_G2,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_G3,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_G4,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_G5,
+        /// <summary>
+        ///
+        /// </summary>
+        kyo境界線_G6,
 
         /// <summary>
         /// 列挙型サイズ
