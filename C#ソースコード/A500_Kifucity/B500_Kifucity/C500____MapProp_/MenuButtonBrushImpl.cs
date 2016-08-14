@@ -3,9 +3,9 @@ using System.Drawing;
 
 namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
 {
-    public class MapchipButtonBrushImpl : MapchipButtonBrush
+    public class MenuButtonBrushImpl : ButtonBrush
     {
-        public MapchipButtonBrushImpl(
+        public MenuButtonBrushImpl(
             int x,
             int y,
             int width,

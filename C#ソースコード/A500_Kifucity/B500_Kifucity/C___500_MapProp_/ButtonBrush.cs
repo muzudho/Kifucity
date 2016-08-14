@@ -5,7 +5,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C___500_MapProp_
     /// <summary>
     /// ボタン状のマップチップを置くブラシ☆
     /// </summary>
-    public interface MapchipButtonBrush
+    public interface ButtonBrush
     {
         ButtonState2 ButtonState { get; set; }
 

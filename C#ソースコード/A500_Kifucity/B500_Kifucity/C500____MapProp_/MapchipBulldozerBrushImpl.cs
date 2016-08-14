@@ -10,6 +10,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
     public class MapchipBulldozerBrushImpl : MapchipBulldozerBrush
     {
         public MapchipBulldozerBrushImpl(
+            int layer,
             MapchipCrop a1,
             MapchipCrop a2,
             MapchipCrop a3,
@@ -59,6 +60,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             MapchipCrop g6
             )
         {
+            this.Layer = layer;
             this.PatchesA = new MapchipCrop[] { MapchipCrop.None, a1, a2, a3, a4, a5, a6, a7, a8, a9 };
             this.PatchesB = new MapchipCrop[] { MapchipCrop.None, b1, b2, b3, b4 };
             this.PatchesC = new MapchipCrop[] { MapchipCrop.None, c1, c2, c3, c4 };
@@ -67,6 +69,11 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             this.PatchesFx = new MapchipCrop[] { MapchipCrop.None, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12 };
             this.PatchesGx = new MapchipCrop[] { MapchipCrop.None, g1, g2, g3, g4, g5, g6 };
         }
+
+        /// <summary>
+        /// レイヤー番号☆
+        /// </summary>
+        public int Layer { get; set; }
 
         /// <summary>
         /// [0]なし
@@ -495,7 +502,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 exists2 && exists9)
             {
                 // -o-
-                // xxx Fx1
+                // xxx F1
                 // xxo
                 crop = this.PatchesFx[1];
                 image = MapchipImageType.Border_Sunachi;
@@ -504,7 +511,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 exists2 && exists9 && exists7)
             {
                 // -o-
-                // xxx Fx2
+                // xxx F2
                 // oxo
                 crop = this.PatchesFx[2];
                 image = MapchipImageType.Border_Sunachi;
@@ -513,7 +520,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 exists2 && exists7)
             {
                 // -o-
-                // xxx Fx3
+                // xxx F3
                 // oxx
                 crop = this.PatchesFx[3];
                 image = MapchipImageType.Border_Sunachi;
@@ -522,7 +529,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 exists3 && exists8)
             {
                 // xxo
-                // xxx Fx4
+                // xxx F4
                 // -o-
                 crop = this.PatchesFx[4];
                 image = MapchipImageType.Border_Sunachi;
@@ -531,7 +538,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 exists1 && exists3 && exists8)
             {
                 // oxo
-                // xxx Fx5
+                // xxx F5
                 // -o-
                 crop = this.PatchesFx[5];
                 image = MapchipImageType.Border_Sunachi;
@@ -540,7 +547,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 exists1 && exists8)
             {
                 // oxx
-                // xxx Fx6
+                // xxx F6
                 // -o-
                 crop = this.PatchesFx[6];
                 image = MapchipImageType.Border_Sunachi;
@@ -549,7 +556,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 exists4 && exists9)
             {
                 // -xx
-                // oxx Fx7
+                // oxx F7
                 // -xo
                 crop = this.PatchesFx[7];
                 image = MapchipImageType.Border_Sunachi;
@@ -558,7 +565,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 exists3 && exists4 && exists9)
             {
                 // -xo
-                // oxx Fx8
+                // oxx F8
                 // -xo
                 crop = this.PatchesFx[8];
                 image = MapchipImageType.Border_Sunachi;
@@ -567,7 +574,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 exists3 && exists4)
             {
                 // -xo
-                // oxx Fx9
+                // oxx F9
                 // -xx
                 crop = this.PatchesFx[9];
                 image = MapchipImageType.Border_Sunachi;
@@ -576,7 +583,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 exists6 && exists7)
             {
                 // xx-
-                // xxo Fx10
+                // xxo F10
                 // ox-
                 crop = this.PatchesFx[10];
                 image = MapchipImageType.Border_Sunachi;
@@ -585,7 +592,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 exists1 && exists6 && exists7)
             {
                 // ox-
-                // xxo Fx11
+                // xxo F11
                 // ox-
                 crop = this.PatchesFx[11];
                 image = MapchipImageType.Border_Sunachi;
@@ -594,7 +601,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 exists1 && exists6)
             {
                 // ox-
-                // xxo Fx12
+                // xxo F12
                 // xx-
                 crop = this.PatchesFx[12];
                 image = MapchipImageType.Border_Sunachi;
@@ -604,7 +611,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 exists8 && exists4 && exists2)
             {
                 // -o-
-                // oxx Gx1
+                // oxx G1
                 // -o-
                 crop = this.PatchesGx[1];
                 image = MapchipImageType.Border_Sunachi;
@@ -613,7 +620,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 exists2 && exists8)
             {
                 // -o-
-                // xxx Gx2
+                // xxx G2
                 // -o-
                 crop = this.PatchesGx[2];
                 image = MapchipImageType.Border_Sunachi;
@@ -622,7 +629,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 exists2 && exists6 && exists8)
             {
                 // -o-
-                // xxo Gx3
+                // xxo G3
                 // -o-
                 crop = this.PatchesGx[3];
                 image = MapchipImageType.Border_Sunachi;
@@ -631,7 +638,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 exists4 && exists2 && exists6)
             {
                 // -o-
-                // oxo Gx4
+                // oxo G4
                 // -x-
                 crop = this.PatchesGx[4];
                 image = MapchipImageType.Border_Sunachi;
@@ -640,7 +647,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 exists4 && exists6)
             {
                 // -x-
-                // oxo Gx5
+                // oxo G5
                 // -x-
                 crop = this.PatchesGx[5];
                 image = MapchipImageType.Border_Sunachi;
@@ -649,7 +656,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 exists8 && exists6 && exists4)
             {
                 // -x-
-                // oxo Gx6
+                // oxo G6
                 // -o-
                 crop = this.PatchesGx[6];
                 image = MapchipImageType.Border_Sunachi;
@@ -658,8 +665,8 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             // 更新☆
             if (crop!=MapchipCrop.None && image != MapchipImageType.None)
             {
-                ucMain.MapData1[1, pRow, pCol] = crop;
-                ucMain.MapData2[1, pRow, pCol] = image;
+                ucMain.MapData1[this.Layer, pRow, pCol] = crop;
+                ucMain.MapData2[this.Layer, pRow, pCol] = image;
             }
         }
 
@@ -682,125 +689,24 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // 境界線自体は、陸地ではないと判定すること☆（＾▽＾）
                 // つまり patches[5] だけが陸地だぜ☆（＾▽＾）
 
+                //────────────────────────────────────────
+                // クリックしたところに施設を置くのは確定だぜ☆（＾▽＾）
+                //────────────────────────────────────────
+
+                // （更新）中央
+                ucMain.MapData1[this.Layer, centerRow, centerCol] = this.PatchesA[5];
+                ucMain.MapData2[this.Layer, centerRow, centerCol] = MapchipImageType.Border_Sunachi;
+
+                //────────────────────────────────────────
+                // 8近傍は、更新の候補だぜ☆（＾▽＾）
+                //────────────────────────────────────────
+
                 // 次は8近傍を、12時の方角から時計回りで見ていくぜ☆（＾▽＾）
                 //
                 // ooo
                 // oxo
                 // ooo
                 //
-
-                // 北
-                bool existsNorth = false;
-                col = centerCol;
-                row = centerRow - 1;
-                if (-1 < row)
-                {
-                    if (ucMain.MapData1[1, row, col] == this.PatchesA[5])
-                    {
-                        existsNorth = true;
-                    }
-                }
-
-                // 北東
-                bool existsNorthEast = false;
-                col = centerCol + 1;
-                row = centerRow - 1;
-                if (col < UcMain.TABLE_COLS && -1 < row)
-                {
-                    if (ucMain.MapData1[1, row, col] == this.PatchesA[5])
-                    {
-                        existsNorthEast = true;
-                    }
-                }
-
-                // 東
-                bool existsEast = false;
-                col = centerCol + 1;
-                row = centerRow;
-                if (col < UcMain.TABLE_COLS)
-                {
-                    if (ucMain.MapData1[1, row, col] == this.PatchesA[5])
-                    {
-                        existsEast = true;
-                    }
-                }
-
-                // 南東
-                bool existsSouthEast = false;
-                col = centerCol + 1;
-                row = centerRow + 1;
-                if (col < UcMain.TABLE_COLS && row < UcMain.TABLE_ROWS)
-                {
-                    if (ucMain.MapData1[1, row, col] == this.PatchesA[5])
-                    {
-                        existsSouthEast = true;
-                    }
-                }
-
-                // 南
-                bool existsSouth = false;
-                col = centerCol;
-                row = centerRow + 1;
-                if (row < UcMain.TABLE_ROWS)
-                {
-                    if (ucMain.MapData1[1, row, col] == this.PatchesA[5])
-                    {
-                        existsSouth = true;
-                    }
-                }
-
-                // 南西
-                bool existsSouthWest = false;
-                col = centerCol - 1;
-                row = centerRow + 1;
-                if (-1 < col && row < UcMain.TABLE_ROWS)
-                {
-                    if (ucMain.MapData1[1, row, col] == this.PatchesA[5])
-                    {
-                        existsSouthWest = true;
-                    }
-                }
-
-                // 西
-                bool existsWest = false;
-                col = centerCol - 1;
-                row = centerRow;
-                if (-1 < col)
-                {
-                    if (ucMain.MapData1[1, row, col] == this.PatchesA[5])
-                    {
-                        existsWest = true;
-                    }
-                }
-
-                // 北西
-                bool existsNorthWest = false;
-                col = centerCol - 1;
-                row = centerRow - 1;
-                if (-1 < col && -1 < row)
-                {
-                    if (ucMain.MapData1[1, row, col] == this.PatchesA[5])
-                    {
-                        existsNorthWest = true;
-                    }
-                }
-
-
-                //────────────────────────────────────────
-                // クリックしたところに施設を置くのは確定だぜ☆（＾▽＾）
-                //────────────────────────────────────────
-
-                // （更新）中央
-                ucMain.MapData1[1, centerRow, centerCol] = this.PatchesA[5];
-                ucMain.MapData2[1, centerRow, centerCol] = MapchipImageType.Border_Sunachi;
-
-                //────────────────────────────────────────
-                // 8近傍は、更新の候補だぜ☆（＾▽＾）
-                //────────────────────────────────────────
-
-                // ooo
-                // oxo
-                // ooo
 
                 // （更新）北
                 col = centerCol;

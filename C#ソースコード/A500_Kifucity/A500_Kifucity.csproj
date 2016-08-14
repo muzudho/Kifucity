@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\</OutputPath>
+    <OutputPath>..\..\bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -27,7 +27,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\</OutputPath>
+    <OutputPath>..\..\bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -46,14 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="B500_Kifucity\C500____MapProp_\MapchipButtonBrushImpl.cs" />
+    <Compile Include="B500_Kifucity\C500____MapProp_\MenuButtonBrushImpl.cs" />
     <Compile Include="B500_Kifucity\C500____MapProp_\MapchipBulldozerBrushImpl.cs" />
     <Compile Include="B500_Kifucity\C500____MapProp_\MapchipRailwayBrushImpl.cs" />
     <Compile Include="B500_Kifucity\C500____MapProp_\MapchipPropertyImpl.cs" />
     <Compile Include="B500_Kifucity\C___500_MapProp_\ButtonState2.cs" />
     <Compile Include="B500_Kifucity\C___500_MapProp_\ButtonType.cs" />
     <Compile Include="B500_Kifucity\C___500_MapProp_\MapchipBrush.cs" />
-    <Compile Include="B500_Kifucity\C___500_MapProp_\MapchipButtonBrush.cs" />
+    <Compile Include="B500_Kifucity\C___500_MapProp_\ButtonBrush.cs" />
     <Compile Include="B500_Kifucity\C___500_MapProp_\MapchipBulldozerBrush.cs" />
     <Compile Include="B500_Kifucity\C___500_MapProp_\MapchipImageType.cs" />
     <Compile Include="B500_Kifucity\C___500_MapProp_\MapchipRailwayBrush.cs" />
