@@ -46,5 +46,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C___500_MapProp_
         /// </summary>
         int Layer { get; set; }
         ImageType ImageType { get; set; }
+        AnimationType AnimationType { get; set; }
     }
 }

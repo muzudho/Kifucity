@@ -11,9 +11,9 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C___450_Position
         MapchipCrop MapchipCrop { get; set; }
 
         /// <summary>
-        /// 8コマ・アニメーションするなら真☆
+        /// マップチップ画像で、アニメーションのコマがどのようにならんでいるか☆
         /// </summary>
-        bool IsAnimation { get; set; }
+        AnimationType AnimationType { get; set; }
 
         /// <summary>
         /// 元画像ファイル☆

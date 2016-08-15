@@ -122,13 +122,27 @@ namespace Grayscale.A500_Kifucity
 
                                 if (null != img)
                                 {
-                                    if (this.City.Cells[layer, row, col].IsAnimation)
+                                    if (AnimationType.Horizontal8==this.City.Cells[layer, row, col].AnimationType)
                                     {
                                         // アニメーションするセルの場合☆ 8コマと想定☆（＾～＾）
+                                        const int span = PositionImpl.CELL_W;
                                         g.DrawImage(img,
                                             new Rectangle(col * PositionImpl.CELL_W + tableLeft, row * PositionImpl.CELL_H + tableTop, PositionImpl.CELL_W, PositionImpl.CELL_H),//ディスプレイ
                                                                                                                                        // 元画像
-                                            this.MapchipProperties[(int)this.City.Cells[layer, row, col].MapchipCrop].SourceBounds.X + animationCount % UcMain.AnimationCountNum * PositionImpl.CELL_W,
+                                            this.MapchipProperties[(int)this.City.Cells[layer, row, col].MapchipCrop].SourceBounds.X + animationCount % UcMain.AnimationCountNum * span,
+                                            this.MapchipProperties[(int)this.City.Cells[layer, row, col].MapchipCrop].SourceBounds.Y,
+                                            this.MapchipProperties[(int)this.City.Cells[layer, row, col].MapchipCrop].SourceBounds.Width,
+                                            this.MapchipProperties[(int)this.City.Cells[layer, row, col].MapchipCrop].SourceBounds.Height,
+                                            GraphicsUnit.Pixel);
+                                    }
+                                    else if (AnimationType.Horizontal8_span128== this.City.Cells[layer, row, col].AnimationType)
+                                    {
+                                        // 境界線チップ用の アニメーションだぜ☆（＾～＾）
+                                        const int span = 128;
+                                        g.DrawImage(img,
+                                            new Rectangle(col * PositionImpl.CELL_W + tableLeft, row * PositionImpl.CELL_H + tableTop, PositionImpl.CELL_W, PositionImpl.CELL_H),//ディスプレイ
+                                                                                                                                                                                 // 元画像
+                                            this.MapchipProperties[(int)this.City.Cells[layer, row, col].MapchipCrop].SourceBounds.X + animationCount % UcMain.AnimationCountNum * span,
                                             this.MapchipProperties[(int)this.City.Cells[layer, row, col].MapchipCrop].SourceBounds.Y,
                                             this.MapchipProperties[(int)this.City.Cells[layer, row, col].MapchipCrop].SourceBounds.Width,
                                             this.MapchipProperties[(int)this.City.Cells[layer, row, col].MapchipCrop].SourceBounds.Height,
@@ -236,7 +250,7 @@ namespace Grayscale.A500_Kifucity
                 this.Images = new Image[]{
                     null,
                     Image.FromFile("./img/map.png"),
-                    Image.FromFile("./img/border_sunachi.png"),
+                    Image.FromFile("./img/borderAnime_sunachi.png"),//Image.FromFile("./img/border_sunachi.png"),
                     Image.FromFile("./img/buttons.png"),
                     Image.FromFile("./img/anime_16x16x8.png")
                 };
@@ -399,6 +413,7 @@ namespace Grayscale.A500_Kifucity
                 new MapchipBulldozerBrushImpl(
                     PositionImpl.LAYER_LAND,
                     ImageType.Border_Sunachi,
+                    AnimationType.Horizontal8_span128,
                     MapchipCrop.kyo境界線_A1,
                     MapchipCrop.kyo境界線_A2,
                     MapchipCrop.kyo境界線_A3,
@@ -464,10 +479,11 @@ namespace Grayscale.A500_Kifucity
                     MapchipCrop.do道路_田8,
                     MapchipCrop.do道路_田9
                 ),
-                //太ペン
+                //砂地（太ペン）
                 new MapchipBoldBrushImpl(
                     PositionImpl.LAYER_LAND,
                     ImageType.Border_Sunachi,
+                    AnimationType.Horizontal8_span128,
                     MapchipCrop.kyo境界線_A5
                 )
             };
@@ -731,7 +747,7 @@ namespace Grayscale.A500_Kifucity
 
             Util_AnimationGif.SaveAnimatedGif("./your_city.gif",
                 bitmapImages,
-                125,
+                12,// ほんとは 12.5 にしたかった☆（／＿＼）
                 0
                 );
         }

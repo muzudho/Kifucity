@@ -437,9 +437,9 @@ namespace BorderCopy
             this.DestinationImage = destinationImage;
         }
 
-        public const int BORDER_ANIME_WIDTH_UNIT = 256;
+        public const int BORDER_ANIME_WIDTH_UNIT = 128;
         public const int BORDER_ANIME_WIDTH = 8 * BORDER_ANIME_WIDTH_UNIT;
-        public const int BORDER_ANIME_HEIGHT = 256;
+        public const int BORDER_ANIME_HEIGHT = 128;
         public const int ANIMATION_COUNT_NUM = 8;
         public const int HALF = 8;
         public const int FULL = 16;

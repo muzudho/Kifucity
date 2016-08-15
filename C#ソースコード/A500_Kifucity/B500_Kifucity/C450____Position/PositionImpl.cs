@@ -81,7 +81,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C450____Position
                         // レイヤー[0] を海で埋め尽くすぜ☆（＾▽＾）
                         this.Cells[layer, row, col].MapchipCrop = MapchipCrop.anime16x16_1;
                         this.Cells[layer, row, col].ImageType = ImageType.Anime_16x16x8;
-                        this.Cells[layer, row, col].IsAnimation = true;
+                        this.Cells[layer, row, col].AnimationType = AnimationType.Horizontal8;
                     }
                 }
             }

@@ -54,6 +54,7 @@
     <Compile Include="B500_Kifucity\C500____MapProp_\MapchipRailwayBrushImpl.cs" />
     <Compile Include="B500_Kifucity\C500____MapProp_\MapchipPropertyImpl.cs" />
     <Compile Include="B500_Kifucity\C___300_AnimeGif\Util_AnimationGif.cs" />
+    <Compile Include="B500_Kifucity\C___450_Position\AnimationType.cs" />
     <Compile Include="B500_Kifucity\C___450_Position\Position.cs" />
     <Compile Include="B500_Kifucity\C___500_MapProp_\ButtonState2.cs" />
     <Compile Include="B500_Kifucity\C___500_MapProp_\ButtonType.cs" />

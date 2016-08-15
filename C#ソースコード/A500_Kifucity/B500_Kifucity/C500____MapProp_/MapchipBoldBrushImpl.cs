@@ -15,11 +15,13 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
         public MapchipBoldBrushImpl(
             int layer,
             ImageType imageType,
+            AnimationType animationType,
             MapchipCrop patch
             )
         {
             this.Layer = layer;
             this.ImageType = imageType;
+            this.AnimationType = animationType;
             this.Patch = patch;
         }
 
@@ -28,6 +30,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
         /// </summary>
         public int Layer { get; set; }
         public ImageType ImageType { get; set; }
+        public AnimationType AnimationType { get; set; }
 
         /// <summary>
         /// 
@@ -56,6 +59,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             // （更新）中央
             ucMain.City.Cells[this.Layer, pRow, pCol].MapchipCrop = this.Patch;
             ucMain.City.Cells[this.Layer, pRow, pCol].ImageType = this.ImageType;
+            ucMain.City.Cells[this.Layer, pRow, pCol].AnimationType = this.AnimationType;
 
 
             int col;
@@ -129,6 +133,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             {
                 ucMain.City.Cells[this.Layer, pRow, pCol].MapchipCrop = crop;
                 ucMain.City.Cells[this.Layer, pRow, pCol].ImageType = this.ImageType;
+                ucMain.City.Cells[this.Layer, pRow, pCol].AnimationType = this.AnimationType;
             }
         }
 
@@ -158,6 +163,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 // （更新）中央
                 ucMain.City.Cells[this.Layer, centerRow, centerCol].MapchipCrop = this.Patch;
                 ucMain.City.Cells[this.Layer, centerRow, centerCol].ImageType = ImageType.Border_Sunachi;
+                ucMain.City.Cells[this.Layer, centerRow, centerCol].AnimationType = this.AnimationType;
 
                 //────────────────────────────────────────
                 // 4近傍は、更新の候補だぜ☆（＾▽＾）

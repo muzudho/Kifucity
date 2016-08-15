@@ -14,7 +14,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C450____Position
         /// <summary>
         /// 8コマ・アニメーションするなら真☆
         /// </summary>
-        public bool IsAnimation { get; set; }
+        public AnimationType AnimationType { get; set; }
 
         /// <summary>
         /// 元画像ファイル☆
@@ -24,7 +24,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C450____Position
         public void Clear()
         {
             this.MapchipCrop = MapchipCrop.None;
-            this.IsAnimation = false;
+            this.AnimationType = AnimationType.None;
             this.ImageType = ImageType.None;
         }
     }
