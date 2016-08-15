@@ -20,7 +20,12 @@
         Buttons,
 
         /// <summary>
-        /// 列挙型サイズ
+        /// アニメ画像
+        /// </summary>
+        Anime_16x16x8,
+
+        /// <summary>
+        /// （列挙型サイズ）
         /// </summary>
         Num
     }

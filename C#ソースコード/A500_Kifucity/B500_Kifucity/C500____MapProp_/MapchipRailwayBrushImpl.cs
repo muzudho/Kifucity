@@ -99,18 +99,18 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 if (col < UcMain.TABLE_COLS && -1 < row)
                 {
                     if (
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[1] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[2] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[3] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[4] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[5] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[6] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[7] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[8] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[9] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Point ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Vertical ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Horizontal
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[1] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[2] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[3] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[4] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[5] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[6] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[7] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[8] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[9] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Point ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Vertical ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Horizontal
                         )
                     {
                         isNorthEast = true;
@@ -124,18 +124,18 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 if (col < UcMain.TABLE_COLS && row < UcMain.TABLE_ROWS)
                 {
                     if (
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[1] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[2] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[3] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[4] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[5] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[6] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[7] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[8] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[9] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Point ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Vertical ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Horizontal
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[1] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[2] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[3] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[4] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[5] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[6] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[7] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[8] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[9] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Point ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Vertical ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Horizontal
                         )
                     {
                         isSouthEast = true;
@@ -149,18 +149,18 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 if (-1 < col && row < UcMain.TABLE_ROWS)
                 {
                     if (
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[1] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[2] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[3] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[4] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[5] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[6] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[7] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[8] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[9] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Point ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Vertical ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Horizontal
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[1] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[2] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[3] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[4] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[5] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[6] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[7] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[8] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[9] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Point ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Vertical ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Horizontal
                         )
                     {
                         isSouthWest = true;
@@ -174,18 +174,18 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 if (-1 < col && -1 < row)
                 {
                     if (
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[1] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[2] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[3] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[4] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[5] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[6] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[7] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[8] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[9] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Point ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Vertical ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Horizontal
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[1] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[2] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[3] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[4] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[5] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[6] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[7] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[8] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[9] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Point ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Vertical ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Horizontal
                         )
                     {
                         isNorthWest = true;
@@ -198,65 +198,65 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 row = centerRow - 1;
                 if (-1 < row)
                 {
-                    if (ucMain.MapData1[this.Layer, row, col] == this.Point)
+                    if (ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Point)
                     {
                         // ・ → │
-                        ucMain.MapData1[this.Layer, row, col] = this.Vertical;
-                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Vertical;
+                        ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         isNorth = true;
                     }
-                    else if (ucMain.MapData1[this.Layer, row, col] == this.Horizontal)
+                    else if (ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Horizontal)
                     {
                         // ─ → 
                         if (!isNorthEast)
                         {
                             // → ┐
-                            ucMain.MapData1[this.Layer, row, col] = this.Patches[3];
-                            ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                            ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Patches[3];
+                            ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         }
                         else if (!isNorthWest)
                         {
                             // → ┌
-                            ucMain.MapData1[this.Layer, row, col] = this.Patches[1];
-                            ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                            ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Patches[1];
+                            ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         }
                         else
                         {
                             // → ┬
-                            ucMain.MapData1[this.Layer, row, col] = this.Patches[2];
-                            ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                            ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Patches[2];
+                            ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         }
                         isNorth = true;
                     }
-                    else if (ucMain.MapData1[this.Layer, row, col] == this.Patches[7])
+                    else if (ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[7])
                     {
                         // └ → ├
-                        ucMain.MapData1[this.Layer, row, col] = this.Patches[4];
-                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Patches[4];
+                        ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         isNorth = true;
                     }
-                    else if (ucMain.MapData1[this.Layer, row, col] == this.Patches[8])
+                    else if (ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[8])
                     {
                         // ┴ → ┼
-                        ucMain.MapData1[this.Layer, row, col] = this.Patches[5];
-                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Patches[5];
+                        ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         isNorth = true;
                     }
-                    else if (ucMain.MapData1[this.Layer, row, col] == this.Patches[9])
+                    else if (ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[9])
                     {
                         // ┘ → ┤
-                        ucMain.MapData1[this.Layer, row, col] = this.Patches[6];
-                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Patches[6];
+                        ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         isNorth = true;
                     }
                     else if (
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[1] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[2] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[3] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[4] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[5] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[6] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Vertical
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[1] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[2] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[3] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[4] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[5] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[6] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Vertical
                         )
                     {
                         isNorth = true;
@@ -269,65 +269,65 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 row = centerRow;
                 if (col < UcMain.TABLE_COLS)
                 {
-                    if (ucMain.MapData1[this.Layer, row, col] == this.Point)
+                    if (ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Point)
                     {
                         // ・ → ─
-                        ucMain.MapData1[this.Layer, row, col] = this.Horizontal;
-                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Horizontal;
+                        ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         isEast = true;
                     }
-                    else if (ucMain.MapData1[this.Layer, row, col] == this.Vertical)
+                    else if (ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Vertical)
                     {
                         // │ → 
                         if (!isNorthEast)
                         {
                             // → ┐
-                            ucMain.MapData1[this.Layer, row, col] = this.Patches[3];
-                            ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                            ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Patches[3];
+                            ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         }
                         else if (!isSouthEast)
                         {
                             // → ┘
-                            ucMain.MapData1[this.Layer, row, col] = this.Patches[9];
-                            ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                            ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Patches[9];
+                            ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         }
                         else
                         {
                             // → ┤
-                            ucMain.MapData1[this.Layer, row, col] = this.Patches[6];
-                            ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                            ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Patches[6];
+                            ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         }
                         isEast = true;
                     }
-                    else if (ucMain.MapData1[this.Layer, row, col] == this.Patches[1])
+                    else if (ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[1])
                     {
                         // ┌ → ┬
-                        ucMain.MapData1[this.Layer, row, col] = this.Patches[2];
-                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Patches[2];
+                        ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         isEast = true;
                     }
-                    else if (ucMain.MapData1[this.Layer, row, col] == this.Patches[4])
+                    else if (ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[4])
                     {
                         // ├ → ┼
-                        ucMain.MapData1[this.Layer, row, col] = this.Patches[5];
-                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Patches[5];
+                        ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         isEast = true;
                     }
-                    else if (ucMain.MapData1[this.Layer, row, col] == this.Patches[7])
+                    else if (ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[7])
                     {
                         // └ → ┴
-                        ucMain.MapData1[this.Layer, row, col] = this.Patches[8];
-                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Patches[8];
+                        ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         isEast = true;
                     }
                     else if (
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[2] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[3] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[5] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[6] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[8] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[9] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Horizontal
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[2] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[3] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[5] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[6] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[8] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[9] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Horizontal
                         )
                     {
                         isEast = true;
@@ -340,65 +340,65 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 row = centerRow + 1;
                 if (row < UcMain.TABLE_ROWS)
                 {
-                    if (ucMain.MapData1[this.Layer, row, col] == this.Point)
+                    if (ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Point)
                     {
                         // ・ → │
-                        ucMain.MapData1[this.Layer, row, col] = this.Vertical;
-                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Vertical;
+                        ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         isSouth = true;
                     }
-                    else if (ucMain.MapData1[this.Layer, row, col] == this.Horizontal)
+                    else if (ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Horizontal)
                     {
                         // ─ → 
                         if (!isSouthEast)
                         {
                             // → ┘
-                            ucMain.MapData1[this.Layer, row, col] = this.Patches[9];
-                            ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                            ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Patches[9];
+                            ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         }
                         else if (!isSouthWest)
                         {
                             // → └
-                            ucMain.MapData1[this.Layer, row, col] = this.Patches[7];
-                            ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                            ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Patches[7];
+                            ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         }
                         else
                         {
                             // → ┴
-                            ucMain.MapData1[this.Layer, row, col] = this.Patches[8];
-                            ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                            ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Patches[8];
+                            ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         }
                         isSouth = true;
                     }
-                    else if (ucMain.MapData1[this.Layer, row, col] == this.Patches[1])
+                    else if (ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[1])
                     {
                         // ┌ → ├
-                        ucMain.MapData1[this.Layer, row, col] = this.Patches[4];
-                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Patches[4];
+                        ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         isSouth = true;
                     }
-                    else if (ucMain.MapData1[this.Layer, row, col] == this.Patches[2])
+                    else if (ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[2])
                     {
                         // ┬ → ┼
-                        ucMain.MapData1[this.Layer, row, col] = this.Patches[5];
-                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Patches[5];
+                        ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         isSouth = true;
                     }
-                    else if (ucMain.MapData1[this.Layer, row, col] == this.Patches[3])
+                    else if (ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[3])
                     {
                         // ┐ → ┤
-                        ucMain.MapData1[this.Layer, row, col] = this.Patches[6];
-                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Patches[6];
+                        ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         isSouth = true;
                     }
                     else if (
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[4] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[5] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[6] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[7] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[8] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[9] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Vertical
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[4] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[5] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[6] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[7] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[8] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[9] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Vertical
                         )
                     {
                         isSouth = true;
@@ -411,65 +411,65 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 row = centerRow;
                 if (-1 < col)
                 {
-                    if (ucMain.MapData1[this.Layer, row, col] == this.Point)
+                    if (ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Point)
                     {
                         // ・ → ─
-                        ucMain.MapData1[this.Layer, row, col] = this.Horizontal;
-                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Horizontal;
+                        ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         isWest = true;
                     }
-                    else if (ucMain.MapData1[this.Layer, row, col] == this.Vertical)
+                    else if (ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Vertical)
                     {
                         // │→
                         if (!isNorthWest)
                         {
                             // → ┌
-                            ucMain.MapData1[this.Layer, row, col] = this.Patches[1];
-                            ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                            ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Patches[1];
+                            ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         }
                         else if (!isSouthWest)
                         {
                             // → └
-                            ucMain.MapData1[this.Layer, row, col] = this.Patches[7];
-                            ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                            ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Patches[7];
+                            ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         }
                         else
                         {
                             // → ├
-                            ucMain.MapData1[this.Layer, row, col] = this.Patches[4];
-                            ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                            ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Patches[4];
+                            ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         }
                         isWest = true;
                     }
-                    else if (ucMain.MapData1[this.Layer, row, col] == this.Patches[3])
+                    else if (ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[3])
                     {
                         // ┐ → ┬
-                        ucMain.MapData1[this.Layer, row, col] = this.Patches[2];
-                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Patches[2];
+                        ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         isWest = true;
                     }
-                    else if (ucMain.MapData1[this.Layer, row, col] == this.Patches[6])
+                    else if (ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[6])
                     {
                         // ┤ → ┼
-                        ucMain.MapData1[this.Layer, row, col] = this.Patches[5];
-                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Patches[5];
+                        ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         isWest = true;
                     }
-                    else if (ucMain.MapData1[this.Layer, row, col] == this.Patches[9])
+                    else if (ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[9])
                     {
                         // ┘ → ┴
-                        ucMain.MapData1[this.Layer, row, col] = this.Patches[8];
-                        ucMain.MapData2[this.Layer, row, col] = this.ImageType;
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop = this.Patches[8];
+                        ucMain.Cells[this.Layer, row, col].ImageType = this.ImageType;
                         isWest = true;
                     }
                     else if (
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[1] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[2] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[4] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[5] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[7] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Patches[8] ||
-                        ucMain.MapData1[this.Layer, row, col] == this.Horizontal
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[1] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[2] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[4] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[5] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[7] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Patches[8] ||
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop == this.Horizontal
                         )
                     {
                         isWest = true;
@@ -480,74 +480,74 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 if (isNorth && isEast && isSouth && isWest)
                 {
                     // ┼
-                    ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Patches[5];
-                    ucMain.MapData2[this.Layer, centerRow, centerCol] = this.ImageType;
+                    ucMain.Cells[this.Layer, centerRow, centerCol].MapchipCrop = this.Patches[5];
+                    ucMain.Cells[this.Layer, centerRow, centerCol].ImageType = this.ImageType;
                 }
                 else if (isWest && isNorth && isEast)
                 {
                     // ┴
-                    ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Patches[8];
-                    ucMain.MapData2[this.Layer, centerRow, centerCol] = this.ImageType;
+                    ucMain.Cells[this.Layer, centerRow, centerCol].MapchipCrop = this.Patches[8];
+                    ucMain.Cells[this.Layer, centerRow, centerCol].ImageType = this.ImageType;
                 }
                 else if (isNorth && isEast && isSouth)
                 {
                     // ├
-                    ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Patches[4];
-                    ucMain.MapData2[this.Layer, centerRow, centerCol] = this.ImageType;
+                    ucMain.Cells[this.Layer, centerRow, centerCol].MapchipCrop = this.Patches[4];
+                    ucMain.Cells[this.Layer, centerRow, centerCol].ImageType = this.ImageType;
                 }
                 else if ( isEast && isSouth && isWest)
                 {
                     // ┬
-                    ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Patches[2];
-                    ucMain.MapData2[this.Layer, centerRow, centerCol] = this.ImageType;
+                    ucMain.Cells[this.Layer, centerRow, centerCol].MapchipCrop = this.Patches[2];
+                    ucMain.Cells[this.Layer, centerRow, centerCol].ImageType = this.ImageType;
                 }
                 else if ( isSouth && isWest && isNorth)
                 {
                     // ┤
-                    ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Patches[6];
-                    ucMain.MapData2[this.Layer, centerRow, centerCol] = this.ImageType;
+                    ucMain.Cells[this.Layer, centerRow, centerCol].MapchipCrop = this.Patches[6];
+                    ucMain.Cells[this.Layer, centerRow, centerCol].ImageType = this.ImageType;
                 }
                 else if (isNorth && isEast)
                 {
                     // └
-                    ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Patches[7];
-                    ucMain.MapData2[this.Layer, centerRow, centerCol] = this.ImageType;
+                    ucMain.Cells[this.Layer, centerRow, centerCol].MapchipCrop = this.Patches[7];
+                    ucMain.Cells[this.Layer, centerRow, centerCol].ImageType = this.ImageType;
                 }
                 else if (isEast && isSouth)
                 {
                     // ┌
-                    ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Patches[1];
-                    ucMain.MapData2[this.Layer, centerRow, centerCol] = this.ImageType;
+                    ucMain.Cells[this.Layer, centerRow, centerCol].MapchipCrop = this.Patches[1];
+                    ucMain.Cells[this.Layer, centerRow, centerCol].ImageType = this.ImageType;
                 }
                 else if (isSouth && isWest)
                 {
                     // ┐
-                    ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Patches[3];
-                    ucMain.MapData2[this.Layer, centerRow, centerCol] = this.ImageType;
+                    ucMain.Cells[this.Layer, centerRow, centerCol].MapchipCrop = this.Patches[3];
+                    ucMain.Cells[this.Layer, centerRow, centerCol].ImageType = this.ImageType;
                 }
                 else if (isWest && isNorth)
                 {
                     // ┘
-                    ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Patches[9];
-                    ucMain.MapData2[this.Layer, centerRow, centerCol] = this.ImageType;
+                    ucMain.Cells[this.Layer, centerRow, centerCol].MapchipCrop = this.Patches[9];
+                    ucMain.Cells[this.Layer, centerRow, centerCol].ImageType = this.ImageType;
                 }
                 else if (isNorth || isSouth)
                 {
                     // │
-                    ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Vertical;
-                    ucMain.MapData2[this.Layer, centerRow, centerCol] = this.ImageType;
+                    ucMain.Cells[this.Layer, centerRow, centerCol].MapchipCrop = this.Vertical;
+                    ucMain.Cells[this.Layer, centerRow, centerCol].ImageType = this.ImageType;
                 }
                 else if (isEast || isWest)
                 {
                     // ─
-                    ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Horizontal;
-                    ucMain.MapData2[this.Layer, centerRow, centerCol] = this.ImageType;
+                    ucMain.Cells[this.Layer, centerRow, centerCol].MapchipCrop = this.Horizontal;
+                    ucMain.Cells[this.Layer, centerRow, centerCol].ImageType = this.ImageType;
                 }
                 else
                 {
                     // ・
-                    ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Point;
-                    ucMain.MapData2[this.Layer, centerRow, centerCol] = this.ImageType;
+                    ucMain.Cells[this.Layer, centerRow, centerCol].MapchipCrop = this.Point;
+                    ucMain.Cells[this.Layer, centerRow, centerCol].ImageType = this.ImageType;
                 }
             }
         }

@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Text;
 using System.IO;
+using Grayscale.A500_Kifucity.B500_Kifucity.C___300_AnimeGif;
 
 namespace Grayscale.A500_Kifucity
 {
@@ -56,8 +57,7 @@ namespace Grayscale.A500_Kifucity
         /// <summary>
         /// マップ・データ。[layer,row,col]
         /// </summary>
-        public MapchipCrop[,,] MapData1 { get; set; }
-        public ImageType[,,] MapData2 { get; set; }
+        public Cell[,,] Cells { get; set; }
 
         /// <summary>
         /// 施設を置くブラシ。[0]なし [1]線路 [2]砂地 [3]道路 [4]太ペン
@@ -81,19 +81,32 @@ namespace Grayscale.A500_Kifucity
         /// </summary>
         public int SaveFileVersion { get; set; }
 
+        /// <summary>
+        /// TODO: あとでタイマーにする予定☆
+        /// とりあえず ペイント１回に付き１増やす☆
+        /// </summary>
+        public int AnimationCount { get; set; }
+        /// <summary>
+        /// このゲームのアニメは 8コマ とするぜ☆（＾▽＾）
+        /// </summary>
+        public const int AnimationCountNum = 8;
+
         public UcMain()
         {
             InitializeComponent();
         }
 
-        private void UcMain_Paint(object sender, PaintEventArgs e)
+        /// <summary>
+        /// Paint や、画像出力で使うぜ☆（＾～＾）
+        /// </summary>
+        private void DrawCanvas(Graphics g, int animationCount)
         {
-            // 外枠を描こうぜ☆
-            Graphics g = e.Graphics;
-
             g.DrawRectangle(Pens.Black, this.TableLeft, this.TableTop,
-                TABLE_COLS*CELL_W, TABLE_ROWS*CELL_H);
+    TABLE_COLS * CELL_W, TABLE_ROWS * CELL_H);
 
+            //────────────────────────────────────────
+            // 各セルを描画しようぜ☆（＾▽＾）
+            //────────────────────────────────────────
             if (null != this.Images)//ビジュアル・エディターでは画像を読込んでない☆（＾～＾）
             {
                 // 画像の一部を切り抜いて貼り付け☆（＾▽＾）
@@ -103,18 +116,34 @@ namespace Grayscale.A500_Kifucity
                     {
                         for (int col = 0; col < TABLE_COLS; col++)
                         {
-                            if(MapchipCrop.None != this.MapData1[layer, row, col])
+                            if (MapchipCrop.None != this.Cells[layer, row, col].MapchipCrop)
                             {
                                 // セルには MapchipImageType が入っているので、どの画像ファイルから
                                 // 画像を切り抜くのかが分かるぜ☆（＾▽＾）
-                                Image img = this.Images[(int)this.MapData2[layer, row, col]];
+                                Image img = this.Images[(int)this.Cells[layer, row, col].ImageType];
 
-                                if (null!=img)
+                                if (null != img)
                                 {
-                                    g.DrawImage(img,
-                                        new Rectangle(col * CELL_W + this.TableLeft, row * CELL_H + this.TableTop, CELL_W, CELL_H),//ディスプレイ
-                                        this.MapchipProperties[(int)this.MapData1[layer, row, col]].SourceBounds,// 元画像
-                                        GraphicsUnit.Pixel);
+                                    if (this.Cells[layer, row, col].IsAnimation)
+                                    {
+                                        // アニメーションするセルの場合☆ 8コマと想定☆（＾～＾）
+                                        g.DrawImage(img,
+                                            new Rectangle(col * CELL_W + this.TableLeft, row * CELL_H + this.TableTop, CELL_W, CELL_H),//ディスプレイ
+                                                                                                                                       // 元画像
+                                            this.MapchipProperties[(int)this.Cells[layer, row, col].MapchipCrop].SourceBounds.X + animationCount % UcMain.AnimationCountNum * UcMain.CELL_W,
+                                            this.MapchipProperties[(int)this.Cells[layer, row, col].MapchipCrop].SourceBounds.Y,
+                                            this.MapchipProperties[(int)this.Cells[layer, row, col].MapchipCrop].SourceBounds.Width,
+                                            this.MapchipProperties[(int)this.Cells[layer, row, col].MapchipCrop].SourceBounds.Height,
+                                            GraphicsUnit.Pixel);
+                                    }
+                                    else
+                                    {
+                                        // 静止画セルの場合☆
+                                        g.DrawImage(img,
+                                            new Rectangle(col * CELL_W + this.TableLeft, row * CELL_H + this.TableTop, CELL_W, CELL_H),//ディスプレイ
+                                            this.MapchipProperties[(int)this.Cells[layer, row, col].MapchipCrop].SourceBounds,// 元画像
+                                            GraphicsUnit.Pixel);
+                                    }
                                 }
                             }
                         }
@@ -164,6 +193,14 @@ namespace Grayscale.A500_Kifucity
             //*/
         }
 
+        private void UcMain_Paint(object sender, PaintEventArgs e)
+        {
+            // 外枠を描こうぜ☆
+            Graphics g = e.Graphics;
+            int animationCount = this.AnimationCount;
+            this.DrawCanvas(g, animationCount);
+        }
+
         private void RefreshTitlebar()
         {
             this.ParentForm.Text = "きふシティ  (savefile ver." + this.SaveFileVersion + ")";
@@ -188,19 +225,33 @@ namespace Grayscale.A500_Kifucity
                     null,
                     Image.FromFile("./img/map.png"),
                     Image.FromFile("./img/border_sunachi.png"),
-                    Image.FromFile("./img/buttons.png")
+                    Image.FromFile("./img/buttons.png"),
+                    Image.FromFile("./img/anime_16x16x8.png")
                 };
-                // 透明色を指定。
+                // 全ての画像の(0,128,128)を透明色に指定。
                 Color transparentColor = Color.FromArgb(0, 128, 128);
-                ((Bitmap)this.Images[(int)ImageType.Mapchip]).MakeTransparent(transparentColor);
-                ((Bitmap)this.Images[(int)ImageType.Border_Sunachi]).MakeTransparent(transparentColor);
-                ((Bitmap)this.Images[(int)ImageType.Buttons]).MakeTransparent(transparentColor);
+                for (int iImg=1; iImg<(int)ImageType.Num; iImg++)
+                {
+                    ((Bitmap)this.Images[iImg]).MakeTransparent(transparentColor);
+                }
 
 
                 // マップチップ画像に関するデータ。
                 this.MapchipProperties = new MapchipProperty[(int)MapchipCrop.Num];
                 this.MapchipProperties[(int)MapchipCrop.None] = new MapchipPropertyImpl(ImageType.Mapchip, 0, 0, 16, 16);
-                this.MapchipProperties[(int)MapchipCrop.u海] = new MapchipPropertyImpl(ImageType.Mapchip, 16, 0, 16, 16);
+
+                // アニメ
+                this.MapchipProperties[(int)MapchipCrop.anime16x16_1] = new MapchipPropertyImpl(ImageType.Anime_16x16x8, 0 * CELL_W, 0 * CELL_H, CELL_W, CELL_H);
+                /*
+                this.MapchipProperties[(int)MapchipCrop.anime16x16_2] = new MapchipPropertyImpl(ImageType.Anime_16x16x8, 1 * CELL_W, 0 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.anime16x16_3] = new MapchipPropertyImpl(ImageType.Anime_16x16x8, 2 * CELL_W, 0 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.anime16x16_4] = new MapchipPropertyImpl(ImageType.Anime_16x16x8, 3 * CELL_W, 0 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.anime16x16_5] = new MapchipPropertyImpl(ImageType.Anime_16x16x8, 4 * CELL_W, 0 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.anime16x16_6] = new MapchipPropertyImpl(ImageType.Anime_16x16x8, 5 * CELL_W, 0 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.anime16x16_7] = new MapchipPropertyImpl(ImageType.Anime_16x16x8, 6 * CELL_W, 0 * CELL_H, CELL_W, CELL_H);
+                this.MapchipProperties[(int)MapchipCrop.anime16x16_8] = new MapchipPropertyImpl(ImageType.Anime_16x16x8, 7 * CELL_W, 0 * CELL_H, CELL_W, CELL_H);
+                */
+
                 this.MapchipProperties[(int)MapchipCrop.R] = new MapchipPropertyImpl(ImageType.Mapchip, 48, 0, 48, 48);//住宅地
                 this.MapchipProperties[(int)MapchipCrop.C] = new MapchipPropertyImpl(ImageType.Mapchip, 96, 0, 48, 48);//商業地
                 this.MapchipProperties[(int)MapchipCrop.I] = new MapchipPropertyImpl(ImageType.Mapchip, 144, 0, 48, 48);//工業地
@@ -409,28 +460,38 @@ namespace Grayscale.A500_Kifucity
                 )
             };
 
-            this.MapData1 = new MapchipCrop[TABLE_LAYERS, UcMain.TABLE_ROWS, UcMain.TABLE_COLS];
-            this.MapData2 = new ImageType[TABLE_LAYERS, UcMain.TABLE_ROWS, UcMain.TABLE_COLS];
-            for (int layer=0;layer<TABLE_LAYERS;layer++)
+            // メモリ確保☆
+            this.Cells = new Cell[TABLE_LAYERS, UcMain.TABLE_ROWS, UcMain.TABLE_COLS];
+            for (int layer = 0; layer < TABLE_LAYERS; layer++)
             {
                 for (int row = 0; row < TABLE_ROWS; row++)
                 {
                     for (int col = 0; col < TABLE_COLS; col++)
                     {
-                        if (UcMain.LAYER_MARINE==layer)
-                        {
-                            // レイヤー[0] を海で埋め尽くすぜ☆（＾▽＾）
-                            this.MapData1[layer, row, col] = MapchipCrop.u海;
-                            this.MapData2[layer, row, col] = ImageType.Mapchip;
-                        }
-                        else
-                        {
-                            this.MapData1[layer, row, col] = MapchipCrop.None;
-                            this.MapData2[layer, row, col] = ImageType.None;
-                        }
+                        this.Cells[layer, row, col] = new CellImpl();
                     }
                 }
             }
+
+            // 海で初期化☆（＾▽＾）
+            {
+                int layer = UcMain.LAYER_MARINE;
+                for (int row = 0; row < TABLE_ROWS; row++)
+                {
+                    for (int col = 0; col < TABLE_COLS; col++)
+                    {
+                        // レイヤー[0] を海で埋め尽くすぜ☆（＾▽＾）
+                        this.Cells[layer, row, col].MapchipCrop = MapchipCrop.anime16x16_1;
+                        this.Cells[layer, row, col].ImageType = ImageType.Anime_16x16x8;
+                        this.Cells[layer, row, col].IsAnimation = true;
+                    }
+                }
+            }
+
+            //────────────────────────────────────────
+            // タイマー・スタート☆
+            //────────────────────────────────────────
+            this.timer1.Start();
         }
 
         private void UcMain_MouseDown(object sender, MouseEventArgs e)
@@ -650,6 +711,39 @@ namespace Grayscale.A500_Kifucity
             }
         }
 
+        /// <summary>
+        /// TODO: Gifアニメの出力を試す☆
+        /// </summary>
+        private void ExportGifAnimation()
+        {
+            // 8コマのアニメにするぜ☆（＾▽＾）
+            Bitmap[] bitmapImages = new Bitmap[UcMain.AnimationCountNum];
+
+            for (int iAnimationCount=0; iAnimationCount<UcMain.AnimationCountNum; iAnimationCount++)
+            {
+                Bitmap img = new Bitmap(
+                    UcMain.TABLE_COLS * UcMain.CELL_W,
+                    UcMain.TABLE_ROWS * UcMain.CELL_H
+                    );
+
+                // ImageオブジェクトのGraphicsオブジェクトを作成する
+                Graphics g = Graphics.FromImage(img);
+
+                // 都市を描画するぜ☆（＾▽＾）
+                this.DrawCanvas(g, iAnimationCount);
+
+                //リソースを解放する
+                g.Dispose();
+
+                bitmapImages[iAnimationCount] = img;
+            }
+
+            Util_AnimationGif.SaveAnimatedGif("./your_city.gif",
+                bitmapImages,
+                125,
+                0
+                );
+        }
 
         public const int MapchipImageSaveNumber = 512;
         /// <summary>
@@ -671,8 +765,8 @@ namespace Grayscale.A500_Kifucity
                     for (int col = 0; col < TABLE_COLS; col++)
                     {
                         sb.Append(
-                            MapchipImageSaveNumber * (int)this.MapData2[layer, row, col] +
-                            (int)this.MapData1[layer, row, col]
+                            MapchipImageSaveNumber * (int)this.Cells[layer, row, col].ImageType +
+                            (int)this.Cells[layer, row, col].MapchipCrop
                         );
                         sb.Append(",");
                     }
@@ -683,6 +777,9 @@ namespace Grayscale.A500_Kifucity
             }
 
             File.WriteAllText("./save.txt", sb.ToString());
+
+            // おまけ☆
+            this.ExportGifAnimation();
         }
 
         /// <summary>
@@ -725,8 +822,8 @@ namespace Grayscale.A500_Kifucity
                         int number;
                         if (int.TryParse(tokens[col],out number))
                         {
-                            this.MapData1[layer, row, col] = (MapchipCrop)(number % MapchipImageSaveNumber);
-                            this.MapData2[layer, row, col] = (ImageType)(number / MapchipImageSaveNumber);
+                            this.Cells[layer, row, col].MapchipCrop = (MapchipCrop)(number % MapchipImageSaveNumber);
+                            this.Cells[layer, row, col].ImageType = (ImageType)(number / MapchipImageSaveNumber);
                         }
                     }
                     row++;
@@ -757,6 +854,18 @@ namespace Grayscale.A500_Kifucity
                         break;
                 }
             }
+        }
+
+        /// <summary>
+        /// タイマー☆
+        /// インターバル 125 にしておけば、秒間8コマになるな☆（＾▽＾）
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            this.AnimationCount++;
+            this.Refresh();
         }
     }
 }

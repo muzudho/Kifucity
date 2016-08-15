@@ -7,7 +7,21 @@
     {
         None = 0,
 
-        u海,
+        /// <summary>
+        /// 海など☆ 16x16サイズ 8コマ☆
+        /// アニメコマの場合、最初の１コマの位置とサイズを指定☆
+        /// </summary>
+        anime16x16_1,
+        /*
+        anime16x16_2,
+        anime16x16_3,
+        anime16x16_4,
+        anime16x16_5,
+        anime16x16_6,
+        anime16x16_7,
+        anime16x16_8,
+         */
+
         /// <summary>
         /// 住宅地
         /// </summary>

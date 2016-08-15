@@ -40,7 +40,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
         private void UpdateBoarder_Sub(UcMain ucMain
             , int pRow, int pCol)
         {
-            if (ucMain.MapData1[1,pRow,pCol]==MapchipCrop.kyo境界線_A5)
+            if (ucMain.Cells[1,pRow,pCol].MapchipCrop==MapchipCrop.kyo境界線_A5)
             {
                 // A5は、境界線ではないので、変形しないぜ☆（＾▽＾）
                 return;
@@ -51,8 +51,8 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             //────────────────────────────────────────
 
             // （更新）中央
-            ucMain.MapData1[this.Layer, pRow, pCol] = this.Patch;
-            ucMain.MapData2[this.Layer, pRow, pCol] = this.ImageType;
+            ucMain.Cells[this.Layer, pRow, pCol].MapchipCrop = this.Patch;
+            ucMain.Cells[this.Layer, pRow, pCol].ImageType = this.ImageType;
 
 
             int col;
@@ -66,8 +66,8 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             if (-1 < row)
             {
                 if (
-                    ucMain.MapData1[this.Layer, row, col] != this.Patch &&
-                    ucMain.MapData2[this.Layer, row, col] != ImageType.Border_Sunachi
+                    ucMain.Cells[this.Layer, row, col].MapchipCrop != this.Patch &&
+                    ucMain.Cells[this.Layer, row, col].ImageType != ImageType.Border_Sunachi
                     )
                 {
                     // 塗りつぶすぜ☆（＾▽＾）
@@ -81,8 +81,8 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             if (col < UcMain.TABLE_COLS)
             {
                 if (
-                    ucMain.MapData1[this.Layer, row, col] != this.Patch &&
-                    ucMain.MapData2[this.Layer, row, col] != ImageType.Border_Sunachi
+                    ucMain.Cells[this.Layer, row, col].MapchipCrop != this.Patch &&
+                    ucMain.Cells[this.Layer, row, col].ImageType != ImageType.Border_Sunachi
                     )
                 {
                     // 塗りつぶすぜ☆（＾▽＾）
@@ -96,8 +96,8 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             if (row < UcMain.TABLE_ROWS)
             {
                 if (
-                    ucMain.MapData1[this.Layer, row, col] != this.Patch &&
-                    ucMain.MapData2[this.Layer, row, col] != ImageType.Border_Sunachi
+                    ucMain.Cells[this.Layer, row, col].MapchipCrop != this.Patch &&
+                    ucMain.Cells[this.Layer, row, col].ImageType != ImageType.Border_Sunachi
                     )
                 {
                     // 塗りつぶすぜ☆（＾▽＾）
@@ -111,8 +111,8 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             if (-1 < col)
             {
                 if (
-                    ucMain.MapData1[this.Layer, row, col] != this.Patch &&
-                    ucMain.MapData2[this.Layer, row, col] != ImageType.Border_Sunachi
+                    ucMain.Cells[this.Layer, row, col].MapchipCrop != this.Patch &&
+                    ucMain.Cells[this.Layer, row, col].ImageType != ImageType.Border_Sunachi
                     )
                 {
                     // 塗りつぶすぜ☆（＾▽＾）
@@ -124,8 +124,8 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             // 更新☆
             if (crop!=MapchipCrop.None)
             {
-                ucMain.MapData1[this.Layer, pRow, pCol] = crop;
-                ucMain.MapData2[this.Layer, pRow, pCol] = this.ImageType;
+                ucMain.Cells[this.Layer, pRow, pCol].MapchipCrop = crop;
+                ucMain.Cells[this.Layer, pRow, pCol].ImageType = this.ImageType;
             }
         }
 
@@ -153,8 +153,8 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 //────────────────────────────────────────
 
                 // （更新）中央
-                ucMain.MapData1[this.Layer, centerRow, centerCol] = this.Patch;
-                ucMain.MapData2[this.Layer, centerRow, centerCol] = ImageType.Border_Sunachi;
+                ucMain.Cells[this.Layer, centerRow, centerCol].MapchipCrop = this.Patch;
+                ucMain.Cells[this.Layer, centerRow, centerCol].ImageType = ImageType.Border_Sunachi;
 
                 //────────────────────────────────────────
                 // 4近傍は、更新の候補だぜ☆（＾▽＾）
@@ -171,8 +171,8 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 col = centerCol;
                 row = centerRow - 1;
                 if (-1 < row &&
-                        ucMain.MapData1[this.Layer, row, col] != this.Patch &&
-                        ucMain.MapData2[this.Layer, row, col] != ImageType.Border_Sunachi
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop != this.Patch &&
+                        ucMain.Cells[this.Layer, row, col].ImageType != ImageType.Border_Sunachi
                     )
                 {
                     this.UpdateBoarder_Sub(ucMain, row, col);
@@ -182,8 +182,8 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 col = centerCol + 1;
                 row = centerRow;
                 if (col < UcMain.TABLE_COLS &&
-                        ucMain.MapData1[this.Layer, row, col] != this.Patch &&
-                        ucMain.MapData2[this.Layer, row, col] != ImageType.Border_Sunachi
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop != this.Patch &&
+                        ucMain.Cells[this.Layer, row, col].ImageType != ImageType.Border_Sunachi
                     )
                 {
                     this.UpdateBoarder_Sub(ucMain, row, col);
@@ -193,8 +193,8 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 col = centerCol;
                 row = centerRow + 1;
                 if (row < UcMain.TABLE_ROWS &&
-                        ucMain.MapData1[this.Layer, row, col] != this.Patch &&
-                        ucMain.MapData2[this.Layer, row, col] != ImageType.Border_Sunachi
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop != this.Patch &&
+                        ucMain.Cells[this.Layer, row, col].ImageType != ImageType.Border_Sunachi
                     )
                 {
                     this.UpdateBoarder_Sub(ucMain, row, col);
@@ -204,8 +204,8 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 col = centerCol - 1;
                 row = centerRow;
                 if (-1 < col &&
-                        ucMain.MapData1[this.Layer, row, col] != this.Patch &&
-                        ucMain.MapData2[this.Layer, row, col] != ImageType.Border_Sunachi
+                        ucMain.Cells[this.Layer, row, col].MapchipCrop != this.Patch &&
+                        ucMain.Cells[this.Layer, row, col].ImageType != ImageType.Border_Sunachi
                     )
                 {
                     this.UpdateBoarder_Sub(ucMain, row, col);

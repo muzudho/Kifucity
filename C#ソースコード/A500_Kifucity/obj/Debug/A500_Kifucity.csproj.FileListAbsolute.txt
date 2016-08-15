@@ -1,7 +1,6 @@
 E:\Muzudho\CSharp\Kifucity\C#ソースコード\bin\Grayscale.A500_Kifucity.exe.config
 E:\Muzudho\CSharp\Kifucity\C#ソースコード\bin\Grayscale.A500_Kifucity.exe
 E:\Muzudho\CSharp\Kifucity\C#ソースコード\bin\Grayscale.A500_Kifucity.pdb
-E:\Muzudho\CSharp\Kifucity\C#ソースコード\A500_Kifucity\obj\Debug\A500_Kifucity.csprojResolveAssemblyReference.cache
 E:\Muzudho\CSharp\Kifucity\C#ソースコード\A500_Kifucity\obj\Debug\Grayscale.A500_Kifucity.Form1.resources
 E:\Muzudho\CSharp\Kifucity\C#ソースコード\A500_Kifucity\obj\Debug\Grayscale.A500_Kifucity.Properties.Resources.resources
 E:\Muzudho\CSharp\Kifucity\C#ソースコード\A500_Kifucity\obj\Debug\Grayscale.A500_Kifucity.UcMain.resources
@@ -11,3 +10,4 @@ E:\Muzudho\CSharp\Kifucity\C#ソースコード\A500_Kifucity\obj\Debug\Grayscal
 E:\Muzudho\CSharp\Kifucity\bin\Grayscale.A500_Kifucity.exe.config
 E:\Muzudho\CSharp\Kifucity\bin\Grayscale.A500_Kifucity.exe
 E:\Muzudho\CSharp\Kifucity\bin\Grayscale.A500_Kifucity.pdb
+E:\Muzudho\CSharp\Kifucity\C#ソースコード\A500_Kifucity\obj\Debug\A500_Kifucity.csprojResolveAssemblyReference.cache

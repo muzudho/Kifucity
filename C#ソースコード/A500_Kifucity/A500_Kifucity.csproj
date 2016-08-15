@@ -46,18 +46,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="B500_Kifucity\C500____MapProp_\CellImpl.cs" />
     <Compile Include="B500_Kifucity\C500____MapProp_\MapchipBoldBrushImpl.cs" />
     <Compile Include="B500_Kifucity\C500____MapProp_\MenuButtonBrushImpl.cs" />
     <Compile Include="B500_Kifucity\C500____MapProp_\MapchipBulldozerBrushImpl.cs" />
     <Compile Include="B500_Kifucity\C500____MapProp_\MapchipRailwayBrushImpl.cs" />
     <Compile Include="B500_Kifucity\C500____MapProp_\MapchipPropertyImpl.cs" />
+    <Compile Include="B500_Kifucity\C___300_AnimeGif\Util_AnimationGif.cs" />
     <Compile Include="B500_Kifucity\C___500_MapProp_\ButtonState2.cs" />
     <Compile Include="B500_Kifucity\C___500_MapProp_\ButtonType.cs" />
+    <Compile Include="B500_Kifucity\C___500_MapProp_\Cell.cs" />
     <Compile Include="B500_Kifucity\C___500_MapProp_\MapchipBrush.cs" />
     <Compile Include="B500_Kifucity\C___500_MapProp_\MenuButtonBrush.cs" />
     <Compile Include="B500_Kifucity\C___500_MapProp_\MapchipBoldBrush.cs" />
     <Compile Include="B500_Kifucity\C___500_MapProp_\MapchipBulldozerBrush.cs" />
-    <Compile Include="B500_Kifucity\C___500_MapProp_\ImageType.cs" />
+    <Compile Include="B500_Kifucity\C___400_Image___\ImageType.cs" />
     <Compile Include="B500_Kifucity\C___500_MapProp_\MapchipRailwayBrush.cs" />
     <Compile Include="B500_Kifucity\C___500_MapProp_\MapchipProperty.cs" />
     <Compile Include="B500_Kifucity\C___500_MapProp_\MapchipCrop.cs" />
