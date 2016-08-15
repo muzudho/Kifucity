@@ -1,4 +1,4 @@
-﻿namespace Grayscale.A500_Kifucity.B500_Kifucity.C___500_MapProp_
+﻿namespace Grayscale.A500_Kifucity.B500_Kifucity.C___400_Image___
 {
     public enum ImageType
     {

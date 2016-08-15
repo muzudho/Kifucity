@@ -1,4 +1,6 @@
-﻿namespace Grayscale.A500_Kifucity.B500_Kifucity.C___500_MapProp_
+﻿using Grayscale.A500_Kifucity.B500_Kifucity.C___400_Image___;
+
+namespace Grayscale.A500_Kifucity.B500_Kifucity.C___450_Position
 {
     public interface Cell
     {

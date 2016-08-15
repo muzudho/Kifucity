@@ -1,4 +1,4 @@
-﻿namespace Grayscale.A500_Kifucity.B500_Kifucity.C___500_MapProp_
+﻿namespace Grayscale.A500_Kifucity.B500_Kifucity.C___450_Position
 {
     /// <summary>
     /// マップチップ画像の切り抜く範囲ひとつひとつの区別☆

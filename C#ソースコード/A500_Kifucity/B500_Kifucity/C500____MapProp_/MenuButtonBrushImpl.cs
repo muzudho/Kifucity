@@ -1,4 +1,6 @@
-﻿using Grayscale.A500_Kifucity.B500_Kifucity.C___500_MapProp_;
+﻿using Grayscale.A500_Kifucity.B500_Kifucity.C___400_Image___;
+using Grayscale.A500_Kifucity.B500_Kifucity.C___450_Position;
+using Grayscale.A500_Kifucity.B500_Kifucity.C___500_MapProp_;
 using System.Drawing;
 
 namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
