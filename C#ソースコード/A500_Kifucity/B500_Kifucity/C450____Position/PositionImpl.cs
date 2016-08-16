@@ -72,17 +72,17 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C450____Position
         public void Init()
         {
             // 海で初期化☆（＾▽＾）
+            int layer = PositionImpl.LAYER_MARINE;
+            for (int row = 0; row < this.TableRows; row++)
             {
-                int layer = PositionImpl.LAYER_MARINE;
-                for (int row = 0; row < this.TableRows; row++)
+                for (int col = 0; col < this.TableCols; col++)
                 {
-                    for (int col = 0; col < this.TableCols; col++)
-                    {
-                        // レイヤー[0] を海で埋め尽くすぜ☆（＾▽＾）
-                        this.Cells[layer, row, col].MapchipCrop = MapchipCrop.anime16x16_1;
-                        this.Cells[layer, row, col].ImageType = ImageType.Anime_16x16x8;
-                        this.Cells[layer, row, col].AnimationType = AnimationType.Horizontal8;
-                    }
+                    // レイヤー[0] を海で埋め尽くすぜ☆（＾▽＾）
+                    this.Cells[layer, row, col].SetValue(
+                        ImageType.NormalAnime,
+                        (ImageCrop)ImageCropNormalAnime.Frame1,
+                        ImageSourcefile.Anime_16x16x8
+                        );
                 }
             }
         }

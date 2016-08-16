@@ -5,24 +5,34 @@
         None,
 
         /// <summary>
-        /// マップチップ
+        /// 個別指定型
         /// </summary>
-        Mapchip,
+        Normal,
 
         /// <summary>
-        /// 境界線チップ 砂地
+        /// 海など☆
         /// </summary>
-        Border_Sunachi,
+        NormalAnime,
 
         /// <summary>
-        /// ボタン
+        /// メニューのボタン型
         /// </summary>
-        Buttons,
+        Button,
 
         /// <summary>
-        /// アニメ画像
+        /// 境界線チップ型（非アニメ）
         /// </summary>
-        Anime_16x16x8,
+        Border,
+
+        /// <summary>
+        /// 境界線アニメ・チップ型
+        /// </summary>
+        BorderAnime,
+
+        /// <summary>
+        /// 線路型
+        /// </summary>
+        Way,
 
         /// <summary>
         /// （列挙型サイズ）

@@ -14,107 +14,118 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
     {
         public MapchipBulldozerBrushImpl(
             int layer,
-            ImageType imageType,
-            AnimationType animationType,
-            MapchipCrop a1,
-            MapchipCrop a2,
-            MapchipCrop a3,
-            MapchipCrop a4,
-            MapchipCrop a5,
-            MapchipCrop a6,
-            MapchipCrop a7,
-            MapchipCrop a8,
-            MapchipCrop a9,
-            MapchipCrop b1,
-            MapchipCrop b2,
-            MapchipCrop b3,
-            MapchipCrop b4,
-            MapchipCrop c1,
-            MapchipCrop c2,
-            MapchipCrop c3,
-            MapchipCrop c4,
-            MapchipCrop d,
-            MapchipCrop e6,
-            MapchipCrop e13,
-            MapchipCrop e10,
-            MapchipCrop e12,
-            MapchipCrop e14,
-            MapchipCrop e15,
-            MapchipCrop e9,
-            MapchipCrop e3,
-            MapchipCrop e7,
-            MapchipCrop e11,
-            MapchipCrop e5,
-            MapchipCrop f1,
-            MapchipCrop f2,
-            MapchipCrop f3,
-            MapchipCrop f4,
-            MapchipCrop f5,
-            MapchipCrop f6,
-            MapchipCrop f7,
-            MapchipCrop f8,
-            MapchipCrop f9,
-            MapchipCrop f10,
-            MapchipCrop f11,
-            MapchipCrop f12,
-            MapchipCrop g1,
-            MapchipCrop g2,
-            MapchipCrop g3,
-            MapchipCrop g4,
-            MapchipCrop g5,
-            MapchipCrop g6
+            ImageSourcefile imageSourcefile,
+            ImageType imageType
             )
         {
             this.Layer = layer;
+            this.ImageSourcefile = imageSourcefile;
             this.ImageType = imageType;
-            this.AnimationType = animationType;
-            this.PatchesA = new MapchipCrop[] { MapchipCrop.None, a1, a2, a3, a4, a5, a6, a7, a8, a9 };
-            this.PatchesB = new MapchipCrop[] { MapchipCrop.None, b1, b2, b3, b4 };
-            this.PatchesC = new MapchipCrop[] { MapchipCrop.None, c1, c2, c3, c4 };
-            this.PatchesD = d;
-            this.PatchesE = new MapchipCrop[] { MapchipCrop.None, MapchipCrop.None, MapchipCrop.None, e3, MapchipCrop.None, e5, e6, e7, MapchipCrop.None, e9, e10, e11, e12, e13, e14, e15 };
-            this.PatchesFx = new MapchipCrop[] { MapchipCrop.None, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12 };
-            this.PatchesGx = new MapchipCrop[] { MapchipCrop.None, g1, g2, g3, g4, g5, g6 };
+            this.PatchesA = new ImageCropBorder[] {
+                    ImageCropBorder.None,
+                    ImageCropBorder.kyo境界線_A1,
+                    ImageCropBorder.kyo境界線_A2,
+                    ImageCropBorder.kyo境界線_A3,
+                    ImageCropBorder.kyo境界線_A4,
+                    ImageCropBorder.kyo境界線_A5,
+                    ImageCropBorder.kyo境界線_A6,
+                    ImageCropBorder.kyo境界線_A7,
+                    ImageCropBorder.kyo境界線_A8,
+                    ImageCropBorder.kyo境界線_A9
+            };
+            this.PatchesB = new ImageCropBorder[] { ImageCropBorder.None,
+                    ImageCropBorder.kyo境界線_B1,
+                    ImageCropBorder.kyo境界線_B2,
+                    ImageCropBorder.kyo境界線_B3,
+                    ImageCropBorder.kyo境界線_B4,
+            };
+            this.PatchesC = new ImageCropBorder[] { ImageCropBorder.None,
+                    ImageCropBorder.kyo境界線_C1,
+                    ImageCropBorder.kyo境界線_C2,
+                    ImageCropBorder.kyo境界線_C3,
+                    ImageCropBorder.kyo境界線_C4,
+            };
+            this.PatchesD = ImageCropBorder.kyo境界線_D;
+            this.PatchesE = new ImageCropBorder[] {
+                ImageCropBorder.None,
+                ImageCropBorder.None,
+                ImageCropBorder.None,
+                ImageCropBorder.kyo境界線_E3,
+                ImageCropBorder.None,
+                     ImageCropBorder.kyo境界線_E5,
+                   ImageCropBorder.kyo境界線_E6,
+                    ImageCropBorder.kyo境界線_E7,
+                ImageCropBorder.None,
+                    ImageCropBorder.kyo境界線_E9,
+                    ImageCropBorder.kyo境界線_E10,
+                    ImageCropBorder.kyo境界線_E11,
+                    ImageCropBorder.kyo境界線_E12,
+                    ImageCropBorder.kyo境界線_E13,
+                    ImageCropBorder.kyo境界線_E14,
+                    ImageCropBorder.kyo境界線_E15,
+            };
+            this.PatchesFx = new ImageCropBorder[] { ImageCropBorder.None,
+                    ImageCropBorder.kyo境界線_F1,
+                    ImageCropBorder.kyo境界線_F2,
+                    ImageCropBorder.kyo境界線_F3,
+                    ImageCropBorder.kyo境界線_F4,
+                    ImageCropBorder.kyo境界線_F5,
+                    ImageCropBorder.kyo境界線_F6,
+                    ImageCropBorder.kyo境界線_F7,
+                    ImageCropBorder.kyo境界線_F8,
+                    ImageCropBorder.kyo境界線_F9,
+                    ImageCropBorder.kyo境界線_F10,
+                    ImageCropBorder.kyo境界線_F11,
+                    ImageCropBorder.kyo境界線_F12,
+            };
+            this.PatchesGx = new ImageCropBorder[] { ImageCropBorder.None,
+                    ImageCropBorder.kyo境界線_G1,
+                    ImageCropBorder.kyo境界線_G2,
+                    ImageCropBorder.kyo境界線_G3,
+                    ImageCropBorder.kyo境界線_G4,
+                    ImageCropBorder.kyo境界線_G5,
+                    ImageCropBorder.kyo境界線_G6
+            };
         }
 
         /// <summary>
         /// レイヤー番号☆
         /// </summary>
         public int Layer { get; set; }
+        public ImageSourcefile ImageSourcefile { get; set; }
         public ImageType ImageType { get; set; }
-        public AnimationType AnimationType { get; set; }
 
         /// <summary>
         /// [0]なし
         /// [1]～[9]
         /// </summary>
-        public MapchipCrop[] PatchesA { get; set; }
+        public ImageCropBorder[] PatchesA { get; set; }
         /// <summary>
         /// [0]なし
         /// [1]～[4]
         /// </summary>
-        public MapchipCrop[] PatchesB { get; set; }
+        public ImageCropBorder[] PatchesB { get; set; }
         /// <summary>
         /// [0]なし
         /// [1]～[4]
         /// </summary>
-        public MapchipCrop[] PatchesC { get; set; }
-        public MapchipCrop PatchesD { get; set; }
+        public ImageCropBorder[] PatchesC { get; set; }
+        public ImageCropBorder PatchesD { get; set; }
         /// <summary>
         /// [0]なし
         /// [1]～[15]のうち幾つか
         /// </summary>
-        public MapchipCrop[] PatchesE { get; set; }
+        public ImageCropBorder[] PatchesE { get; set; }
         /// <summary>
         /// [0]なし
         /// [1]～[12]
         /// </summary>
-        public MapchipCrop[] PatchesFx { get; set; }
+        public ImageCropBorder[] PatchesFx { get; set; }
         /// <summary>
         /// [0]なし
         /// [1]～[6]
         /// </summary>
-        public MapchipCrop[] PatchesGx { get; set; }
+        public ImageCropBorder[] PatchesGx { get; set; }
 
         /// <summary>
         /// 周囲８方向に何があるかで、チップの形が決まるぜ☆（＾▽＾）
@@ -125,7 +136,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
         private void UpdateBoarder_Sub(UcMain ucMain
             , int pRow, int pCol)
         {
-            if (ucMain.City.Cells[this.Layer,pRow,pCol].MapchipCrop == MapchipCrop.kyo境界線_A5)
+            if ((int)ucMain.City.Cells[this.Layer,pRow,pCol].ImageCrop == (int)ImageCropBorder.kyo境界線_A5)
             {
                 // A5は、境界線ではないので、変形しないぜ☆（＾▽＾）
                 return;
@@ -146,7 +157,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             row = pRow - 1;
             if (-1 < row)
             {
-                if (ucMain.City.Cells[this.Layer, row, col].MapchipCrop == this.PatchesA[5])
+                if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.PatchesA[5])
                 {
                     exists2 = true;
                 }
@@ -158,7 +169,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             row = pRow - 1;
             if (col < ucMain.City.TableCols && -1 < row)
             {
-                if (ucMain.City.Cells[this.Layer, row, col].MapchipCrop == this.PatchesA[5])
+                if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.PatchesA[5])
                 {
                     exists3 = true;
                 }
@@ -170,7 +181,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             row = pRow;
             if (col < ucMain.City.TableCols)
             {
-                if (ucMain.City.Cells[this.Layer, row, col].MapchipCrop == this.PatchesA[5])
+                if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.PatchesA[5])
                 {
                     exists6 = true;
                 }
@@ -182,7 +193,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             row = pRow + 1;
             if (col < ucMain.City.TableCols && row < ucMain.City.TableRows)
             {
-                if (ucMain.City.Cells[this.Layer, row, col].MapchipCrop == this.PatchesA[5])
+                if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.PatchesA[5])
                 {
                     exists9 = true;
                 }
@@ -194,7 +205,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             row = pRow + 1;
             if (row < ucMain.City.TableRows)
             {
-                if (ucMain.City.Cells[this.Layer, row, col].MapchipCrop == this.PatchesA[5])
+                if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.PatchesA[5])
                 {
                     exists8 = true;
                 }
@@ -206,7 +217,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             row = pRow + 1;
             if (-1 < col && row < ucMain.City.TableRows)
             {
-                if (ucMain.City.Cells[this.Layer, row, col].MapchipCrop == this.PatchesA[5])
+                if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.PatchesA[5])
                 {
                     exists7 = true;
                 }
@@ -218,7 +229,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             row = pRow;
             if (-1 < col)
             {
-                if (ucMain.City.Cells[this.Layer, row, col].MapchipCrop == this.PatchesA[5])
+                if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.PatchesA[5])
                 {
                     exists4 = true;
                 }
@@ -230,14 +241,14 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             row = pRow - 1;
             if (-1 < col && -1 < row)
             {
-                if (ucMain.City.Cells[this.Layer, row, col].MapchipCrop == this.PatchesA[5])
+                if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.PatchesA[5])
                 {
                     exists1 = true;
                 }
             }
 
 
-            MapchipCrop crop = MapchipCrop.None;
+            ImageCropBorder crop = (ImageCropBorder)ImageCrop.None;
             //
             // 変形する条件
             //
@@ -621,18 +632,18 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             }
 
             // 更新☆
-            if (crop!=MapchipCrop.None)
+            if (crop!=ImageCropBorder.None)
             {
-                ucMain.City.Cells[this.Layer, pRow, pCol].MapchipCrop = crop;
-                ucMain.City.Cells[this.Layer, pRow, pCol].ImageType = this.ImageType;
-                ucMain.City.Cells[this.Layer, pRow, pCol].AnimationType = this.AnimationType;
+                ucMain.City.Cells[this.Layer, pRow, pCol].SetValue(
+                    this.ImageType, (ImageCrop)crop, this.ImageSourcefile
+                    );
             }
         }
 
         /// <summary>
         /// 近傍を巻き込んだマップチップの置き換え
         /// </summary>
-        public void UpdateNeighborhood(UcMain ucMain //MapchipCrop[,,] map
+        public void UpdateNeighborhood(UcMain ucMain //ImageCrop[,,] map
             , int centerRow, int centerCol)
         {
             if (-1 < centerCol && centerCol < ucMain.City.TableCols &&
@@ -653,9 +664,9 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 //────────────────────────────────────────
 
                 // （更新）中央
-                ucMain.City.Cells[this.Layer, centerRow, centerCol].MapchipCrop = this.PatchesA[5];
-                ucMain.City.Cells[this.Layer, centerRow, centerCol].ImageType = ImageType.Border_Sunachi;
-                ucMain.City.Cells[this.Layer, centerRow, centerCol].AnimationType = this.AnimationType;
+                ucMain.City.Cells[this.Layer, centerRow, centerCol].SetValue(
+                    this.ImageType, (ImageCrop)this.PatchesA[5], ImageSourcefile.Border_Sunachi
+                    );
 
                 //────────────────────────────────────────
                 // 8近傍は、更新の候補だぜ☆（＾▽＾）
@@ -786,7 +797,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                         {
                             this.UpdateNeighborhood(ucMain //this.MapImg
                                 , pRow, pCol);
-                            //this.MapImg[1, pRow, pCol] = brushRailway.Patches[5];// MapchipCrop.su砂_田5;
+                            //this.MapImg[1, pRow, pCol] = brushRailway.Patches[5];// ImageCrop.su砂_田5;
                         }
                     }
                     //*/
@@ -818,7 +829,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                         {
                             this.UpdateNeighborhood(ucMain //this.MapImg
                                 , pRow, pCol);
-                            //this.MapImg[1, pRow, pCol] = brushRailway.Patches[5]; //MapchipCrop.su砂_田5;
+                            //this.MapImg[1, pRow, pCol] = brushRailway.Patches[5]; //ImageCrop.su砂_田5;
                         }
                     }
                     //*/
@@ -857,7 +868,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                         {
                             this.UpdateNeighborhood(ucMain //this.MapImg
                                 , pRow, pCol);
-                            //this.MapImg[1, pRow, pCol] = brushRailway.Patches[5]; //MapchipCrop.su砂_田5;
+                            //this.MapImg[1, pRow, pCol] = brushRailway.Patches[5]; //ImageCrop.su砂_田5;
                         }
                     }
                     //*/
@@ -889,7 +900,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                         {
                             this.UpdateNeighborhood(ucMain //this.MapImg
                                 , pRow, pCol);
-                            //this.MapImg[1, pRow, pCol] = brushRailway.Patches[5]; //MapchipCrop.su砂_田5;
+                            //this.MapImg[1, pRow, pCol] = brushRailway.Patches[5]; //ImageCrop.su砂_田5;
                         }
                     }
                     //*/

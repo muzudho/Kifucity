@@ -11,14 +11,14 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C___500_MapProp_
     {
         ButtonState2 ButtonState { get; set; }
 
-        ImageType ImageType { get; set; }
+        ImageSourcefile ImageType { get; set; }
         /// <summary>
         /// [0]なし
         /// [1]押す前
         /// [2]マウスカーソルを合わせたとき
         /// [3]押されているとき
         /// </summary>
-        MapchipCrop[] Patches { get; set; }
+        ImageCropButton[] Patches { get; set; }
 
         /// <summary>
         /// ボタンの表示位置とサイズ☆

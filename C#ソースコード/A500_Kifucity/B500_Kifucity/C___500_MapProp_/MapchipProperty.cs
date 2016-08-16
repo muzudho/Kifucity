@@ -8,7 +8,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C___500_MapProp_
         /// <summary>
         /// 画像。
         /// </summary>
-        ImageType MapchipImageType { get; set; }
+        ImageSourcefile MapchipImageType { get; set; }
 
         /// <summary>
         /// マップチップ画像上の位置とサイズ。

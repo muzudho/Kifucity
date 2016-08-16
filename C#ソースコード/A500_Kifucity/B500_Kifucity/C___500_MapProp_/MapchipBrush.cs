@@ -10,7 +10,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C___500_MapProp_
         /// <summary>
         /// 近傍を巻き込んだマップチップの置き換え
         /// </summary>
-        void UpdateNeighborhood(UcMain ucMain //MapchipCrop[,,] map
+        void UpdateNeighborhood(UcMain ucMain //ImageCrop[,,] map
             , int row, int col);
 
         /// <summary>

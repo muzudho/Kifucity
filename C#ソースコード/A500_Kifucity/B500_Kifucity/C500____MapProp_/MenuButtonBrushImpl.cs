@@ -8,15 +8,15 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
     public class MenuButtonBrushImpl : MenuButtonBrush
     {
         public MenuButtonBrushImpl(
-            ImageType imageType,
+            ImageSourcefile imageType,
             int x,
             int y,
             int width,
             int height,
-            MapchipCrop patch1,
-            MapchipCrop patch2,
-            MapchipCrop patch3,
-            MapchipCrop patch4
+            ImageCropButton patch1,
+            ImageCropButton patch2,
+            ImageCropButton patch3,
+            ImageCropButton patch4
             )
         {
             this.ImageType = imageType;
@@ -24,9 +24,9 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
 
             this.ButtonState = ButtonState2.Pushable;
 
-            this.Patches = new MapchipCrop[]
+            this.Patches = new ImageCropButton[]
             {
-                MapchipCrop.None,
+                ImageCropButton.None,
                 patch1,
                 patch2,
                 patch3,
@@ -36,14 +36,14 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
 
         public ButtonState2 ButtonState { get; set; }
 
-        public ImageType ImageType { get; set; }
+        public ImageSourcefile ImageType { get; set; }
         /// <summary>
         /// [0]なし
         /// [1]押す前
         /// [2]マウスカーソルを合わせたとき
         /// [3]押されているとき
         /// </summary>
-        public MapchipCrop[] Patches { get; set; }
+        public ImageCropButton[] Patches { get; set; }
 
         /// <summary>
         /// ボタンの表示位置とサイズ☆
@@ -55,9 +55,9 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
         /// </summary>
         public void Paint(Graphics g, UcMain ucMain)
         {
-            if (null != ucMain.Images)//ビジュアル・エディター対策
+            if (null != ucMain.ImageDatabase.Images)//ビジュアル・エディター対策
             {
-                g.DrawImage(ucMain.Images[(int)this.ImageType], this.DestinationBounds, ucMain.MapchipProperties[(int)this.Patches[(int)this.ButtonState]].SourceBounds, GraphicsUnit.Pixel);
+                g.DrawImage(ucMain.ImageDatabase.Images[(int)this.ImageType], this.DestinationBounds, ucMain.ImageDatabase.Crop[(int)this.ImageType][(int)this.Patches[(int)this.ButtonState]], GraphicsUnit.Pixel);
             }
         }
 

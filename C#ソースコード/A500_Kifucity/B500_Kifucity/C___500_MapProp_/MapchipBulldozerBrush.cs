@@ -13,39 +13,39 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C___500_MapProp_
         /// [0]なし
         /// [1]～[9]
         /// </summary>
-        MapchipCrop[] PatchesA { get; set; }
+        ImageCropBorder[] PatchesA { get; set; }
         /// <summary>
         /// [0]なし
         /// [1]～[4]
         /// </summary>
-        MapchipCrop[] PatchesB { get; set; }
+        ImageCropBorder[] PatchesB { get; set; }
         /// <summary>
         /// [0]なし
         /// [1]～[4]
         /// </summary>
-        MapchipCrop[] PatchesC { get; set; }
-        MapchipCrop PatchesD { get; set; }
+        ImageCropBorder[] PatchesC { get; set; }
+        ImageCropBorder PatchesD { get; set; }
         /// <summary>
         /// [0]なし
         /// [1]～[15]のうち幾つか
         /// </summary>
-        MapchipCrop[] PatchesE { get; set; }
+        ImageCropBorder[] PatchesE { get; set; }
         /// <summary>
         /// [0]なし
         /// [1]～[12]
         /// </summary>
-        MapchipCrop[] PatchesFx { get; set; }
+        ImageCropBorder[] PatchesFx { get; set; }
         /// <summary>
         /// [0]なし
         /// [1]～[6]
         /// </summary>
-        MapchipCrop[] PatchesGx { get; set; }
+        ImageCropBorder[] PatchesGx { get; set; }
 
         /// <summary>
         /// レイヤー番号☆
         /// </summary>
         int Layer { get; set; }
+        ImageSourcefile ImageSourcefile { get; set; }
         ImageType ImageType { get; set; }
-        AnimationType AnimationType { get; set; }
     }
 }

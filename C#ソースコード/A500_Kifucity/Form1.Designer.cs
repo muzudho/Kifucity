@@ -34,10 +34,8 @@
             // ucMain1
             // 
             this.ucMain1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucMain1.Images = null;
             this.ucMain1.IsButtonEffected = false;
             this.ucMain1.Location = new System.Drawing.Point(0, 0);
-            this.ucMain1.MapchipProperties = null;
             this.ucMain1.MouseDownLocation = new System.Drawing.Point(0, 0);
             this.ucMain1.Name = "ucMain1";
             this.ucMain1.SaveFileVersion = 3;
