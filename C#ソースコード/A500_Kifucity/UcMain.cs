@@ -41,7 +41,7 @@ namespace Grayscale.A500_Kifucity
         public Position City { get; set; }
 
         /// <summary>
-        /// 施設を置くブラシ。[0]なし [1]線路 [2]砂地 [3]道路 [4]太ペン
+        /// 施設を置くブラシ。[0]なし [1]線路 [2]砂地 [3]道路 [4]太ペン [5]送電線
         /// </summary>
         public MapchipBrush[] BrushesFacility { get; set; }
 
@@ -191,10 +191,10 @@ namespace Grayscale.A500_Kifucity
                 //────────────────────────────────────────
                 // ボタンを置こうぜ☆（＾▽＾）
                 //────────────────────────────────────────
-                this.BrushesButton[(int)ButtonType.se整地].Paint(g, this);
-                this.BrushesButton[(int)ButtonType.do道路].Paint(g, this);
-                this.BrushesButton[(int)ButtonType.se線路].Paint(g, this);
-                this.BrushesButton[(int)ButtonType.bo太ペン].Paint(g, this);
+                for (int iButtonType=1; iButtonType<this.BrushesButton.Length; iButtonType++)
+                {
+                    this.BrushesButton[iButtonType].Paint(g, this);
+                }
             }
 
             /*
@@ -262,6 +262,7 @@ namespace Grayscale.A500_Kifucity
                 new MenuButtonBrushImpl(ImageSourcefile.Buttons, 1*ImageDatabaseImpl.BUTTON_W+32,0*ImageDatabaseImpl.BUTTON_H+32,ImageDatabaseImpl.BUTTON_W,ImageDatabaseImpl.BUTTON_H,ImageCropButton.sebt整地1,ImageCropButton.sebt整地2,ImageCropButton.sebt整地3,ImageCropButton.sebt整地4),
                 new MenuButtonBrushImpl(ImageSourcefile.Buttons, 0*ImageDatabaseImpl.BUTTON_W+32,1*ImageDatabaseImpl.BUTTON_H+32,ImageDatabaseImpl.BUTTON_W,ImageDatabaseImpl.BUTTON_H,ImageCropButton.dobt道路1,ImageCropButton.dobt道路2,ImageCropButton.dobt道路3,ImageCropButton.dobt道路4),
                 new MenuButtonBrushImpl(ImageSourcefile.Buttons, 1*ImageDatabaseImpl.BUTTON_W+32,1*ImageDatabaseImpl.BUTTON_H+32,ImageDatabaseImpl.BUTTON_W,ImageDatabaseImpl.BUTTON_H,ImageCropButton.bobt太ペン1,ImageCropButton.bobt太ペン2,ImageCropButton.bobt太ペン3,ImageCropButton.bobt太ペン4),
+                new MenuButtonBrushImpl(ImageSourcefile.Buttons, 0*ImageDatabaseImpl.BUTTON_W+32,2*ImageDatabaseImpl.BUTTON_H+32,ImageDatabaseImpl.BUTTON_W,ImageDatabaseImpl.BUTTON_H,ImageCropButton.pobt送電線1,ImageCropButton.pobt送電線2,ImageCropButton.pobt送電線3,ImageCropButton.pobt送電線4),
             };
             this.BrushesFacility = new MapchipBrush[]
             {
@@ -288,7 +289,12 @@ namespace Grayscale.A500_Kifucity
                     ImageSourcefile.Border_Sunachi,
                     ImageType.BorderAnime,//FIXME:
                     ImageCropBorder.kyo境界線_A5
-                )
+                ),
+                // 送電線 power line
+                new MapchipRailwayBrushImpl(
+                    PositionImpl.LAYER_ROAD,
+                    ImageSourcefile.Way_PowerLine
+                ),
             };
 
             // 海で初期化☆（＾▽＾）

@@ -37,6 +37,13 @@
         bobt太ペン2,
         bobt太ペン3,
         bobt太ペン4,
+        /// <summary>
+        /// 送電線 power line
+        /// </summary>
+        pobt送電線1,
+        pobt送電線2,
+        pobt送電線3,
+        pobt送電線4,
         /*
         /// <summary>
         /// 砂地で囲まれた空間を、砂地で埋めるバケツ。

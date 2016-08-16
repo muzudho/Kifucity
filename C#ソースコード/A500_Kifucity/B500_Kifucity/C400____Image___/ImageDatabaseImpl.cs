@@ -142,6 +142,10 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C400____Image___
             this.Crop[(int)ImageType.Button][(int)ImageCropButton.bobt太ペン2] = new Rectangle( 3 * BUTTON_W, 1 * BUTTON_H, BUTTON_W, BUTTON_H);
             this.Crop[(int)ImageType.Button][(int)ImageCropButton.bobt太ペン3] = new Rectangle( 3 * BUTTON_W, 2 * BUTTON_H, BUTTON_W, BUTTON_H);
             this.Crop[(int)ImageType.Button][(int)ImageCropButton.bobt太ペン4] = new Rectangle( 3 * BUTTON_W, 3 * BUTTON_H, BUTTON_W, BUTTON_H);
+            this.Crop[(int)ImageType.Button][(int)ImageCropButton.pobt送電線1] = new Rectangle(4 * BUTTON_W, 0 * BUTTON_H, BUTTON_W, BUTTON_H);
+            this.Crop[(int)ImageType.Button][(int)ImageCropButton.pobt送電線2] = new Rectangle(4 * BUTTON_W, 1 * BUTTON_H, BUTTON_W, BUTTON_H);
+            this.Crop[(int)ImageType.Button][(int)ImageCropButton.pobt送電線3] = new Rectangle(4 * BUTTON_W, 2 * BUTTON_H, BUTTON_W, BUTTON_H);
+            this.Crop[(int)ImageType.Button][(int)ImageCropButton.pobt送電線4] = new Rectangle(4 * BUTTON_W, 3 * BUTTON_H, BUTTON_W, BUTTON_H);
         }
 
         /// <summary>
