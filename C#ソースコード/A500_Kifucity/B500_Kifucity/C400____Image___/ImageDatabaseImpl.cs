@@ -20,25 +20,46 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C400____Image___
         public const int BUTTON_W = 32;
         public const int BUTTON_H = 32;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="isReal">ダミーでメモリの確保だけをし、ファイルの読込みはしないときは偽だぜ☆（＾～＾）</param>
+        /// <returns></returns>
+        private Image[] ReadImageSourcefiles_RealOrEmpty(bool isReal)
+        {
+            string[] filepaths = new string[]
+            {
+                "",
+                "./img/map.png",
+                "./img/borderAnime_sunachi.png",//"./img/border_sunachi.png",
+                "./img/buttons.png",
+                "./img/anime_16x16x8.png",
+                "./img/wayChip_1.png",
+                "./img/wayChip_2.png",
+                "./img/wayChip_3.png",
+                "./img/wayChip_4.png",
+            };
+
+            this.ImageSourcefiles = new Image[filepaths.Length];
+
+            if (isReal)
+            {
+                for (int i=1; i<filepaths.Length;i++)
+                {
+                    this.ImageSourcefiles[i] = Image.FromFile(filepaths[i]);
+                }
+            }
+
+            return this.ImageSourcefiles;
+        }
+        /// <summary>
+        /// ダミーでメモリの確保だけをし、ファイルの読込みはしない☆（＾～＾）
+        /// </summary>
         public ImageDatabaseImpl()
         {
-            // マップチップ画像読み込み
-            this.Images = new Image[]{
-                    null,
-                    Image.FromFile("./img/map.png"),
-                    Image.FromFile("./img/borderAnime_sunachi.png"),//Image.FromFile("./img/border_sunachi.png"),
-                    Image.FromFile("./img/buttons.png"),
-                    Image.FromFile("./img/anime_16x16x8.png"),
-                    Image.FromFile("./img/wayChip_1.png"),
-                    Image.FromFile("./img/wayChip_2.png"),
-                    Image.FromFile("./img/wayChip_3.png"),
-                };
-            // 全ての画像の(0,128,128)を透明色に指定。
-            Color transparentColor = Color.FromArgb(0, 128, 128);
-            for (int iImg = 1; iImg < (int)ImageSourcefile.Num; iImg++)
-            {
-                ((Bitmap)this.Images[iImg]).MakeTransparent(transparentColor);
-            }
+            // ダミーでメモリの確保だけをし、ファイルの読込みはしない☆（＾～＾）
+            this.ImageSourcefiles = this.ReadImageSourcefiles_RealOrEmpty(false);
 
             // マップチップ画像に関するデータ。
             this.Crop = new Rectangle[(int)ImageType.Num][];
@@ -54,7 +75,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C400____Image___
             this.Crop[(int)ImageType.NormalAnime][(int)ImageCropNormalAnime.Frame1] = new Rectangle(0 * PositionImpl.CELL_W, 0 * PositionImpl.CELL_H, PositionImpl.CELL_W, PositionImpl.CELL_H);
 
             // 境界線チップ [0]非アニメ [1]アニメの１コマ目
-            for (int i=0; i<2; i++)
+            for (int i = 0; i < 2; i++)
             {
                 int imageTypeN = (i == 0 ? (int)ImageType.Border : (int)ImageType.BorderAnime);
 
@@ -126,22 +147,22 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C400____Image___
             this.Crop[(int)ImageType.Normal][(int)ImageCropNormal.I] = new Rectangle(144, 0, 48, 48);//工業地
 
             // ボタン
-            this.Crop[(int)ImageType.Button][(int)ImageCropButton.sebt線路1] = new Rectangle( 0 * BUTTON_W, 0 * BUTTON_H, BUTTON_W, BUTTON_H);
-            this.Crop[(int)ImageType.Button][(int)ImageCropButton.sebt線路2] = new Rectangle( 0 * BUTTON_W, 1 * BUTTON_H, BUTTON_W, BUTTON_H);
-            this.Crop[(int)ImageType.Button][(int)ImageCropButton.sebt線路3] = new Rectangle( 0 * BUTTON_W, 2 * BUTTON_H, BUTTON_W, BUTTON_H);
-            this.Crop[(int)ImageType.Button][(int)ImageCropButton.sebt線路4] = new Rectangle( 0 * BUTTON_W, 3 * BUTTON_H, BUTTON_W, BUTTON_H);
-            this.Crop[(int)ImageType.Button][(int)ImageCropButton.sebt整地1] = new Rectangle( 1 * BUTTON_W, 0 * BUTTON_H, BUTTON_W, BUTTON_H);
-            this.Crop[(int)ImageType.Button][(int)ImageCropButton.sebt整地2] = new Rectangle( 1 * BUTTON_W, 1 * BUTTON_H, BUTTON_W, BUTTON_H);
-            this.Crop[(int)ImageType.Button][(int)ImageCropButton.sebt整地3] = new Rectangle( 1 * BUTTON_W, 2 * BUTTON_H, BUTTON_W, BUTTON_H);
-            this.Crop[(int)ImageType.Button][(int)ImageCropButton.sebt整地4] = new Rectangle( 1 * BUTTON_W, 3 * BUTTON_H, BUTTON_W, BUTTON_H);
-            this.Crop[(int)ImageType.Button][(int)ImageCropButton.dobt道路1] = new Rectangle( 2 * BUTTON_W, 0 * BUTTON_H, BUTTON_W, BUTTON_H);
-            this.Crop[(int)ImageType.Button][(int)ImageCropButton.dobt道路2] = new Rectangle( 2 * BUTTON_W, 1 * BUTTON_H, BUTTON_W, BUTTON_H);
-            this.Crop[(int)ImageType.Button][(int)ImageCropButton.dobt道路3] = new Rectangle( 2 * BUTTON_W, 2 * BUTTON_H, BUTTON_W, BUTTON_H);
-            this.Crop[(int)ImageType.Button][(int)ImageCropButton.dobt道路4] = new Rectangle( 2 * BUTTON_W, 3 * BUTTON_H, BUTTON_W, BUTTON_H);
-            this.Crop[(int)ImageType.Button][(int)ImageCropButton.bobt太ペン1] = new Rectangle( 3 * BUTTON_W, 0 * BUTTON_H, BUTTON_W, BUTTON_H);
-            this.Crop[(int)ImageType.Button][(int)ImageCropButton.bobt太ペン2] = new Rectangle( 3 * BUTTON_W, 1 * BUTTON_H, BUTTON_W, BUTTON_H);
-            this.Crop[(int)ImageType.Button][(int)ImageCropButton.bobt太ペン3] = new Rectangle( 3 * BUTTON_W, 2 * BUTTON_H, BUTTON_W, BUTTON_H);
-            this.Crop[(int)ImageType.Button][(int)ImageCropButton.bobt太ペン4] = new Rectangle( 3 * BUTTON_W, 3 * BUTTON_H, BUTTON_W, BUTTON_H);
+            this.Crop[(int)ImageType.Button][(int)ImageCropButton.sebt線路1] = new Rectangle(0 * BUTTON_W, 0 * BUTTON_H, BUTTON_W, BUTTON_H);
+            this.Crop[(int)ImageType.Button][(int)ImageCropButton.sebt線路2] = new Rectangle(0 * BUTTON_W, 1 * BUTTON_H, BUTTON_W, BUTTON_H);
+            this.Crop[(int)ImageType.Button][(int)ImageCropButton.sebt線路3] = new Rectangle(0 * BUTTON_W, 2 * BUTTON_H, BUTTON_W, BUTTON_H);
+            this.Crop[(int)ImageType.Button][(int)ImageCropButton.sebt線路4] = new Rectangle(0 * BUTTON_W, 3 * BUTTON_H, BUTTON_W, BUTTON_H);
+            this.Crop[(int)ImageType.Button][(int)ImageCropButton.sebt整地1] = new Rectangle(1 * BUTTON_W, 0 * BUTTON_H, BUTTON_W, BUTTON_H);
+            this.Crop[(int)ImageType.Button][(int)ImageCropButton.sebt整地2] = new Rectangle(1 * BUTTON_W, 1 * BUTTON_H, BUTTON_W, BUTTON_H);
+            this.Crop[(int)ImageType.Button][(int)ImageCropButton.sebt整地3] = new Rectangle(1 * BUTTON_W, 2 * BUTTON_H, BUTTON_W, BUTTON_H);
+            this.Crop[(int)ImageType.Button][(int)ImageCropButton.sebt整地4] = new Rectangle(1 * BUTTON_W, 3 * BUTTON_H, BUTTON_W, BUTTON_H);
+            this.Crop[(int)ImageType.Button][(int)ImageCropButton.dobt道路1] = new Rectangle(2 * BUTTON_W, 0 * BUTTON_H, BUTTON_W, BUTTON_H);
+            this.Crop[(int)ImageType.Button][(int)ImageCropButton.dobt道路2] = new Rectangle(2 * BUTTON_W, 1 * BUTTON_H, BUTTON_W, BUTTON_H);
+            this.Crop[(int)ImageType.Button][(int)ImageCropButton.dobt道路3] = new Rectangle(2 * BUTTON_W, 2 * BUTTON_H, BUTTON_W, BUTTON_H);
+            this.Crop[(int)ImageType.Button][(int)ImageCropButton.dobt道路4] = new Rectangle(2 * BUTTON_W, 3 * BUTTON_H, BUTTON_W, BUTTON_H);
+            this.Crop[(int)ImageType.Button][(int)ImageCropButton.bobt太ペン1] = new Rectangle(3 * BUTTON_W, 0 * BUTTON_H, BUTTON_W, BUTTON_H);
+            this.Crop[(int)ImageType.Button][(int)ImageCropButton.bobt太ペン2] = new Rectangle(3 * BUTTON_W, 1 * BUTTON_H, BUTTON_W, BUTTON_H);
+            this.Crop[(int)ImageType.Button][(int)ImageCropButton.bobt太ペン3] = new Rectangle(3 * BUTTON_W, 2 * BUTTON_H, BUTTON_W, BUTTON_H);
+            this.Crop[(int)ImageType.Button][(int)ImageCropButton.bobt太ペン4] = new Rectangle(3 * BUTTON_W, 3 * BUTTON_H, BUTTON_W, BUTTON_H);
             this.Crop[(int)ImageType.Button][(int)ImageCropButton.pobt送電線1] = new Rectangle(4 * BUTTON_W, 0 * BUTTON_H, BUTTON_W, BUTTON_H);
             this.Crop[(int)ImageType.Button][(int)ImageCropButton.pobt送電線2] = new Rectangle(4 * BUTTON_W, 1 * BUTTON_H, BUTTON_W, BUTTON_H);
             this.Crop[(int)ImageType.Button][(int)ImageCropButton.pobt送電線3] = new Rectangle(4 * BUTTON_W, 2 * BUTTON_H, BUTTON_W, BUTTON_H);
@@ -149,10 +170,26 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C400____Image___
         }
 
         /// <summary>
+        /// 画像の読込みをするぜ☆（＾▽＾）
+        /// </summary>
+        public void Load()
+        {
+            // マップチップ画像読み込み
+            this.ImageSourcefiles = this.ReadImageSourcefiles_RealOrEmpty(true);
+
+            // 全ての画像の(0,128,128)を透明色に指定。
+            Color transparentColor = Color.FromArgb(0, 128, 128);
+            for (int iImg = 1; iImg < (int)ImageSourcefile.Num; iImg++)
+            {
+                ((Bitmap)this.ImageSourcefiles[iImg]).MakeTransparent(transparentColor);
+            }
+        }
+
+        /// <summary>
         /// [ImageSourcefile]
         /// [0]なし [1]マップ画像☆ [2]砂地画像☆ [3]ボタン画像☆ [4]道路☆ [5]線路☆ [6]送電線☆
         /// </summary>
-        public Image[] Images { get; set; }
+        public Image[] ImageSourcefiles { get; set; }
 
         /// <summary>
         /// 切り抜く領域☆

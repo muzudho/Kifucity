@@ -47,7 +47,7 @@ namespace Grayscale.A500_Kifucity
 
         /// <summary>
         /// ボタンを描くブラシ。
-        /// [0]なし [1]線路 [2]整地 [3]道路 ...
+        /// [0]なし [1]線路 [2]整地 [3]道路 [4]送電線／高架送電線 ...
         /// </summary>
         public MenuButtonBrush[] BrushesButton { get; set; }
 
@@ -79,6 +79,57 @@ namespace Grayscale.A500_Kifucity
         public UcMain()
         {
             InitializeComponent();
+
+            //
+            // ビジュアル・エディターでは、
+            // Load よりも Paint の方が呼び出される方が早いので、ここで初期化するぜ☆（＾～＾）
+            //
+
+            this.ImageDatabase = new ImageDatabaseImpl();
+            //────────────────────────────────────────
+            // ブラシ
+            //────────────────────────────────────────
+            this.BrushesButton = new MenuButtonBrush[]
+            {
+                null,
+                new MenuButtonBrushImpl(ImageSourcefile.Buttons, 0*ImageDatabaseImpl.BUTTON_W+32,0*ImageDatabaseImpl.BUTTON_H+32,ImageDatabaseImpl.BUTTON_W,ImageDatabaseImpl.BUTTON_H,ImageCropButton.sebt線路1,ImageCropButton.sebt線路2,ImageCropButton.sebt線路3,ImageCropButton.sebt線路4),
+                new MenuButtonBrushImpl(ImageSourcefile.Buttons, 1*ImageDatabaseImpl.BUTTON_W+32,0*ImageDatabaseImpl.BUTTON_H+32,ImageDatabaseImpl.BUTTON_W,ImageDatabaseImpl.BUTTON_H,ImageCropButton.sebt整地1,ImageCropButton.sebt整地2,ImageCropButton.sebt整地3,ImageCropButton.sebt整地4),
+                new MenuButtonBrushImpl(ImageSourcefile.Buttons, 0*ImageDatabaseImpl.BUTTON_W+32,1*ImageDatabaseImpl.BUTTON_H+32,ImageDatabaseImpl.BUTTON_W,ImageDatabaseImpl.BUTTON_H,ImageCropButton.dobt道路1,ImageCropButton.dobt道路2,ImageCropButton.dobt道路3,ImageCropButton.dobt道路4),
+                new MenuButtonBrushImpl(ImageSourcefile.Buttons, 1*ImageDatabaseImpl.BUTTON_W+32,1*ImageDatabaseImpl.BUTTON_H+32,ImageDatabaseImpl.BUTTON_W,ImageDatabaseImpl.BUTTON_H,ImageCropButton.bobt太ペン1,ImageCropButton.bobt太ペン2,ImageCropButton.bobt太ペン3,ImageCropButton.bobt太ペン4),
+                new MenuButtonBrushImpl(ImageSourcefile.Buttons, 0*ImageDatabaseImpl.BUTTON_W+32,2*ImageDatabaseImpl.BUTTON_H+32,ImageDatabaseImpl.BUTTON_W,ImageDatabaseImpl.BUTTON_H,ImageCropButton.pobt送電線1,ImageCropButton.pobt送電線2,ImageCropButton.pobt送電線3,ImageCropButton.pobt送電線4),
+            };
+            this.BrushesFacility = new MapchipBrush[]
+            {
+                null,
+                // 線路
+                new MapchipRailwayBrushImpl(
+                    PositionImpl.LAYER_RAILWAY,
+                    ImageSourcefile.Way_Railway
+                ),
+                // 砂地
+                new MapchipBulldozerBrushImpl(
+                    PositionImpl.LAYER_LAND,
+                    ImageSourcefile.Border_Sunachi,
+                    ImageType.BorderAnime
+                ),
+                // 道路
+                new MapchipRailwayBrushImpl(
+                    PositionImpl.LAYER_ROAD,
+                    ImageSourcefile.Way_Roadway
+                ),
+                //砂地（太ペン）
+                new MapchipBoldBrushImpl(
+                    PositionImpl.LAYER_LAND,
+                    ImageSourcefile.Border_Sunachi,
+                    ImageType.BorderAnime,//FIXME:
+                    ImageCropBorder.kyo境界線_A5
+                ),
+                // 送電線 power line
+                new MapchipRailwayBrushImpl(
+                    PositionImpl.LAYER_ROAD,
+                    ImageSourcefile.Way_PowerLine
+                ),
+            };
         }
 
         /// <summary>
@@ -95,64 +146,61 @@ namespace Grayscale.A500_Kifucity
             //────────────────────────────────────────
             // 各セルを描画しようぜ☆（＾▽＾）
             //────────────────────────────────────────
-            if (null != this.ImageDatabase.Images)//ビジュアル・エディターでは画像を読込んでない☆（＾～＾）
+            // 画像の一部を切り抜いて貼り付け☆（＾▽＾）
+            for (int layer = 0; layer < PositionImpl.TABLE_LAYERS; layer++)
             {
-                // 画像の一部を切り抜いて貼り付け☆（＾▽＾）
-                for (int layer = 0; layer < PositionImpl.TABLE_LAYERS; layer++)
+                for (int row = 0; row < this.City.TableRows; row++)
                 {
-                    for (int row = 0; row < this.City.TableRows; row++)
+                    for (int col = 0; col < this.City.TableCols; col++)
                     {
-                        for (int col = 0; col < this.City.TableCols; col++)
+                        if (ImageCrop.None != this.City.Cells[layer, row, col].ImageCrop)
                         {
-                            if (ImageCrop.None != this.City.Cells[layer, row, col].ImageCrop)
+                            // セルには MapchipImageType が入っているので、どの画像ファイルから
+                            // 画像を切り抜くのかが分かるぜ☆（＾▽＾）
+                            Image img = this.ImageDatabase.ImageSourcefiles[(int)this.City.Cells[layer, row, col].ImageSourcefile];
+
+                            if (null != img
+                                //&&
+                                //ImageType.None != this.City.Cells[layer, row, col].ImageType
+                                )
                             {
-                                // セルには MapchipImageType が入っているので、どの画像ファイルから
-                                // 画像を切り抜くのかが分かるぜ☆（＾▽＾）
-                                Image img = this.ImageDatabase.Images[(int)this.City.Cells[layer, row, col].ImageSourcefile];
+                                int imageCropN = (int)this.City.Cells[layer, row, col].ImageCrop;
 
-                                if (null != img
-                                    //&&
-                                    //ImageType.None != this.City.Cells[layer, row, col].ImageType
-                                    )
+                                if (ImageType.NormalAnime==this.City.Cells[layer, row, col].ImageType)
                                 {
-                                    int imageCropN = (int)this.City.Cells[layer, row, col].ImageCrop;
+                                    // アニメーションするセルの場合☆ 8コマと想定☆（＾～＾）
 
-                                    if (ImageType.NormalAnime==this.City.Cells[layer, row, col].ImageType)
-                                    {
-                                        // アニメーションするセルの場合☆ 8コマと想定☆（＾～＾）
-
-                                        const int span = PositionImpl.CELL_W;
-                                        g.DrawImage(img,
-                                            new Rectangle(col * PositionImpl.CELL_W + tableLeft, row * PositionImpl.CELL_H + tableTop, PositionImpl.CELL_W, PositionImpl.CELL_H),//ディスプレイ
-                                                                                                                                       // 元画像
+                                    const int span = PositionImpl.CELL_W;
+                                    g.DrawImage(img,
+                                        new Rectangle(col * PositionImpl.CELL_W + tableLeft, row * PositionImpl.CELL_H + tableTop, PositionImpl.CELL_W, PositionImpl.CELL_H),//ディスプレイ
+                                                                                                                                    // 元画像
                                         
-                                            this.ImageDatabase.Crop[(int)ImageType.NormalAnime][imageCropN].X + animationCount % UcMain.AnimationCountNum * span,
-                                            this.ImageDatabase.Crop[(int)ImageType.NormalAnime][imageCropN].Y,
-                                            this.ImageDatabase.Crop[(int)ImageType.NormalAnime][imageCropN].Width,
-                                            this.ImageDatabase.Crop[(int)ImageType.NormalAnime][imageCropN].Height,
-                                            GraphicsUnit.Pixel);
-                                    }
-                                    else if (ImageType.BorderAnime == this.City.Cells[layer, row, col].ImageType)
-                                    {
-                                        // 境界線チップ用の アニメーションだぜ☆（＾～＾）
-                                        const int span = 128;
-                                        g.DrawImage(img,
-                                            new Rectangle(col * PositionImpl.CELL_W + tableLeft, row * PositionImpl.CELL_H + tableTop, PositionImpl.CELL_W, PositionImpl.CELL_H),//ディスプレイ
-                                                                                                                                                                                 // 元画像
-                                            this.ImageDatabase.Crop[(int)ImageType.BorderAnime][imageCropN].X + animationCount % UcMain.AnimationCountNum * span,
-                                            this.ImageDatabase.Crop[(int)ImageType.BorderAnime][imageCropN].Y,
-                                            this.ImageDatabase.Crop[(int)ImageType.BorderAnime][imageCropN].Width,
-                                            this.ImageDatabase.Crop[(int)ImageType.BorderAnime][imageCropN].Height,
-                                            GraphicsUnit.Pixel);
-                                    }
-                                    else
-                                    {
-                                        // 静止画セルの場合☆
-                                        g.DrawImage(img,
-                                            new Rectangle(col * PositionImpl.CELL_W + tableLeft, row * PositionImpl.CELL_H + tableTop, PositionImpl.CELL_W, PositionImpl.CELL_H),//ディスプレイ
-                                            this.ImageDatabase.Crop[(int)this.City.Cells[layer, row, col].ImageType][imageCropN],// 元画像
-                                            GraphicsUnit.Pixel);
-                                    }
+                                        this.ImageDatabase.Crop[(int)ImageType.NormalAnime][imageCropN].X + animationCount % UcMain.AnimationCountNum * span,
+                                        this.ImageDatabase.Crop[(int)ImageType.NormalAnime][imageCropN].Y,
+                                        this.ImageDatabase.Crop[(int)ImageType.NormalAnime][imageCropN].Width,
+                                        this.ImageDatabase.Crop[(int)ImageType.NormalAnime][imageCropN].Height,
+                                        GraphicsUnit.Pixel);
+                                }
+                                else if (ImageType.BorderAnime == this.City.Cells[layer, row, col].ImageType)
+                                {
+                                    // 境界線チップ用の アニメーションだぜ☆（＾～＾）
+                                    const int span = 128;
+                                    g.DrawImage(img,
+                                        new Rectangle(col * PositionImpl.CELL_W + tableLeft, row * PositionImpl.CELL_H + tableTop, PositionImpl.CELL_W, PositionImpl.CELL_H),//ディスプレイ
+                                                                                                                                                                                // 元画像
+                                        this.ImageDatabase.Crop[(int)ImageType.BorderAnime][imageCropN].X + animationCount % UcMain.AnimationCountNum * span,
+                                        this.ImageDatabase.Crop[(int)ImageType.BorderAnime][imageCropN].Y,
+                                        this.ImageDatabase.Crop[(int)ImageType.BorderAnime][imageCropN].Width,
+                                        this.ImageDatabase.Crop[(int)ImageType.BorderAnime][imageCropN].Height,
+                                        GraphicsUnit.Pixel);
+                                }
+                                else
+                                {
+                                    // 静止画セルの場合☆
+                                    g.DrawImage(img,
+                                        new Rectangle(col * PositionImpl.CELL_W + tableLeft, row * PositionImpl.CELL_H + tableTop, PositionImpl.CELL_W, PositionImpl.CELL_H),//ディスプレイ
+                                        this.ImageDatabase.Crop[(int)this.City.Cells[layer, row, col].ImageType][imageCropN],// 元画像
+                                        GraphicsUnit.Pixel);
                                 }
                             }
                         }
@@ -243,59 +291,12 @@ namespace Grayscale.A500_Kifucity
 
             try
             {
-                this.ImageDatabase = new ImageDatabaseImpl();
-
-
+                this.ImageDatabase.Load();
             }
             catch (Exception)
             {
                 // ビジュアル・エディター等のFormではファイルの読み込みに失敗することがある。
             }
-
-            //────────────────────────────────────────
-            // ブラシ
-            //────────────────────────────────────────
-            this.BrushesButton = new MenuButtonBrush[]
-            {
-                null,
-                new MenuButtonBrushImpl(ImageSourcefile.Buttons, 0*ImageDatabaseImpl.BUTTON_W+32,0*ImageDatabaseImpl.BUTTON_H+32,ImageDatabaseImpl.BUTTON_W,ImageDatabaseImpl.BUTTON_H,ImageCropButton.sebt線路1,ImageCropButton.sebt線路2,ImageCropButton.sebt線路3,ImageCropButton.sebt線路4),
-                new MenuButtonBrushImpl(ImageSourcefile.Buttons, 1*ImageDatabaseImpl.BUTTON_W+32,0*ImageDatabaseImpl.BUTTON_H+32,ImageDatabaseImpl.BUTTON_W,ImageDatabaseImpl.BUTTON_H,ImageCropButton.sebt整地1,ImageCropButton.sebt整地2,ImageCropButton.sebt整地3,ImageCropButton.sebt整地4),
-                new MenuButtonBrushImpl(ImageSourcefile.Buttons, 0*ImageDatabaseImpl.BUTTON_W+32,1*ImageDatabaseImpl.BUTTON_H+32,ImageDatabaseImpl.BUTTON_W,ImageDatabaseImpl.BUTTON_H,ImageCropButton.dobt道路1,ImageCropButton.dobt道路2,ImageCropButton.dobt道路3,ImageCropButton.dobt道路4),
-                new MenuButtonBrushImpl(ImageSourcefile.Buttons, 1*ImageDatabaseImpl.BUTTON_W+32,1*ImageDatabaseImpl.BUTTON_H+32,ImageDatabaseImpl.BUTTON_W,ImageDatabaseImpl.BUTTON_H,ImageCropButton.bobt太ペン1,ImageCropButton.bobt太ペン2,ImageCropButton.bobt太ペン3,ImageCropButton.bobt太ペン4),
-                new MenuButtonBrushImpl(ImageSourcefile.Buttons, 0*ImageDatabaseImpl.BUTTON_W+32,2*ImageDatabaseImpl.BUTTON_H+32,ImageDatabaseImpl.BUTTON_W,ImageDatabaseImpl.BUTTON_H,ImageCropButton.pobt送電線1,ImageCropButton.pobt送電線2,ImageCropButton.pobt送電線3,ImageCropButton.pobt送電線4),
-            };
-            this.BrushesFacility = new MapchipBrush[]
-            {
-                null,
-                // 線路
-                new MapchipRailwayBrushImpl(
-                    PositionImpl.LAYER_RAILWAY,
-                    ImageSourcefile.Way_Railway
-                ),
-                // 砂地
-                new MapchipBulldozerBrushImpl(
-                    PositionImpl.LAYER_LAND,
-                    ImageSourcefile.Border_Sunachi,
-                    ImageType.BorderAnime
-                ),
-                // 道路
-                new MapchipRailwayBrushImpl(
-                    PositionImpl.LAYER_ROAD,
-                    ImageSourcefile.Way_Roadway
-                ),
-                //砂地（太ペン）
-                new MapchipBoldBrushImpl(
-                    PositionImpl.LAYER_LAND,
-                    ImageSourcefile.Border_Sunachi,
-                    ImageType.BorderAnime,//FIXME:
-                    ImageCropBorder.kyo境界線_A5
-                ),
-                // 送電線 power line
-                new MapchipRailwayBrushImpl(
-                    PositionImpl.LAYER_ROAD,
-                    ImageSourcefile.Way_PowerLine
-                ),
-            };
 
             // 海で初期化☆（＾▽＾）
             this.City.Init();

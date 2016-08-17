@@ -13,18 +13,19 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C___500_MapProp_
         /// レイヤー番号☆
         /// </summary>
         int Layer { get; set; }
-        ImageSourcefile ImageSourcefile { get; set; }
+        /// <summary>
+        /// 元画像は、１種類の道路／線路タイプ、２種類の送電線／高架送電線タイプがあるぜ☆（＾～＾）
+        /// </summary>
+        ImageSourcefile ImageSourcefile1 { get; set; }
 
         /// <summary>
-        /// [0]なし [1]・ [2]│
-        /// [3]┌    [4]┬  [5]┐
-        /// [6]├    [7]┼  [8]┤
-        /// [9]└    [10]┴ [11]┘
+        /// [ 0]なし
+        /// [ 1]・ [ 2]│  [ 3]─
+        /// [ 4]┌  [ 5]┬  [ 6]┐
+        /// [ 7]├  [ 8]┼  [ 9]┤
+        /// [10]└  [11]┴  [12]┘
         /// </summary>
-        ImageCropWay Point { get; set; }
-        ImageCropWay Vertical { get; set; }
-        ImageCropWay Horizontal { get; set; }
-        ImageCropWay[] Patches { get; set; }
+        ImageCropWay[] Patches_New { get; set; }
 
         /*
         /// <summary>

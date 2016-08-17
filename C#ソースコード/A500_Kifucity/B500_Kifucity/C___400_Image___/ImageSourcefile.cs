@@ -23,7 +23,7 @@
         Buttons,
 
         /// <summary>
-        /// アニメ画像
+        /// 海等。アニメ画像
         /// </summary>
         Anime_16x16x8,
 
@@ -39,6 +39,10 @@
         /// 送電線
         /// </summary>
         Way_PowerLine,
+        /// <summary>
+        /// 高架送電線
+        /// </summary>
+        Way_PowerLine2,
 
         /// <summary>
         /// （列挙型サイズ）

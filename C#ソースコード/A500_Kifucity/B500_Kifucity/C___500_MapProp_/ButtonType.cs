@@ -18,9 +18,15 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C___500_MapProp_
         do道路,
         bo太ペン,//baバケツ,
         /// <summary>
-        /// power line
+        /// 送電線／高架送電線 power line
         /// </summary>
         po送電線,
+        /*
+        /// <summary>
+        /// 高架送電線
+        /// </summary>
+        po送電線2,
+        */
 
         /// <summary>
         /// 列挙型サイズ

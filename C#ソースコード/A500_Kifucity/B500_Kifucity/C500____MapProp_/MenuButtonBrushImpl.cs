@@ -55,9 +55,10 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
         /// </summary>
         public void Paint(Graphics g, UcMain ucMain)
         {
-            if (null != ucMain.ImageDatabase.Images)//ビジュアル・エディター対策
+            //ucMain.ImageDatabase.ImageSourcefiles
+            if (null != ucMain.ImageDatabase.ImageSourcefiles[(int)this.ImageType])//ビジュアル・エディター対策
             {
-                g.DrawImage(ucMain.ImageDatabase.Images[(int)this.ImageType], this.DestinationBounds, ucMain.ImageDatabase.Crop[(int)this.ImageType][(int)this.Patches[(int)this.ButtonState]], GraphicsUnit.Pixel);
+                g.DrawImage(ucMain.ImageDatabase.ImageSourcefiles[(int)this.ImageType], this.DestinationBounds, ucMain.ImageDatabase.Crop[(int)this.ImageType][(int)this.Patches[(int)this.ButtonState]], GraphicsUnit.Pixel);
             }
         }
 

@@ -14,26 +14,27 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
     {
         public MapchipRailwayBrushImpl(
             int layer,
-            ImageSourcefile imageSourcefile
+            ImageSourcefile imageSourcefile1
             )
         {
             this.Layer = layer;
-            this.ImageSourcefile = imageSourcefile;
-            this.Point = ImageCropWay.P;
-            this.Vertical = ImageCropWay.V;
-            this.Horizontal = ImageCropWay.H;
-            this.Patches = new ImageCropWay[]
+            this.ImageSourcefile1 = imageSourcefile1;
+
+            this.Patches_New = new ImageCropWay[]
             {
-                    ImageCropWay.None,
-                    ImageCropWay.Patch1,
-                    ImageCropWay.Patch2,
-                    ImageCropWay.Patch3,
-                    ImageCropWay.Patch4,
-                    ImageCropWay.Patch5,
-                    ImageCropWay.Patch6,
-                    ImageCropWay.Patch7,
-                    ImageCropWay.Patch8,
-                    ImageCropWay.Patch9
+                ImageCropWay.None,
+                ImageCropWay.P,
+                ImageCropWay.V,
+                ImageCropWay.H,
+                ImageCropWay.Patch1,
+                ImageCropWay.Patch2,
+                ImageCropWay.Patch3,
+                ImageCropWay.Patch4,
+                ImageCropWay.Patch5,
+                ImageCropWay.Patch6,
+                ImageCropWay.Patch7,
+                ImageCropWay.Patch8,
+                ImageCropWay.Patch9
             };
         }
 
@@ -42,24 +43,24 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
         /// レイヤー番号☆
         /// </summary>
         public int Layer { get; set; }
-        public ImageSourcefile ImageSourcefile { get; set; }
+        /// <summary>
+        /// 元画像は、１種類の道路／線路タイプ、２種類の送電線／高架送電線タイプがあるぜ☆（＾～＾）
+        /// </summary>
+        public ImageSourcefile ImageSourcefile1 { get; set; }
 
         /// <summary>
         /// </summary>
-        public ImageCropWay Point { get; set; }
-        public ImageCropWay Vertical { get; set; }
-        public ImageCropWay Horizontal { get; set; }
-        public ImageCropWay[] Patches { get; set; }
+        public ImageCropWay[] Patches_New { get; set; }
 
 
-        /// <summary>
-        /// 近傍を巻き込んだマップチップの置き換え
-        /// </summary>
-        public void UpdateNeighborhood(UcMain ucMain //ImageCrop[,,] map
-            , int centerRow, int centerCol)
+        public static void UpdateNeighborhood_Inner(UcMain ucMain //ImageCrop[,,] map
+            , int centerRow, int centerCol, int layer
+            ,ImageType imgType
+            ,MapchipRailwayBrushImpl brush//ImageCrop imgCrop
+            , ImageSourcefile imgSrc)
         {
             if (-1 < centerCol && centerCol < ucMain.City.TableCols &&
-                -1 < centerRow && centerRow < ucMain.City.TableRows)
+    -1 < centerRow && centerRow < ucMain.City.TableRows)
             {
                 int col;
                 int row;
@@ -71,18 +72,18 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 if (col < ucMain.City.TableCols && -1 < row)
                 {
                     if (
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[1] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[2] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[3] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[4] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[5] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[6] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[7] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[8] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[9] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Point ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Vertical ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Horizontal
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[1] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[2] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[3] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[4] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[5] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[6] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[7] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[8] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[9] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[10] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[11] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[12]
                         )
                     {
                         isNorthEast = true;
@@ -96,18 +97,18 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 if (col < ucMain.City.TableCols && row < ucMain.City.TableRows)
                 {
                     if (
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[1] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[2] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[3] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[4] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[5] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[6] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[7] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[8] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[9] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Point ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Vertical ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Horizontal
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[1] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[2] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[3] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[4] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[5] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[6] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[7] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[8] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[9] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[10] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[11] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[12]
                         )
                     {
                         isSouthEast = true;
@@ -121,18 +122,18 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 if (-1 < col && row < ucMain.City.TableRows)
                 {
                     if (
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[1] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[2] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[3] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[4] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[5] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[6] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[7] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[8] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[9] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Point ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Vertical ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Horizontal
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[1] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[2] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[3] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[4] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[5] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[6] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[7] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[8] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[9] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[10] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[11] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[12]
                         )
                     {
                         isSouthWest = true;
@@ -146,18 +147,18 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 if (-1 < col && -1 < row)
                 {
                     if (
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[1] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[2] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[3] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[4] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[5] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[6] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[7] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[8] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[9] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Point ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Vertical ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Horizontal
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[1] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[2] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[3] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[4] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[5] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[6] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[7] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[8] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[9] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[10] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[11] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[12]
                         )
                     {
                         isNorthWest = true;
@@ -170,72 +171,72 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 row = centerRow - 1;
                 if (-1 < row)
                 {
-                    if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Point)
+                    if ((int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[1])
                     {
                         // ・ → │
-                        ucMain.City.Cells[this.Layer, row, col].SetValue(
-                            this.ImageType, (ImageCrop)this.Vertical, this.ImageSourcefile
+                        ucMain.City.Cells[layer, row, col].SetValue(
+                            imgType, (ImageCrop)brush.Patches_New[2], imgSrc
                             );
                         isNorth = true;
                     }
-                    else if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Horizontal)
+                    else if ((int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[3])
                     {
                         // ─ → 
                         if (!isNorthEast)
                         {
                             // → ┐
-                            ucMain.City.Cells[this.Layer, row, col].SetValue(
-                                this.ImageType, (ImageCrop)this.Patches[3], this.ImageSourcefile
+                            ucMain.City.Cells[layer, row, col].SetValue(
+                                imgType, (ImageCrop)brush.Patches_New[6], imgSrc
                                 );
                         }
                         else if (!isNorthWest)
                         {
                             // → ┌
-                            ucMain.City.Cells[this.Layer, row, col].SetValue(
-                                this.ImageType, (ImageCrop)this.Patches[1], this.ImageSourcefile
+                            ucMain.City.Cells[layer, row, col].SetValue(
+                                imgType, (ImageCrop)brush.Patches_New[4], imgSrc
                                 );
                         }
                         else
                         {
                             // → ┬
-                            ucMain.City.Cells[this.Layer, row, col].SetValue(
-                                this.ImageType, (ImageCrop)this.Patches[2], this.ImageSourcefile
+                            ucMain.City.Cells[layer, row, col].SetValue(
+                                imgType, (ImageCrop)brush.Patches_New[5], imgSrc
                                 );
                         }
                         isNorth = true;
                     }
-                    else if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[7])
+                    else if ((int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[10])
                     {
                         // └ → ├
-                        ucMain.City.Cells[this.Layer, row, col].SetValue(
-                            this.ImageType, (ImageCrop)this.Patches[4], this.ImageSourcefile
+                        ucMain.City.Cells[layer, row, col].SetValue(
+                            imgType, (ImageCrop)brush.Patches_New[7], imgSrc
                             );
                         isNorth = true;
                     }
-                    else if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[8])
+                    else if ((int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[11])
                     {
                         // ┴ → ┼
-                        ucMain.City.Cells[this.Layer, row, col].SetValue(
-                            this.ImageType, (ImageCrop)this.Patches[5], this.ImageSourcefile
+                        ucMain.City.Cells[layer, row, col].SetValue(
+                            imgType, (ImageCrop)brush.Patches_New[8], imgSrc
                             );
                         isNorth = true;
                     }
-                    else if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[9])
+                    else if ((int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[12])
                     {
                         // ┘ → ┤
-                        ucMain.City.Cells[this.Layer, row, col].SetValue(
-                            this.ImageType, (ImageCrop)this.Patches[6], this.ImageSourcefile
+                        ucMain.City.Cells[layer, row, col].SetValue(
+                            imgType, (ImageCrop)brush.Patches_New[9], imgSrc
                             ); ;
                         isNorth = true;
                     }
                     else if (
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[1] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[2] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[3] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[4] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[5] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[6] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Vertical
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[4] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[5] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[6] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[7] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[8] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[9] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[2]
                         )
                     {
                         isNorth = true;
@@ -248,72 +249,72 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 row = centerRow;
                 if (col < ucMain.City.TableCols)
                 {
-                    if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Point)
+                    if ((int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[1])
                     {
                         // ・ → ─
-                        ucMain.City.Cells[this.Layer, row, col].SetValue(
-                            this.ImageType, (ImageCrop)this.Horizontal, this.ImageSourcefile
+                        ucMain.City.Cells[layer, row, col].SetValue(
+                            imgType, (ImageCrop)brush.Patches_New[3], imgSrc
                             );
                         isEast = true;
                     }
-                    else if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Vertical)
+                    else if ((int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[2])
                     {
                         // │ → 
                         if (!isNorthEast)
                         {
                             // → ┐
-                            ucMain.City.Cells[this.Layer, row, col].SetValue(
-                                this.ImageType, (ImageCrop)this.Patches[3], this.ImageSourcefile
+                            ucMain.City.Cells[layer, row, col].SetValue(
+                                imgType, (ImageCrop)brush.Patches_New[6], imgSrc
                                 );
                         }
                         else if (!isSouthEast)
                         {
                             // → ┘
-                            ucMain.City.Cells[this.Layer, row, col].SetValue(
-                                this.ImageType, (ImageCrop)this.Patches[9], this.ImageSourcefile
+                            ucMain.City.Cells[layer, row, col].SetValue(
+                                imgType, (ImageCrop)brush.Patches_New[12], imgSrc
                                 );
                         }
                         else
                         {
                             // → ┤
-                            ucMain.City.Cells[this.Layer, row, col].SetValue(
-                                this.ImageType, (ImageCrop)this.Patches[6], this.ImageSourcefile
+                            ucMain.City.Cells[layer, row, col].SetValue(
+                                imgType, (ImageCrop)brush.Patches_New[9], imgSrc
                                 );
                         }
                         isEast = true;
                     }
-                    else if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[1])
+                    else if ((int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[4])
                     {
                         // ┌ → ┬
-                        ucMain.City.Cells[this.Layer, row, col].SetValue(
-                            this.ImageType, (ImageCrop)this.Patches[2], this.ImageSourcefile
+                        ucMain.City.Cells[layer, row, col].SetValue(
+                            imgType, (ImageCrop)brush.Patches_New[5], imgSrc
                             );
                         isEast = true;
                     }
-                    else if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[4])
+                    else if ((int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[7])
                     {
                         // ├ → ┼
-                        ucMain.City.Cells[this.Layer, row, col].SetValue(
-                            this.ImageType, (ImageCrop)this.Patches[5], this.ImageSourcefile
+                        ucMain.City.Cells[layer, row, col].SetValue(
+                            imgType, (ImageCrop)brush.Patches_New[8], imgSrc
                             );
                         isEast = true;
                     }
-                    else if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[7])
+                    else if ((int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[10])
                     {
                         // └ → ┴
-                        ucMain.City.Cells[this.Layer, row, col].SetValue(
-                            this.ImageType, (ImageCrop)this.Patches[8], this.ImageSourcefile
+                        ucMain.City.Cells[layer, row, col].SetValue(
+                            imgType, (ImageCrop)brush.Patches_New[11], imgSrc
                             );
                         isEast = true;
                     }
                     else if (
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[2] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[3] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[5] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[6] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[8] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[9] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Horizontal
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[5] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[6] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[8] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[9] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[11] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[12] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[3]
                         )
                     {
                         isEast = true;
@@ -326,78 +327,78 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 row = centerRow + 1;
                 if (row < ucMain.City.TableRows)
                 {
-                    if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Point)
+                    if ((int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[1])
                     {
                         // ・ → │
-                        ucMain.City.Cells[this.Layer, row, col].SetValue(
-                            this.ImageType, (ImageCrop)this.Vertical, this.ImageSourcefile
+                        ucMain.City.Cells[layer, row, col].SetValue(
+                            imgType, (ImageCrop)brush.Patches_New[2], imgSrc
                             );
                         isSouth = true;
                     }
-                    else if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Horizontal)
+                    else if ((int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[3])
                     {
                         // ─ → 
                         if (!isSouthEast)
                         {
                             // → ┘
-                            ucMain.City.Cells[this.Layer, row, col].SetValue(
-                                this.ImageType, (ImageCrop)this.Patches[9], this.ImageSourcefile
+                            ucMain.City.Cells[layer, row, col].SetValue(
+                                imgType, (ImageCrop)brush.Patches_New[12], imgSrc
                                 );
                         }
                         else if (!isSouthWest)
                         {
                             // → └
-                            ucMain.City.Cells[this.Layer, row, col].SetValue(
-                                this.ImageType, (ImageCrop)this.Patches[7], this.ImageSourcefile
+                            ucMain.City.Cells[layer, row, col].SetValue(
+                                imgType, (ImageCrop)brush.Patches_New[10], imgSrc
                                 );
                         }
                         else
                         {
                             // → ┴
-                            ucMain.City.Cells[this.Layer, row, col].SetValue(
-                                this.ImageType, (ImageCrop)this.Patches[8], this.ImageSourcefile
+                            ucMain.City.Cells[layer, row, col].SetValue(
+                                imgType, (ImageCrop)brush.Patches_New[11], imgSrc
                                 );
                         }
                         isSouth = true;
                     }
-                    else if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[1])
+                    else if ((int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[4])
                     {
                         // ┌ → ├
-                        ucMain.City.Cells[this.Layer, row, col].SetValue(
-                            this.ImageType,
-                            (ImageCrop)this.Patches[4],
-                            this.ImageSourcefile
+                        ucMain.City.Cells[layer, row, col].SetValue(
+                            imgType,
+                            (ImageCrop)brush.Patches_New[7],
+                            imgSrc
                             );
                         isSouth = true;
                     }
-                    else if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[2])
+                    else if ((int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[5])
                     {
                         // ┬ → ┼
-                        ucMain.City.Cells[this.Layer, row, col].SetValue(
-                            this.ImageType,
-                            (ImageCrop)this.Patches[5],
-                            this.ImageSourcefile
+                        ucMain.City.Cells[layer, row, col].SetValue(
+                            imgType,
+                            (ImageCrop)brush.Patches_New[5],
+                            imgSrc
                             );
                         isSouth = true;
                     }
-                    else if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[3])
+                    else if ((int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[6])
                     {
                         // ┐ → ┤
-                        ucMain.City.Cells[this.Layer, row, col].SetValue(
-                            this.ImageType,
-                            (ImageCrop)this.Patches[6],
-                            this.ImageSourcefile
+                        ucMain.City.Cells[layer, row, col].SetValue(
+                            imgType,
+                            (ImageCrop)brush.Patches_New[9],
+                            imgSrc
                             );
                         isSouth = true;
                     }
                     else if (
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[4] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[5] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[6] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[7] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[8] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[9] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Vertical
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[7] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[8] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[9] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[10] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[11] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[12] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[2]
                         )
                     {
                         isSouth = true;
@@ -410,72 +411,72 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 row = centerRow;
                 if (-1 < col)
                 {
-                    if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Point)
+                    if ((int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[1])
                     {
                         // ・ → ─
-                        ucMain.City.Cells[this.Layer, row, col].SetValue(
-                            this.ImageType, (ImageCrop)this.Horizontal, this.ImageSourcefile
+                        ucMain.City.Cells[layer, row, col].SetValue(
+                            imgType, (ImageCrop)brush.Patches_New[3], imgSrc
                             );
                         isWest = true;
                     }
-                    else if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Vertical)
+                    else if ((int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[2])
                     {
                         // │→
                         if (!isNorthWest)
                         {
                             // → ┌
-                            ucMain.City.Cells[this.Layer, row, col].SetValue(
-                                this.ImageType, (ImageCrop)this.Patches[1], this.ImageSourcefile
+                            ucMain.City.Cells[layer, row, col].SetValue(
+                                imgType, (ImageCrop)brush.Patches_New[4], imgSrc
                                 );
                         }
                         else if (!isSouthWest)
                         {
                             // → └
-                            ucMain.City.Cells[this.Layer, row, col].SetValue(
-                                this.ImageType, (ImageCrop)this.Patches[7], this.ImageSourcefile
+                            ucMain.City.Cells[layer, row, col].SetValue(
+                                imgType, (ImageCrop)brush.Patches_New[10], imgSrc
                                 );
                         }
                         else
                         {
                             // → ├
-                            ucMain.City.Cells[this.Layer, row, col].SetValue(
-                                this.ImageType, (ImageCrop)this.Patches[4], this.ImageSourcefile
+                            ucMain.City.Cells[layer, row, col].SetValue(
+                                imgType, (ImageCrop)brush.Patches_New[7], imgSrc
                                 );
                         }
                         isWest = true;
                     }
-                    else if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[3])
+                    else if ((int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[6])
                     {
                         // ┐ → ┬
-                        ucMain.City.Cells[this.Layer, row, col].SetValue(
-                            this.ImageType, (ImageCrop)this.Patches[2], this.ImageSourcefile
+                        ucMain.City.Cells[layer, row, col].SetValue(
+                            imgType, (ImageCrop)brush.Patches_New[5], imgSrc
                             );
                         isWest = true;
                     }
-                    else if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[6])
+                    else if ((int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[9])
                     {
                         // ┤ → ┼
-                        ucMain.City.Cells[this.Layer, row, col].SetValue(
-                            this.ImageType, (ImageCrop)this.Patches[5], this.ImageSourcefile
+                        ucMain.City.Cells[layer, row, col].SetValue(
+                            imgType, (ImageCrop)brush.Patches_New[8], imgSrc
                             );
                         isWest = true;
                     }
-                    else if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[9])
+                    else if ((int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[12])
                     {
                         // ┘ → ┴
-                        ucMain.City.Cells[this.Layer, row, col].SetValue(
-                            this.ImageType, (ImageCrop)this.Patches[8], this.ImageSourcefile
+                        ucMain.City.Cells[layer, row, col].SetValue(
+                            imgType, (ImageCrop)brush.Patches_New[11], imgSrc
                             );
                         isWest = true;
                     }
                     else if (
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[1] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[2] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[4] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[5] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[7] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Patches[8] ||
-                        (int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.Horizontal
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[4] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[5] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[7] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[8] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[10] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[11] ||
+                        (int)ucMain.City.Cells[layer, row, col].ImageCrop == (int)brush.Patches_New[3]
                         )
                     {
                         isWest = true;
@@ -486,88 +487,101 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 if (isNorth && isEast && isSouth && isWest)
                 {
                     // ┼
-                    ucMain.City.Cells[this.Layer, centerRow, centerCol].SetValue(
-                        this.ImageType, (ImageCrop)this.Patches[5], this.ImageSourcefile
+                    ucMain.City.Cells[layer, centerRow, centerCol].SetValue(
+                        imgType, (ImageCrop)brush.Patches_New[8], imgSrc
                         );
                 }
                 else if (isWest && isNorth && isEast)
                 {
                     // ┴
-                    ucMain.City.Cells[this.Layer, centerRow, centerCol].SetValue(
-                        this.ImageType, (ImageCrop)this.Patches[8], this.ImageSourcefile
+                    ucMain.City.Cells[layer, centerRow, centerCol].SetValue(
+                        imgType, (ImageCrop)brush.Patches_New[11], imgSrc
                         );
                 }
                 else if (isNorth && isEast && isSouth)
                 {
                     // ├
-                    ucMain.City.Cells[this.Layer, centerRow, centerCol].SetValue(
-                        this.ImageType, (ImageCrop)this.Patches[4], this.ImageSourcefile
+                    ucMain.City.Cells[layer, centerRow, centerCol].SetValue(
+                        imgType, (ImageCrop)brush.Patches_New[7], imgSrc
                         );
                 }
-                else if ( isEast && isSouth && isWest)
+                else if (isEast && isSouth && isWest)
                 {
                     // ┬
-                    ucMain.City.Cells[this.Layer, centerRow, centerCol].SetValue(
-                        this.ImageType, (ImageCrop)this.Patches[2], this.ImageSourcefile
+                    ucMain.City.Cells[layer, centerRow, centerCol].SetValue(
+                        imgType, (ImageCrop)brush.Patches_New[5], imgSrc
                         );
                 }
-                else if ( isSouth && isWest && isNorth)
+                else if (isSouth && isWest && isNorth)
                 {
                     // ┤
-                    ucMain.City.Cells[this.Layer, centerRow, centerCol].SetValue(
-                        this.ImageType, (ImageCrop)this.Patches[6], this.ImageSourcefile
+                    ucMain.City.Cells[layer, centerRow, centerCol].SetValue(
+                        imgType, (ImageCrop)brush.Patches_New[9], imgSrc
                         );
                 }
                 else if (isNorth && isEast)
                 {
                     // └
-                    ucMain.City.Cells[this.Layer, centerRow, centerCol].SetValue(
-                        this.ImageType, (ImageCrop)this.Patches[7], this.ImageSourcefile
+                    ucMain.City.Cells[layer, centerRow, centerCol].SetValue(
+                        imgType, (ImageCrop)brush.Patches_New[10], imgSrc
                         );
                 }
                 else if (isEast && isSouth)
                 {
                     // ┌
-                    ucMain.City.Cells[this.Layer, centerRow, centerCol].SetValue(
-                        this.ImageType, (ImageCrop)this.Patches[1], this.ImageSourcefile
+                    ucMain.City.Cells[layer, centerRow, centerCol].SetValue(
+                        imgType, (ImageCrop)brush.Patches_New[4], imgSrc
                         );
                 }
                 else if (isSouth && isWest)
                 {
                     // ┐
-                    ucMain.City.Cells[this.Layer, centerRow, centerCol].SetValue(
-                        this.ImageType, (ImageCrop)this.Patches[3], this.ImageSourcefile
+                    ucMain.City.Cells[layer, centerRow, centerCol].SetValue(
+                        imgType, (ImageCrop)brush.Patches_New[6], imgSrc
                         );
                 }
                 else if (isWest && isNorth)
                 {
                     // ┘
-                    ucMain.City.Cells[this.Layer, centerRow, centerCol].SetValue(
-                        this.ImageType, (ImageCrop)this.Patches[9], this.ImageSourcefile
+                    ucMain.City.Cells[layer, centerRow, centerCol].SetValue(
+                        imgType, (ImageCrop)brush.Patches_New[12], imgSrc
                         );
                 }
                 else if (isNorth || isSouth)
                 {
                     // │
-                    ucMain.City.Cells[this.Layer, centerRow, centerCol].SetValue(
-                        this.ImageType, (ImageCrop)this.Vertical, this.ImageSourcefile
+                    ucMain.City.Cells[layer, centerRow, centerCol].SetValue(
+                        imgType, (ImageCrop)brush.Patches_New[2], imgSrc
                         );
                 }
                 else if (isEast || isWest)
                 {
                     // ─
-                    ucMain.City.Cells[this.Layer, centerRow, centerCol].SetValue(
-                        this.ImageType, (ImageCrop)this.Horizontal, this.ImageSourcefile
+                    ucMain.City.Cells[layer, centerRow, centerCol].SetValue(
+                        imgType, (ImageCrop)brush.Patches_New[3], imgSrc
                         );
                 }
                 else
                 {
                     // ・
-                    ucMain.City.Cells[this.Layer, centerRow, centerCol].SetValue(
-                        this.ImageType, (ImageCrop)this.Point, this.ImageSourcefile
+                    ucMain.City.Cells[layer, centerRow, centerCol].SetValue(
+                        imgType, (ImageCrop)brush.Patches_New[1], imgSrc
                         );
                 }
             }
+        }
+
+        /// <summary>
+        /// 近傍を巻き込んだマップチップの置き換え
+        /// </summary>
+        public void UpdateNeighborhood(UcMain ucMain //ImageCrop[,,] map
+            , int centerRow, int centerCol)
+        {
+            MapchipRailwayBrushImpl.UpdateNeighborhood_Inner( ucMain
+            , centerRow, centerCol, this.Layer,
+            this.ImageType,
+            this,//this.ImageCrop,
+            this.ImageSourcefile1);
         }
 
         /// <summary>
