@@ -50,9 +50,10 @@
     <Compile Include="B500_Kifucity\C450____Position\PositionImpl.cs" />
     <Compile Include="B500_Kifucity\C450____Position\CellImpl.cs" />
     <Compile Include="B500_Kifucity\C500____MapProp_\MapchipBoldBrushImpl.cs" />
+    <Compile Include="B500_Kifucity\C500____MapProp_\n110_MapchipPowerlineBrushImpl.cs" />
     <Compile Include="B500_Kifucity\C500____MapProp_\MenuButtonBrushImpl.cs" />
     <Compile Include="B500_Kifucity\C500____MapProp_\MapchipBulldozerBrushImpl.cs" />
-    <Compile Include="B500_Kifucity\C500____MapProp_\MapchipRailwayBrushImpl.cs" />
+    <Compile Include="B500_Kifucity\C500____MapProp_\n100_MapchipRailwayBrushImpl.cs" />
     <Compile Include="B500_Kifucity\C500____MapProp_\MapchipPropertyImpl.cs" />
     <Compile Include="B500_Kifucity\C___300_AnimeGif\Util_AnimationGif.cs" />
     <Compile Include="B500_Kifucity\C___400_Image___\ImageCrop.cs" />

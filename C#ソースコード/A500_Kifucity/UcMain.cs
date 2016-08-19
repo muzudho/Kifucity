@@ -104,7 +104,9 @@ namespace Grayscale.A500_Kifucity
                 // 線路
                 new MapchipRailwayBrushImpl(
                     PositionImpl.LAYER_RAILWAY,
-                    ImageSourcefile.Way_Railway
+                    new ImageSourcefile[] {
+                        ImageSourcefile.Way_Railway
+                    }
                 ),
                 // 砂地
                 new MapchipBulldozerBrushImpl(
@@ -115,7 +117,9 @@ namespace Grayscale.A500_Kifucity
                 // 道路
                 new MapchipRailwayBrushImpl(
                     PositionImpl.LAYER_ROAD,
-                    ImageSourcefile.Way_Roadway
+                    new ImageSourcefile[] {
+                        ImageSourcefile.Way_Roadway
+                    }
                 ),
                 //砂地（太ペン）
                 new MapchipBoldBrushImpl(
@@ -125,9 +129,12 @@ namespace Grayscale.A500_Kifucity
                     ImageCropBorder.kyo境界線_A5
                 ),
                 // 送電線 power line
-                new MapchipRailwayBrushImpl(
-                    PositionImpl.LAYER_ROAD,
-                    ImageSourcefile.Way_PowerLine
+                new MapchipPowerlineBrushImpl(
+                    PositionImpl.LAYER_POWERLINE,
+                    new ImageSourcefile[] {
+                        ImageSourcefile.Way_PowerLine,
+                        ImageSourcefile.Way_PowerLine2
+                    }
                 ),
             };
         }
@@ -365,8 +372,7 @@ namespace Grayscale.A500_Kifucity
                             if (this.BrushesButton[iBtn].ButtonState==ButtonState2.Pushed ||
                                 this.BrushesButton[iBtn].ButtonState == ButtonState2.Pushed_MouseOver)
                             {
-                                this.BrushesFacility[iBtn].UpdateNeighborhood(this //this.MapImg
-                                    , row, col);
+                                this.BrushesFacility[iBtn].UpdateNeighborhood(this.City, row, col);
                             }
                         }
 
@@ -413,8 +419,7 @@ namespace Grayscale.A500_Kifucity
                             if (this.BrushesButton[iBtn].ButtonState == ButtonState2.Pushed ||
                                 this.BrushesButton[iBtn].ButtonState == ButtonState2.Pushed_MouseOver)
                             {
-                                this.BrushesFacility[iBtn].UpdateNeighborhood(this //this.MapImg
-                                    , row, col);
+                                this.BrushesFacility[iBtn].UpdateNeighborhood(this.City, row, col);
                             }
                         }
 

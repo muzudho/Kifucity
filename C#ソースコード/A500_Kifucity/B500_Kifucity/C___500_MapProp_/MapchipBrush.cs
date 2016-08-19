@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using Grayscale.A500_Kifucity.B500_Kifucity.C___450_Position;
 
 namespace Grayscale.A500_Kifucity.B500_Kifucity.C___500_MapProp_
 {
@@ -10,8 +11,16 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C___500_MapProp_
         /// <summary>
         /// 近傍を巻き込んだマップチップの置き換え
         /// </summary>
-        void UpdateNeighborhood(UcMain ucMain //ImageCrop[,,] map
-            , int row, int col);
+        void UpdateNeighborhood(Position city, int row, int col);
+
+        /// <summary>
+        /// どの元画像を使うかを、ブラシ毎にセルを見て変えるためのものだぜ☆（＾▽＾）
+        /// </summary>
+        /// <param name="city"></param>
+        /// <param name="row"></param>
+        /// <param name="col"></param>
+        /// <returns></returns>
+        int GetSourcefileIndex(Position city, int row, int col);
 
         /// <summary>
         /// 直線状にマップチップを連続配置するぜ☆（＾▽＾）

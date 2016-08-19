@@ -16,7 +16,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C___500_MapProp_
         /// <summary>
         /// 元画像は、１種類の道路／線路タイプ、２種類の送電線／高架送電線タイプがあるぜ☆（＾～＾）
         /// </summary>
-        ImageSourcefile ImageSourcefile1 { get; set; }
+        ImageSourcefile[] ImageSourcefiles { get; set; }
 
         /// <summary>
         /// [ 0]なし
@@ -25,15 +25,6 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C___500_MapProp_
         /// [ 7]├  [ 8]┼  [ 9]┤
         /// [10]└  [11]┴  [12]┘
         /// </summary>
-        ImageCropWay[] Patches_New { get; set; }
-
-        /*
-        /// <summary>
-        /// 線路状にマップチップを連続配置するぜ☆（＾▽＾）
-        /// </summary>
-        void PutMapchipAsLine(
-            out bool out_isUpdate, Point mouseLocation, UcMain ucMain
-            );
-            */
+        ImageCropWay[] ImageCrop { get; set; }
     }
 }

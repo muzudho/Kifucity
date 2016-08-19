@@ -30,13 +30,14 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C450____Position
 
 
         /// <summary>
-        /// レイヤー。[0]海 [1]陸地相当 [2]道路 [3]鉄道
+        /// レイヤー。[0]海 [1]陸地相当 [2]道路 [3]鉄道 [4]送電線／高架送電線
         /// </summary>
-        public const int TABLE_LAYERS = 4;
         public const int LAYER_MARINE = 0;
         public const int LAYER_LAND = 1;
         public const int LAYER_ROAD = 2;
         public const int LAYER_RAILWAY = 3;
+        public const int LAYER_POWERLINE = 4;
+        public const int TABLE_LAYERS = 5;
         // マスの大きさ
         public const int CELL_W = 16;
         public const int CELL_H = 16;

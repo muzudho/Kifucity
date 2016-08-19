@@ -93,6 +93,12 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
         /// </summary>
         public int Layer { get; set; }
         public ImageSourcefile ImageSourcefile { get; set; }
+
+        public int GetSourcefileIndex(Position city, int row, int col)
+        {
+            return 0;
+        }
+
         public ImageType ImageType { get; set; }
 
         /// <summary>
@@ -133,10 +139,9 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
         /// <param name="ucMain"></param>
         /// <param name="pRow"></param>
         /// <param name="pCol"></param>
-        private void UpdateBoarder_Sub(UcMain ucMain
-            , int pRow, int pCol)
+        private void UpdateBoarder_Sub(Position city, int pRow, int pCol)
         {
-            if ((int)ucMain.City.Cells[this.Layer,pRow,pCol].ImageCrop == (int)ImageCropBorder.kyo境界線_A5)
+            if ((int)city.Cells[this.Layer,pRow,pCol].ImageCrop == (int)ImageCropBorder.kyo境界線_A5)
             {
                 // A5は、境界線ではないので、変形しないぜ☆（＾▽＾）
                 return;
@@ -157,7 +162,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             row = pRow - 1;
             if (-1 < row)
             {
-                if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.PatchesA[5])
+                if ((int)city.Cells[this.Layer, row, col].ImageCrop == (int)this.PatchesA[5])
                 {
                     exists2 = true;
                 }
@@ -167,9 +172,9 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             bool exists3 = false;
             col = pCol + 1;
             row = pRow - 1;
-            if (col < ucMain.City.TableCols && -1 < row)
+            if (col < city.TableCols && -1 < row)
             {
-                if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.PatchesA[5])
+                if ((int)city.Cells[this.Layer, row, col].ImageCrop == (int)this.PatchesA[5])
                 {
                     exists3 = true;
                 }
@@ -179,9 +184,9 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             bool exists6 = false;
             col = pCol + 1;
             row = pRow;
-            if (col < ucMain.City.TableCols)
+            if (col < city.TableCols)
             {
-                if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.PatchesA[5])
+                if ((int)city.Cells[this.Layer, row, col].ImageCrop == (int)this.PatchesA[5])
                 {
                     exists6 = true;
                 }
@@ -191,9 +196,9 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             bool exists9 = false;
             col = pCol + 1;
             row = pRow + 1;
-            if (col < ucMain.City.TableCols && row < ucMain.City.TableRows)
+            if (col < city.TableCols && row < city.TableRows)
             {
-                if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.PatchesA[5])
+                if ((int)city.Cells[this.Layer, row, col].ImageCrop == (int)this.PatchesA[5])
                 {
                     exists9 = true;
                 }
@@ -203,9 +208,9 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             bool exists8 = false;
             col = pCol;
             row = pRow + 1;
-            if (row < ucMain.City.TableRows)
+            if (row < city.TableRows)
             {
-                if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.PatchesA[5])
+                if ((int)city.Cells[this.Layer, row, col].ImageCrop == (int)this.PatchesA[5])
                 {
                     exists8 = true;
                 }
@@ -215,9 +220,9 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             bool exists7 = false;
             col = pCol - 1;
             row = pRow + 1;
-            if (-1 < col && row < ucMain.City.TableRows)
+            if (-1 < col && row < city.TableRows)
             {
-                if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.PatchesA[5])
+                if ((int)city.Cells[this.Layer, row, col].ImageCrop == (int)this.PatchesA[5])
                 {
                     exists7 = true;
                 }
@@ -229,7 +234,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             row = pRow;
             if (-1 < col)
             {
-                if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.PatchesA[5])
+                if ((int)city.Cells[this.Layer, row, col].ImageCrop == (int)this.PatchesA[5])
                 {
                     exists4 = true;
                 }
@@ -241,7 +246,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             row = pRow - 1;
             if (-1 < col && -1 < row)
             {
-                if ((int)ucMain.City.Cells[this.Layer, row, col].ImageCrop == (int)this.PatchesA[5])
+                if ((int)city.Cells[this.Layer, row, col].ImageCrop == (int)this.PatchesA[5])
                 {
                     exists1 = true;
                 }
@@ -634,7 +639,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
             // 更新☆
             if (crop!=ImageCropBorder.None)
             {
-                ucMain.City.Cells[this.Layer, pRow, pCol].SetValue(
+                city.Cells[this.Layer, pRow, pCol].SetValue(
                     this.ImageType, (ImageCrop)crop, this.ImageSourcefile
                     );
             }
@@ -643,11 +648,10 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
         /// <summary>
         /// 近傍を巻き込んだマップチップの置き換え
         /// </summary>
-        public void UpdateNeighborhood(UcMain ucMain //ImageCrop[,,] map
-            , int centerRow, int centerCol)
+        public void UpdateNeighborhood(Position city, int centerRow, int centerCol)
         {
-            if (-1 < centerCol && centerCol < ucMain.City.TableCols &&
-                -1 < centerRow && centerRow < ucMain.City.TableRows)
+            if (-1 < centerCol && centerCol < city.TableCols &&
+                -1 < centerRow && centerRow < city.TableRows)
             {
                 int col;
                 int row;
@@ -664,7 +668,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 //────────────────────────────────────────
 
                 // （更新）中央
-                ucMain.City.Cells[this.Layer, centerRow, centerCol].SetValue(
+                city.Cells[this.Layer, centerRow, centerCol].SetValue(
                     this.ImageType, (ImageCrop)this.PatchesA[5], ImageSourcefile.Border_Sunachi
                     );
 
@@ -684,47 +688,47 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 row = centerRow - 1;
                 if (-1 < row)
                 {
-                    this.UpdateBoarder_Sub(ucMain, row, col);
+                    this.UpdateBoarder_Sub(city, row, col);
                 }
 
                 // （更新）北東
                 col = centerCol + 1;
                 row = centerRow - 1;
-                if (col < ucMain.City.TableCols && -1 < row)
+                if (col < city.TableCols && -1 < row)
                 {
-                    this.UpdateBoarder_Sub(ucMain, row, col);
+                    this.UpdateBoarder_Sub(city, row, col);
                 }
 
                 // （更新）東
                 col = centerCol + 1;
                 row = centerRow;
-                if (col < ucMain.City.TableCols)
+                if (col < city.TableCols)
                 {
-                    this.UpdateBoarder_Sub(ucMain, row, col);
+                    this.UpdateBoarder_Sub(city, row, col);
                 }
 
                 // （更新）南東
                 col = centerCol + 1;
                 row = centerRow + 1;
-                if (col < ucMain.City.TableCols && row < ucMain.City.TableRows)
+                if (col < city.TableCols && row < city.TableRows)
                 {
-                    this.UpdateBoarder_Sub(ucMain, row, col);
+                    this.UpdateBoarder_Sub(city, row, col);
                 }
 
                 // （更新）南
                 col = centerCol;
                 row = centerRow + 1;
-                if (row < ucMain.City.TableRows)
+                if (row < city.TableRows)
                 {
-                    this.UpdateBoarder_Sub(ucMain, row, col);
+                    this.UpdateBoarder_Sub(city, row, col);
                 }
 
                 // （更新）南西
                 col = centerCol - 1;
                 row = centerRow + 1;
-                if (-1 < col && row < ucMain.City.TableRows)
+                if (-1 < col && row < city.TableRows)
                 {
-                    this.UpdateBoarder_Sub(ucMain, row, col);
+                    this.UpdateBoarder_Sub(city, row, col);
                 }
 
                 // （更新）西
@@ -732,7 +736,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 row = centerRow;
                 if (-1 < col)
                 {
-                    this.UpdateBoarder_Sub(ucMain, row, col);
+                    this.UpdateBoarder_Sub(city, row, col);
                 }
 
                 // （更新）北西
@@ -740,7 +744,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                 row = centerRow - 1;
                 if (-1 < col && -1 < row)
                 {
-                    this.UpdateBoarder_Sub(ucMain, row, col);
+                    this.UpdateBoarder_Sub(city, row, col);
                 }
             }
         }
@@ -795,9 +799,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                         pRow = beginRow + iRow;
                         if (pCol < ucMain.City.TableCols && pRow < ucMain.City.TableRows)
                         {
-                            this.UpdateNeighborhood(ucMain //this.MapImg
-                                , pRow, pCol);
-                            //this.MapImg[1, pRow, pCol] = brushRailway.Patches[5];// ImageCrop.su砂_田5;
+                            this.UpdateNeighborhood(ucMain.City, pRow, pCol);
                         }
                     }
                     //*/
@@ -827,9 +829,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                         pRow = beginRow + iRow;
                         if (pCol < ucMain.City.TableCols && pRow < ucMain.City.TableRows)
                         {
-                            this.UpdateNeighborhood(ucMain //this.MapImg
-                                , pRow, pCol);
-                            //this.MapImg[1, pRow, pCol] = brushRailway.Patches[5]; //ImageCrop.su砂_田5;
+                            this.UpdateNeighborhood(ucMain.City, pRow, pCol);
                         }
                     }
                     //*/
@@ -866,9 +866,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                         pRow = beginRow + iRow;
                         if (pCol < ucMain.City.TableCols && pRow < ucMain.City.TableRows)
                         {
-                            this.UpdateNeighborhood(ucMain //this.MapImg
-                                , pRow, pCol);
-                            //this.MapImg[1, pRow, pCol] = brushRailway.Patches[5]; //ImageCrop.su砂_田5;
+                            this.UpdateNeighborhood(ucMain.City, pRow, pCol);
                         }
                     }
                     //*/
@@ -898,9 +896,7 @@ namespace Grayscale.A500_Kifucity.B500_Kifucity.C500____MapProp_
                         pRow = beginRow + iRow;
                         if (pCol < ucMain.City.TableCols && pRow < ucMain.City.TableRows)
                         {
-                            this.UpdateNeighborhood(ucMain //this.MapImg
-                                , pRow, pCol);
-                            //this.MapImg[1, pRow, pCol] = brushRailway.Patches[5]; //ImageCrop.su砂_田5;
+                            this.UpdateNeighborhood(ucMain.City, pRow, pCol);
                         }
                     }
                     //*/
