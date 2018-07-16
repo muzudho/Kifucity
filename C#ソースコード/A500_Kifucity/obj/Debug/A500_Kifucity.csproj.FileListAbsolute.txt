@@ -11,3 +11,14 @@ E:\Muzudho\CSharp\Kifucity\bin\Grayscale.A500_Kifucity.exe.config
 E:\Muzudho\CSharp\Kifucity\bin\Grayscale.A500_Kifucity.exe
 E:\Muzudho\CSharp\Kifucity\bin\Grayscale.A500_Kifucity.pdb
 E:\Muzudho\CSharp\Kifucity\C#ソースコード\A500_Kifucity\obj\Debug\A500_Kifucity.csprojResolveAssemblyReference.cache
+C:\Users\Takahashi\source\repos\Kifucity\bin\Grayscale.A500_Kifucity.exe.config
+C:\Users\Takahashi\source\repos\Kifucity\bin\Grayscale.A500_Kifucity.exe
+C:\Users\Takahashi\source\repos\Kifucity\bin\Grayscale.A500_Kifucity.pdb
+C:\Users\Takahashi\source\repos\Kifucity\C#ソースコード\A500_Kifucity\obj\Debug\A500_Kifucity.csprojResolveAssemblyReference.cache
+C:\Users\Takahashi\source\repos\Kifucity\C#ソースコード\A500_Kifucity\obj\Debug\Grayscale.A500_Kifucity.Form1.resources
+C:\Users\Takahashi\source\repos\Kifucity\C#ソースコード\A500_Kifucity\obj\Debug\Grayscale.A500_Kifucity.Properties.Resources.resources
+C:\Users\Takahashi\source\repos\Kifucity\C#ソースコード\A500_Kifucity\obj\Debug\Grayscale.A500_Kifucity.UcMain.resources
+C:\Users\Takahashi\source\repos\Kifucity\C#ソースコード\A500_Kifucity\obj\Debug\A500_Kifucity.csproj.GenerateResource.Cache
+C:\Users\Takahashi\source\repos\Kifucity\C#ソースコード\A500_Kifucity\obj\Debug\A500_Kifucity.csproj.CoreCompileInputs.cache
+C:\Users\Takahashi\source\repos\Kifucity\C#ソースコード\A500_Kifucity\obj\Debug\Grayscale.A500_Kifucity.exe
+C:\Users\Takahashi\source\repos\Kifucity\C#ソースコード\A500_Kifucity\obj\Debug\Grayscale.A500_Kifucity.pdb
